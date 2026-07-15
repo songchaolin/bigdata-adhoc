@@ -1,0 +1,27 @@
+adhoc-executor/src/main/resources/application.yml
+  ed6859a83db170d0 7,10-12
+adhoc-executor/pom.xml
+  ed6859a83db170d0 36,77-84
+adhoc-server/src/main/resources/application.yml
+  ed6859a83db170d0 7,10-12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "a93e0db0e2192f89c62bb28c58cf28c72f746a7d",
+  "prompts": {
+    "ed6859a83db170d0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "baadbac9-c4aa-4190-b9fc-ad262ff39649",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 17,
+      "total_deletions": 2,
+      "accepted_lines": 17,
+      "overriden_lines": 0
+    }
+  }
+}
