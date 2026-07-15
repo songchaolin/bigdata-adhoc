@@ -1,0 +1,35 @@
+adhoc-storage/pom.xml
+  ed6859a83db170d0 1-55
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/AdhocExecutorApplication.java
+  ed6859a83db170d0 1-21
+adhoc-executor/src/main/resources/application.yml
+  ed6859a83db170d0 1-16
+adhoc-executor/src/test/resources/application.yml
+  ed6859a83db170d0 1-3
+adhoc-dependencies/pom.xml
+  ed6859a83db170d0 1-125
+adhoc-executor/src/test/java/com/yl/bigdata/adhoc/executor/AdhocExecutorApplicationTest.java
+  ed6859a83db170d0 1-13
+adhoc-executor/pom.xml
+  ed6859a83db170d0 1-79
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "e9686fc83d329c856af34be05916be4dc8bca5a0",
+  "prompts": {
+    "ed6859a83db170d0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "baadbac9-c4aa-4190-b9fc-ad262ff39649",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 135,
+      "total_deletions": 24,
+      "accepted_lines": 1900,
+      "overriden_lines": 0
+    }
+  }
+}
