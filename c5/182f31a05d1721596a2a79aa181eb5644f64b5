@@ -1,0 +1,25 @@
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/grpc/JobExecutorServiceImpl.java
+  ed6859a83db170d0 1-30
+adhoc-executor/src/test/java/com/yl/bigdata/adhoc/executor/grpc/JobExecutorServiceImplTest.java
+  ed6859a83db170d0 1-40
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "c5182f31a05d1721596a2a79aa181eb5644f64b5",
+  "prompts": {
+    "ed6859a83db170d0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "baadbac9-c4aa-4190-b9fc-ad262ff39649",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 70,
+      "total_deletions": 0,
+      "accepted_lines": 1863,
+      "overriden_lines": 0
+    }
+  }
+}
