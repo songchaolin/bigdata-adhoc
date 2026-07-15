@@ -1,0 +1,112 @@
+superpowers/specs/2026-07-08-adhoc-redesign/diagrams/drawio/03-er-diagram.drawio
+  ed6859a83db170d0 1-126
+superpowers/specs/2026-07-08-adhoc-redesign/01-task-scheduling-execution.md
+  ed6859a83db170d0 1-1208
+superpowers/specs/2026-07-08-adhoc-redesign/diagrams/plantuml/07-result-write-read.puml
+  ed6859a83db170d0 1-187
+adhoc-dao/pom.xml
+  ed6859a83db170d0 1-24
+adhoc-observability/pom.xml
+  ed6859a83db170d0 1-23
+pom.xml
+  ed6859a83db170d0 1-65
+superpowers/specs/2026-07-08-adhoc-redesign/diagrams/plantuml/05-schedule-dispatch-flow.puml
+  ed6859a83db170d0 1-88
+superpowers/specs/2026-07-08-adhoc-redesign/04-result-storage.md
+  ed6859a83db170d0 1-1051
+superpowers/plans/2026-07-15-adhoc-p1-grpc-contract-wiring.md
+  ed6859a83db170d0 1-936
+adhoc-server/pom.xml
+  ed6859a83db170d0 1-65
+docs/README.md
+  ad1b601f60f9d2c9 1-26
+superpowers/specs/2026-07-08-adhoc-redesign/03-engine-routing.md
+  ed6859a83db170d0 1-389
+superpowers/specs/2026-07-08-adhoc-redesign/08-directory-tree.md
+  ed6859a83db170d0 1-520
+superpowers/specs/2026-07-08-adhoc-redesign/diagrams/plantuml/09-job-task-state-machine.puml
+  ed6859a83db170d0 1-199
+superpowers/specs/2026-07-08-adhoc-redesign/tech-design-v2.md
+  ed6859a83db170d0 1-1886
+superpowers/specs/2026-07-08-adhoc-redesign/task-scheduling.md
+  ed6859a83db170d0 1-469
+superpowers/specs/2026-07-08-adhoc-redesign/02-sql-parsing-governance.md
+  ed6859a83db170d0 1-534
+adhoc-sql-parser/pom.xml
+  ed6859a83db170d0 1-27
+superpowers/specs/2026-07-08-adhoc-redesign/10-limitations.md
+  ed6859a83db170d0 1-328
+superpowers/specs/2026-07-08-adhoc-redesign/11-schema.md
+  ed6859a83db170d0 1-679
+superpowers/specs/2026-07-08-adhoc-redesign/mvp-delivery-plan.md
+  ed6859a83db170d0 1-257
+superpowers/specs/2026-07-08-adhoc-redesign/tech-design-outline.md
+  ed6859a83db170d0 1-167
+adhoc-common/pom.xml
+  ed6859a83db170d0 1-24
+docs/项目周报.md
+  ed6859a83db170d0 1-63
+.gitignore
+  ad1b601f60f9d2c9 1-41
+superpowers/specs/2026-07-08-adhoc-redesign/project-overview.md
+  ed6859a83db170d0 1-1838
+superpowers/specs/2026-07-08-adhoc-redesign/tech-design.md
+  ed6859a83db170d0 1-2750
+superpowers/specs/2026-07-08-adhoc-redesign/diagrams/plantuml/04-submit-flow.puml
+  ed6859a83db170d0 1-148
+superpowers/specs/2026-07-08-adhoc-redesign/diagrams/README.md
+  ed6859a83db170d0 1-142
+superpowers/specs/2026-07-08-adhoc-redesign/12-sdk.md
+  ed6859a83db170d0 1-1189
+superpowers/specs/2026-07-08-adhoc-redesign/diagrams/drawio/02-module-dependency.drawio
+  ed6859a83db170d0 1-139
+superpowers/specs/2026-07-08-adhoc-redesign/06-observability.md
+  ed6859a83db170d0 1-578
+superpowers/specs/2026-07-08-adhoc-redesign/09-execution-log.md
+  ed6859a83db170d0 1-765
+superpowers/specs/2026-07-08-adhoc-redesign/diagrams/drawio/01-system-architecture.drawio
+  ed6859a83db170d0 1-205
+adhoc-api-sdk/pom.xml
+  ed6859a83db170d0 1-34
+superpowers/specs/2026-07-08-adhoc-redesign/diagrams/plantuml/08-heartbeat-compensation.puml
+  ed6859a83db170d0 1-283
+superpowers/specs/2026-07-08-adhoc-redesign/development-plan.md
+  ed6859a83db170d0 1-407
+superpowers/specs/2026-07-08-adhoc-redesign/00-architecture-overview.md
+  ed6859a83db170d0 1-608
+superpowers/specs/2026-07-08-adhoc-redesign/05-high-availability.md
+  ed6859a83db170d0 1-927
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "b78e0940a3b691572b3c27ca9fdb30a40f2d6f70",
+  "prompts": {
+    "ad1b601f60f9d2c9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "29571b09-1489-4775-8b37-a16515d0ebc9",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 0,
+      "accepted_lines": 67,
+      "overriden_lines": 0
+    },
+    "ed6859a83db170d0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "baadbac9-c4aa-4190-b9fc-ad262ff39649",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 19864,
+      "total_deletions": 2,
+      "accepted_lines": 21454,
+      "overriden_lines": 0
+    }
+  }
+}
