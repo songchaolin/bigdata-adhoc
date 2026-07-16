@@ -1,0 +1,85 @@
+adhoc-dao/src/main/java/com/yl/bigdata/adhoc/dao/entity/AdhocResultSummary.java
+  ed6859a83db170d0 1-26
+adhoc-dao/src/main/java/com/yl/bigdata/adhoc/dao/entity/AdhocQueryJob.java
+  ed6859a83db170d0 1-40
+adhoc-dao/src/main/java/com/yl/bigdata/adhoc/dao/entity/AdhocQueryGovernance.java
+  ed6859a83db170d0 1-22
+adhoc-dao/src/main/java/com/yl/bigdata/adhoc/dao/entity/AdhocQueryTask.java
+  ed6859a83db170d0 1-55
+adhoc-dao/src/main/java/com/yl/bigdata/adhoc/dao/mapper/AdhocQueryGovernanceMapper.java
+  ed6859a83db170d0 1-9
+adhoc-dao/src/main/java/com/yl/bigdata/adhoc/dao/entity/AdhocFileNode.java
+  ed6859a83db170d0 1-25
+adhoc-dao/src/main/java/com/yl/bigdata/adhoc/dao/mapper/AdhocQueryTaskMapper.java
+  ed6859a83db170d0 1-9
+adhoc-dao/src/main/java/com/yl/bigdata/adhoc/dao/mapper/AdhocResultSummaryMapper.java
+  ed6859a83db170d0 1-9
+adhoc-dao/src/main/java/com/yl/bigdata/adhoc/dao/mapper/AdhocEngineParamRuleMapper.java
+  ed6859a83db170d0 1-9
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/enums/FailStage.java
+  ed6859a83db170d0 1-9
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/exception/AdhocErrorCode.java
+  ed6859a83db170d0 1-31
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/enums/EngineType.java
+  ed6859a83db170d0 1-6
+adhoc-dao/src/main/java/com/yl/bigdata/adhoc/dao/mapper/AdhocExecutorInstanceMapper.java
+  ed6859a83db170d0 1-9
+adhoc-dao/src/main/java/com/yl/bigdata/adhoc/dao/entity/AdhocServerInstance.java
+  ed6859a83db170d0 1-26
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/enums/FailReasonCategory.java
+  ed6859a83db170d0 1-13
+adhoc-dao/src/main/java/com/yl/bigdata/adhoc/dao/mapper/AdhocServerInstanceMapper.java
+  ed6859a83db170d0 1-9
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/enums/HdfsUploadStatus.java
+  ed6859a83db170d0 1-7
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/enums/JobStatus.java
+  ed6859a83db170d0 1-10
+adhoc-dao/src/main/java/com/yl/bigdata/adhoc/dao/entity/AdhocQueryTableRef.java
+  ed6859a83db170d0 1-20
+adhoc-dao/src/main/java/com/yl/bigdata/adhoc/dao/entity/AdhocEngineParamRule.java
+  ed6859a83db170d0 1-26
+adhoc-dao/src/main/java/com/yl/bigdata/adhoc/dao/mapper/AdhocFileNodeMapper.java
+  ed6859a83db170d0 1-9
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/enums/InstanceStatus.java
+  ed6859a83db170d0 1-7
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/enums/TaskStage.java
+  ed6859a83db170d0 1-7
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/enums/TaskStatus.java
+  ed6859a83db170d0 1-9
+adhoc-dao/src/main/java/com/yl/bigdata/adhoc/dao/mapper/AdhocQueryTableRefMapper.java
+  ed6859a83db170d0 1-9
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/enums/SqlType.java
+  ed6859a83db170d0 1-15
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/enums/ResultStatus.java
+  ed6859a83db170d0 1-7
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/exception/AdhocException.java
+  ed6859a83db170d0 1-23
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/enums/NodeType.java
+  ed6859a83db170d0 1-6
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/enums/StorageType.java
+  ed6859a83db170d0 1-8
+adhoc-dao/src/main/java/com/yl/bigdata/adhoc/dao/entity/AdhocExecutorInstance.java
+  ed6859a83db170d0 1-40
+adhoc-dao/src/main/java/com/yl/bigdata/adhoc/dao/mapper/AdhocQueryJobMapper.java
+  ed6859a83db170d0 1-9
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "95c70ba51e8a5e5f726d44e55cfbe902ed76b831",
+  "prompts": {
+    "ed6859a83db170d0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "baadbac9-c4aa-4190-b9fc-ad262ff39649",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 519,
+      "total_deletions": 0,
+      "accepted_lines": 519,
+      "overriden_lines": 0
+    }
+  }
+}
