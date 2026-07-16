@@ -1,0 +1,29 @@
+adhoc-storage/src/main/java/com/yl/bigdata/adhoc/storage/writer/HdfsUploader.java
+  ed6859a83db170d0 1-53
+adhoc-storage/src/main/java/com/yl/bigdata/adhoc/storage/fs/HdfsClient.java
+  ed6859a83db170d0 1-60
+adhoc-storage/src/main/java/com/yl/bigdata/adhoc/storage/reader/AdhocResultReader.java
+  ed6859a83db170d0 26-33
+adhoc-storage/src/test/java/com/yl/bigdata/adhoc/storage/fs/HdfsClientTest.java
+  ed6859a83db170d0 1-104
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "75988062b7c13f12b33899782659f4be7ef79bbb",
+  "prompts": {
+    "ed6859a83db170d0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "baadbac9-c4aa-4190-b9fc-ad262ff39649",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 302,
+      "total_deletions": 78,
+      "accepted_lines": 225,
+      "overriden_lines": 0
+    }
+  }
+}
