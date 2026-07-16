@@ -1,0 +1,33 @@
+adhoc-dao/src/main/java/com/yl/bigdata/adhoc/dao/mapper/AdhocQueryJobMapper.java
+  ed6859a83db170d0 6-10,14-28
+adhoc-dao/src/main/java/com/yl/bigdata/adhoc/dao/mapper/AdhocExecutorInstanceMapper.java
+  ed6859a83db170d0 6,10-13
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/schedule/QueueWorker.java
+  ed6859a83db170d0 1-77
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/AdhocServerApplication.java
+  ed6859a83db170d0 7,11
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/grpc/ExecutorClient.java
+  ed6859a83db170d0 26-30
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/schedule/QueueWorkerTest.java
+  ed6859a83db170d0 1-97
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "58ce25aebe0e58d2170b111a07080ac18355d3b7",
+  "prompts": {
+    "ed6859a83db170d0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "baadbac9-c4aa-4190-b9fc-ad262ff39649",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 303,
+      "total_deletions": 0,
+      "accepted_lines": 206,
+      "overriden_lines": 0
+    }
+  }
+}
