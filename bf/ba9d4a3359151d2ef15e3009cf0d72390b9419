@@ -1,0 +1,27 @@
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/split/SqlSegment.java
+  ed6859a83db170d0 1-15
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/split/SqlSplitter.java
+  ed6859a83db170d0 1-63
+adhoc-executor/src/test/java/com/yl/bigdata/adhoc/executor/split/SqlSplitterTest.java
+  ed6859a83db170d0 1-69
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "bfba9d4a3359151d2ef15e3009cf0d72390b9419",
+  "prompts": {
+    "ed6859a83db170d0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "baadbac9-c4aa-4190-b9fc-ad262ff39649",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 147,
+      "total_deletions": 0,
+      "accepted_lines": 147,
+      "overriden_lines": 0
+    }
+  }
+}
