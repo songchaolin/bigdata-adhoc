@@ -1,0 +1,33 @@
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/grpc/HeartbeatServiceImpl.java
+  ed6859a83db170d0 3,5,7,16-19,22,29,32,34,46-49,58-69
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/ha/ExecutorHeartbeatTask.java
+  ed6859a83db170d0 23-24,30-33,39,44-48
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/ha/RunningTaskRegistry.java
+  ed6859a83db170d0 1-26
+adhoc-dao/src/main/java/com/yl/bigdata/adhoc/dao/mapper/AdhocQueryTaskMapper.java
+  ed6859a83db170d0 31-35
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/JobExecutionRunner.java
+  ed6859a83db170d0 13,46,60-61,66,99,101-120
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/grpc/HeartbeatServiceImplTest.java
+  ed6859a83db170d0 5,7,19-21,25,32-33,40-41,47,60-104
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "e615c23057f64967105dde876bef1196c7cd5a0b",
+  "prompts": {
+    "ed6859a83db170d0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "baadbac9-c4aa-4190-b9fc-ad262ff39649",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 154,
+      "total_deletions": 34,
+      "accepted_lines": 154,
+      "overriden_lines": 0
+    }
+  }
+}
