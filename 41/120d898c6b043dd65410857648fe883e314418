@@ -1,0 +1,37 @@
+adhoc-sql-parser/src/main/java/com/yl/bigdata/adhoc/sqlparser/extractor/TableLineageExtractor.java
+  ed6859a83db170d0 1-59
+adhoc-sql-parser/src/main/java/com/yl/bigdata/adhoc/sqlparser/extractor/SqlTypeExtractor.java
+  ed6859a83db170d0 1-105
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/spi/SqlParserEngine.java
+  ed6859a83db170d0 1-8
+adhoc-sql-parser/src/main/java/com/yl/bigdata/adhoc/sqlparser/engine/KyuubiSparkParserEngine.java
+  ed6859a83db170d0 1-57
+adhoc-sql-parser/src/main/java/com/yl/bigdata/adhoc/sqlparser/parser/SqlParserFactory.java
+  ed6859a83db170d0 3-21
+adhoc-sql-parser/pom.xml
+  ed6859a83db170d0 21,24-43
+adhoc-sql-parser/src/test/java/com/yl/bigdata/adhoc/sqlparser/engine/KyuubiSparkParserEngineTest.java
+  ed6859a83db170d0 1-72
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/model/SqlParseResult.java
+  ed6859a83db170d0 1-19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "41120d898c6b043dd65410857648fe883e314418",
+  "prompts": {
+    "ed6859a83db170d0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "baadbac9-c4aa-4190-b9fc-ad262ff39649",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 2849,
+      "total_deletions": 9,
+      "accepted_lines": 2844,
+      "overriden_lines": 3
+    }
+  }
+}
