@@ -1,0 +1,35 @@
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/ha/InstanceCleanup.java
+  ed6859a83db170d0 1-33
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/ha/ServerCrashCompensationTest.java
+  ed6859a83db170d0 1-63
+adhoc-dao/src/main/java/com/yl/bigdata/adhoc/dao/mapper/AdhocExecutorInstanceMapper.java
+  ed6859a83db170d0 5,37-40
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/ha/ServerCrashCompensation.java
+  ed6859a83db170d0 1-30
+adhoc-dao/src/main/java/com/yl/bigdata/adhoc/dao/mapper/AdhocServerInstanceMapper.java
+  ed6859a83db170d0 5,25-32
+adhoc-dao/src/main/java/com/yl/bigdata/adhoc/dao/mapper/AdhocQueryJobMapper.java
+  ed6859a83db170d0 34-39
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/ha/GracefulShutdown.java
+  ed6859a83db170d0 1-42
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "a98cc45445c1937688c5030b2ae975883256acb2",
+  "prompts": {
+    "ed6859a83db170d0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "baadbac9-c4aa-4190-b9fc-ad262ff39649",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 188,
+      "total_deletions": 0,
+      "accepted_lines": 188,
+      "overriden_lines": 0
+    }
+  }
+}
