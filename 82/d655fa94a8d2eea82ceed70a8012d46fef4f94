@@ -1,0 +1,39 @@
+adhoc-storage/src/main/java/com/yl/bigdata/adhoc/storage/reader/AdhocResultReader.java
+  ed6859a83db170d0 1-124
+adhoc-storage/src/main/java/com/yl/bigdata/adhoc/storage/format/AdhocResultSerializer.java
+  ed6859a83db170d0 1-40
+adhoc-storage/pom.xml
+  ed6859a83db170d0 62
+adhoc-storage/src/main/java/com/yl/bigdata/adhoc/storage/model/ResultSchema.java
+  ed6859a83db170d0 1-15
+adhoc-storage/src/main/java/com/yl/bigdata/adhoc/storage/model/ResultRow.java
+  ed6859a83db170d0 1-13
+adhoc-storage/src/main/java/com/yl/bigdata/adhoc/storage/writer/LocalResultWriter.java
+  ed6859a83db170d0 1-58
+adhoc-storage/src/main/java/com/yl/bigdata/adhoc/storage/format/AdhocResultFormat.java
+  ed6859a83db170d0 1-42
+adhoc-storage/src/test/java/com/yl/bigdata/adhoc/storage/AdhocResultRoundTripTest.java
+  ed6859a83db170d0 1-59
+adhoc-storage/src/main/java/com/yl/bigdata/adhoc/storage/model/ResultColumn.java
+  ed6859a83db170d0 1-15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "82d655fa94a8d2eea82ceed70a8012d46fef4f94",
+  "prompts": {
+    "ed6859a83db170d0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "baadbac9-c4aa-4190-b9fc-ad262ff39649",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 367,
+      "total_deletions": 0,
+      "accepted_lines": 367,
+      "overriden_lines": 0
+    }
+  }
+}
