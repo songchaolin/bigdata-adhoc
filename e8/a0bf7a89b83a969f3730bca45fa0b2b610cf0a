@@ -1,0 +1,29 @@
+adhoc-dao/src/main/resources/db/schema.sql
+  ed6859a83db170d0 1-240
+adhoc-executor/src/test/resources/application.yml
+  ed6859a83db170d0 1-7
+adhoc-executor/src/main/resources/application.yml
+  ed6859a83db170d0 8-10
+adhoc-server/src/main/resources/application.yml
+  ed6859a83db170d0 8-10
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "e8a0bf7a89b83a969f3730bca45fa0b2b610cf0a",
+  "prompts": {
+    "ed6859a83db170d0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "baadbac9-c4aa-4190-b9fc-ad262ff39649",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 253,
+      "total_deletions": 12,
+      "accepted_lines": 253,
+      "overriden_lines": 0
+    }
+  }
+}
