@@ -1,0 +1,31 @@
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/dao/AdhocQueryJobMapperTest.java
+  ed6859a83db170d0 1-44
+adhoc-executor/src/main/resources/application.yml
+  ed6859a83db170d0 8-10
+adhoc-server/src/main/resources/application.yml
+  ed6859a83db170d0 8-10
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/AdhocServerApplication.java
+  ed6859a83db170d0 4,8-9
+adhoc-server/src/test/resources/application.yml
+  ed6859a83db170d0 5-9,13-16
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "b49eca8d587853f0f1e4a7315922f1efa5eb9952",
+  "prompts": {
+    "ed6859a83db170d0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "baadbac9-c4aa-4190-b9fc-ad262ff39649",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 64,
+      "total_deletions": 21,
+      "accepted_lines": 62,
+      "overriden_lines": 0
+    }
+  }
+}
