@@ -1,0 +1,27 @@
+adhoc-sql-parser/src/main/java/com/yl/bigdata/adhoc/sqlparser/model/ProcessedSqlSegment.java
+  ed6859a83db170d0 1-16
+adhoc-sql-parser/src/main/java/com/yl/bigdata/adhoc/sqlparser/preprocess/SqlScriptProcessor.java
+  ed6859a83db170d0 1-57
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/JobExecutionRunner.java
+  ed6859a83db170d0 15-16,42,76,97,102-114,151,154,164-172,182
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "99c52a7573062c5a3b8fdf11beacc7900bf94814",
+  "prompts": {
+    "ed6859a83db170d0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "baadbac9-c4aa-4190-b9fc-ad262ff39649",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 103,
+      "total_deletions": 9,
+      "accepted_lines": 2602,
+      "overriden_lines": 0
+    }
+  }
+}
