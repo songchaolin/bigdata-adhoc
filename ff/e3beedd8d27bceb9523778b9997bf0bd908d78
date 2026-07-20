@@ -1,0 +1,27 @@
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/exception/AdhocErrorCode.java
+  4a849a6d26d798f5 20-21
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/service/JobServiceTest.java
+  4a849a6d26d798f5 3,17,71-121,138
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/service/JobService.java
+  4a849a6d26d798f5 11-13,16,18-20,24-26,31-34,77-96,107
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "ffe3beedd8d27bceb9523778b9997bf0bd908d78",
+  "prompts": {
+    "4a849a6d26d798f5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a58c5088-80a2-4f61-9eef-7ccfbc50822b",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 91,
+      "total_deletions": 6,
+      "accepted_lines": 9586,
+      "overriden_lines": 0
+    }
+  }
+}
