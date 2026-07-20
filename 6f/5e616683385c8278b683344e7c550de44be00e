@@ -1,0 +1,55 @@
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/grpc/DataFetcherServiceImpl.java
+  4a849a6d26d798f5 3-4,6-7,11,15,17-18,22-28,30-31,33-34,36
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/grpc/ExecutorClient.java
+  4a849a6d26d798f5 3,7,16,20-24,27-30,32
+.sr-ref/ParsingFailureException.java
+  4a849a6d26d798f5 1
+adhoc-protocol/src/main/proto/internal/data_fetcher.proto
+  4a849a6d26d798f5 10,35
+.sr-ref/StarRocksParserFactory.java
+  4a849a6d26d798f5 1
+adhoc-dao/src/main/java/com/yl/bigdata/adhoc/dao/entity/AdhocResultSummary.java
+  4a849a6d26d798f5 20,22
+adhoc-dao/src/main/java/com/yl/bigdata/adhoc/dao/entity/AdhocQueryTask.java
+  4a849a6d26d798f5 47
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/TaskLogBuffer.java
+  4a849a6d26d798f5 1,3,5-7,9,11-15,17-20,22-24,27-68,70-72,74-77,80
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/TaskLogBufferRegistry.java
+  4a849a6d26d798f5 1,5-11,13-15,17-19,21-22,25-26,28
+adhoc-dao/src/main/resources/db/schema.sql
+  4a849a6d26d798f5 61,72,76-78,142-143,145,149
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/web/ResultController.java
+  4a849a6d26d798f5 7,9,18,25,27,29,38-39,41,50,55,57,60
+.sr-ref/CaseInsensitiveStream.java
+  4a849a6d26d798f5 1-80
+.sr-ref/SqlParser.java
+  4a849a6d26d798f5 1-292
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/config/StorageConfig.java
+  4a849a6d26d798f5 3-4,9,14-27,29-34
+.sr-ref/AstBuilder.java
+  4a849a6d26d798f5 1-9121
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/config/StorageConfig.java
+  4a849a6d26d798f5 3-4,9,14-27,31-32,34
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/JobExecutionRunner.java
+  4a849a6d26d798f5 12,14,16,20-21,34-36,50-51,69,76-77,111-113,115-122,126,128-129,131-133,135-164,167,182-187,219-220,226,234-237,241-243,245,251-252,282
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "6f5e616683385c8278b683344e7c550de44be00e",
+  "prompts": {
+    "4a849a6d26d798f5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a58c5088-80a2-4f61-9eef-7ccfbc50822b",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 9788,
+      "total_deletions": 351,
+      "accepted_lines": 19283,
+      "overriden_lines": 0
+    }
+  }
+}
