@@ -1,0 +1,25 @@
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/grpc/HeartbeatServiceImpl.java
+  1b151ba3530c5f91 19-20,28,34
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/grpc/HeartbeatServiceImplTest.java
+  1b151ba3530c5f91 55
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "1dbd635c0deef245e3e7d666242957bb77dcf24e",
+  "prompts": {
+    "1b151ba3530c5f91": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8d9c4e7f-8c61-4136-8d65-8bb0c49cb121",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 5,
+      "total_deletions": 175,
+      "accepted_lines": 1431,
+      "overriden_lines": 0
+    }
+  }
+}
