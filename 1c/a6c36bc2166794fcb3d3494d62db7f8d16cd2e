@@ -1,0 +1,31 @@
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/ha/ServerHeartbeatTask.java
+  1b151ba3530c5f91 1-34
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/ha/ServerInstanceRegistration.java
+  1b151ba3530c5f91 11,17,22,24,30-32
+adhoc-dao/src/main/resources/db/oss-schema-sync.sql
+  1b151ba3530c5f91 1-15
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/ha/ServerInstanceInfo.java
+  1b151ba3530c5f91 1-46
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/AdhocExecutorApplication.java
+  1b151ba3530c5f91 15-16
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "1ca6c36bc2166794fcb3d3494d62db7f8d16cd2e",
+  "prompts": {
+    "1b151ba3530c5f91": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8d9c4e7f-8c61-4136-8d65-8bb0c49cb121",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 104,
+      "total_deletions": 12,
+      "accepted_lines": 161,
+      "overriden_lines": 0
+    }
+  }
+}
