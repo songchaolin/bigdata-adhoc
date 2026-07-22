@@ -1,0 +1,23 @@
+adhoc-sql-parser/src/main/java/com/yl/bigdata/adhoc/sqlparser/engine/KyuubiSparkParserEngine.java
+  1b151ba3530c5f91 9,32-33
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "704cb7ba658edbf08a8fcee9ce0958f6b98c2609",
+  "prompts": {
+    "1b151ba3530c5f91": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8d9c4e7f-8c61-4136-8d65-8bb0c49cb121",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 3,
+      "total_deletions": 0,
+      "accepted_lines": 1458,
+      "overriden_lines": 0
+    }
+  }
+}
