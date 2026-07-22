@@ -1,0 +1,59 @@
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/enums/ResultStatus.java
+  1b151ba3530c5f91 6-22
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/JobExecutionRunner.java
+  1b151ba3530c5f91 5-13,99,106,115,142-144,163,172-174,195,221-222,224-225,242-243,263-264,278-279,286-287,290,292,294
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/grpc/ExecutorChannelPool.java
+  1b151ba3530c5f91 4,8-11,14-17,20-23,27-28,31-37,42,44-47,50-59,65-86,89-90,92-153,155-176,181-182
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/service/JobService.java
+  1b151ba3530c5f91 5-7,37-38,67,82,89
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/enums/TaskStatus.java
+  1b151ba3530c5f91 8-37
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/ha/JobLogCollector.java
+  1b151ba3530c5f91 4,95
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/enums/InstanceStatus.java
+  1b151ba3530c5f91 6-26
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/web/dto/EchoRequest.java
+  1b151ba3530c5f91 1-11
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/enums/OssUploadStatus.java
+  1b151ba3530c5f91 3,6-22
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/enums/JobStatus.java
+  1b151ba3530c5f91 9-39
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/enums/SqlType.java
+  1b151ba3530c5f91 14-30
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/enums/NodeType.java
+  1b151ba3530c5f91 5-21
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/enums/StorageType.java
+  1b151ba3530c5f91 7-23
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/service/LogQueryService.java
+  1b151ba3530c5f91 3-4,55,81
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/enums/EngineType.java
+  1b151ba3530c5f91 5-21
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/enums/TaskStage.java
+  1b151ba3530c5f91 6-22
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/enums/FailReasonCategory.java
+  1b151ba3530c5f91 12-28
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/enums/FailStage.java
+  1b151ba3530c5f91 8-24
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/grpc/HeartbeatServiceImpl.java
+  1b151ba3530c5f91 4,50
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "e595031e05c20c86270bdef78af0370a961eecc4",
+  "prompts": {
+    "1b151ba3530c5f91": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8d9c4e7f-8c61-4136-8d65-8bb0c49cb121",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 297,
+      "total_deletions": 59,
+      "accepted_lines": 1975,
+      "overriden_lines": 1
+    }
+  }
+}
