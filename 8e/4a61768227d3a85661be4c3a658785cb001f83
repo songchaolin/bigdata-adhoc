@@ -1,0 +1,29 @@
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/ha/JobLog.java
+  1b151ba3530c5f91 2-3,8,10-12,15-52
+adhoc-executor/src/test/java/com/yl/bigdata/adhoc/executor/grpc/DataFetcherServiceImplTest.java
+  1b151ba3530c5f91 3-4,18,23,25,40-41,51
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/ha/RunningJobRegistry.java
+  1b151ba3530c5f91 3-8,11,14,17-19,24-34,37,41,45,47
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/LogBuffer.java
+  1b151ba3530c5f91 1-85
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "8e4a61768227d3a85661be4c3a658785cb001f83",
+  "prompts": {
+    "1b151ba3530c5f91": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8d9c4e7f-8c61-4136-8d65-8bb0c49cb121",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 78,
+      "total_deletions": 146,
+      "accepted_lines": 1533,
+      "overriden_lines": 0
+    }
+  }
+}
