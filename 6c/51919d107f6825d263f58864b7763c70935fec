@@ -1,0 +1,25 @@
+adhoc-sql-parser/src/main/java/com/yl/bigdata/adhoc/sqlparser/parser/CollectingErrorListener.java
+  1b151ba3530c5f91 1-40
+adhoc-sql-parser/src/main/java/com/yl/bigdata/adhoc/sqlparser/engine/KyuubiSparkParserEngine.java
+  1b151ba3530c5f91 7,18,28,31,34,37,56-63,69-107
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "6c51919d107f6825d263f58864b7763c70935fec",
+  "prompts": {
+    "1b151ba3530c5f91": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8d9c4e7f-8c61-4136-8d65-8bb0c49cb121",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 94,
+      "total_deletions": 6,
+      "accepted_lines": 1549,
+      "overriden_lines": 0
+    }
+  }
+}
