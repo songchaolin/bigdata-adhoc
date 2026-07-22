@@ -1,0 +1,29 @@
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/enums/StorageType.java
+  1b151ba3530c5f91 5
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/web/ResultController.java
+  1b151ba3530c5f91 3,6,19-20,34-39,50,55,57,60
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/enums/FailStage.java
+  1b151ba3530c5f91 8
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/JobExecutionRunner.java
+  1b151ba3530c5f91 11,263
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "7ada3d5747a4058f7f11f2bb666f1514f7f0782c",
+  "prompts": {
+    "1b151ba3530c5f91": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8d9c4e7f-8c61-4136-8d65-8bb0c49cb121",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 1191,
+      "total_deletions": 263,
+      "accepted_lines": 1505,
+      "overriden_lines": 0
+    }
+  }
+}
