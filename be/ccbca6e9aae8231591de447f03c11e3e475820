@@ -1,0 +1,23 @@
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/schedule/QueueWorkerTest.java
+  dab945f3a659dfc8 69,137
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "beccbca6e9aae8231591de447f03c11e3e475820",
+  "prompts": {
+    "dab945f3a659dfc8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f99c7bc2-fd28-4443-a76f-c142a2d99c32",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 12,
+      "total_deletions": 135,
+      "accepted_lines": 702,
+      "overriden_lines": 0
+    }
+  }
+}
