@@ -1,0 +1,36 @@
+superpowers/specs/2026-07-22-job-task-timing-log-design.md
+  dab945f3a659dfc8 1-155
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "052325eabeffd4e2a6675f3d5524249532bbac0b",
+  "prompts": {
+    "1b151ba3530c5f91": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8d9c4e7f-8c61-4136-8d65-8bb0c49cb121",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 46,
+      "total_deletions": 16,
+      "accepted_lines": 1415,
+      "overriden_lines": 0
+    },
+    "dab945f3a659dfc8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f99c7bc2-fd28-4443-a76f-c142a2d99c32",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 155,
+      "total_deletions": 0,
+      "accepted_lines": 155,
+      "overriden_lines": 0
+    }
+  }
+}
