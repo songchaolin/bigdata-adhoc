@@ -1,0 +1,33 @@
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/JobStateWriter.java
+  d3a7d1180373ba5b 1-55
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/TaskStateWriter.java
+  d3a7d1180373ba5b 1-94
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/SqlLimitEnforcer.java
+  d3a7d1180373ba5b 1-44
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/TaskResultWriter.java
+  d3a7d1180373ba5b 1-60
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/EngineSelector.java
+  d3a7d1180373ba5b 1-63
+adhoc-executor/src/test/java/com/yl/bigdata/adhoc/executor/runner/SqlLimitEnforcerTest.java
+  d3a7d1180373ba5b 1-42
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "e80110c7844ec20d3bcffbe2fd12683306c67cc7",
+  "prompts": {
+    "d3a7d1180373ba5b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "aae968bb-d6aa-4af3-8666-84bdc80e9e95",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 360,
+      "total_deletions": 2,
+      "accepted_lines": 985,
+      "overriden_lines": 0
+    }
+  }
+}
