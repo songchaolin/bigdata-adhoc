@@ -1,0 +1,25 @@
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/service/JobServiceLimitTest.java
+  d3a7d1180373ba5b 1-88
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/service/JobService.java
+  d3a7d1180373ba5b 12,29-30,44,46,49,64-66,105-109,122-140
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "7d57ac5013cfd1d382178578c7f2c43533d02df4",
+  "prompts": {
+    "d3a7d1180373ba5b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "aae968bb-d6aa-4af3-8666-84bdc80e9e95",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 121,
+      "total_deletions": 2,
+      "accepted_lines": 1106,
+      "overriden_lines": 0
+    }
+  }
+}
