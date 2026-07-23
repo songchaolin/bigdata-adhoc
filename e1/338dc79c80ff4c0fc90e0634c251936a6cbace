@@ -1,0 +1,29 @@
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/schedule/QueueWorkerLimitTest.java
+  d3a7d1180373ba5b 4,6,41-42,46-47,50-63
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/schedule/QueueWorker.java
+  d3a7d1180373ba5b 77-112,114-127,129-130,132,134-135,148,150,155,164,173-177,181-190,192-193
+adhoc-dao/src/main/resources/mapper/AdhocQueryJobMapper.xml
+  d3a7d1180373ba5b 42-46,54-59
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/schedule/QueueWorkerTest.java
+  d3a7d1180373ba5b 95,157-158
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "e1338dc79c80ff4c0fc90e0634c251936a6cbace",
+  "prompts": {
+    "d3a7d1180373ba5b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "aae968bb-d6aa-4af3-8666-84bdc80e9e95",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 110,
+      "total_deletions": 60,
+      "accepted_lines": 1108,
+      "overriden_lines": 0
+    }
+  }
+}
