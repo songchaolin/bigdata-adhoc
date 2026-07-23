@@ -1,0 +1,47 @@
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/ha/JobReconcileTask.java
+  d3a7d1180373ba5b 203
+  dab945f3a659dfc8 103
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/schedule/QueueWorker.java
+  d3a7d1180373ba5b 87,93,116,127
+adhoc-executor/src/test/java/com/yl/bigdata/adhoc/executor/runner/JobExecutionRunnerScenarioTest.java
+  d3a7d1180373ba5b 113,115
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/service/JobService.java
+  d3a7d1180373ba5b 72-74
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/TaskResultWriter.java
+  d3a7d1180373ba5b 38,57
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/JobExecutionRunner.java
+  d3a7d1180373ba5b 90,96,100,122-123,129-130,144-146,148,150-151,157-159,179,222,228-229,231-232,239,262,270
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "e0de35e60f6d507d2b94ad842af4134e258d1a64",
+  "prompts": {
+    "d3a7d1180373ba5b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "aae968bb-d6aa-4af3-8666-84bdc80e9e95",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 68,
+      "total_deletions": 68,
+      "accepted_lines": 664,
+      "overriden_lines": 0
+    },
+    "dab945f3a659dfc8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f99c7bc2-fd28-4443-a76f-c142a2d99c32",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 0,
+      "accepted_lines": 1735,
+      "overriden_lines": 0
+    }
+  }
+}
