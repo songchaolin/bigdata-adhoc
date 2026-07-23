@@ -1,0 +1,44 @@
+adhoc-executor/pom.xml
+  dab945f3a659dfc8 25
+  d3a7d1180373ba5b 74-79
+adhoc-dependencies/pom.xml
+  d3a7d1180373ba5b 50-52,83-91
+adhoc-server/pom.xml
+  dab945f3a659dfc8 25-26
+  d3a7d1180373ba5b 55-60
+adhoc-server/src/main/resources/META-INF/app.properties
+  d3a7d1180373ba5b 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "6302400ccb448b8f0c7f71e4718ac8a48fdb14b9",
+  "prompts": {
+    "d3a7d1180373ba5b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "aae968bb-d6aa-4af3-8666-84bdc80e9e95",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 252,
+      "total_deletions": 1,
+      "accepted_lines": 1250,
+      "overriden_lines": 0
+    },
+    "dab945f3a659dfc8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f99c7bc2-fd28-4443-a76f-c142a2d99c32",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 0,
+      "accepted_lines": 1730,
+      "overriden_lines": 0
+    }
+  }
+}
