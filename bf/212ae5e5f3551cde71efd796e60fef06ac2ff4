@@ -1,0 +1,37 @@
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/grpc/JobExecutorServiceImpl.java
+  d3a7d1180373ba5b 67-75
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/ha/ServerStatusReporter.java
+  d3a7d1180373ba5b 1-84
+superpowers/specs/2026-07-08-adhoc-redesign/13-config-catalog.md
+  d3a7d1180373ba5b 54
+adhoc-executor/src/test/resources/application.yml
+  d3a7d1180373ba5b 23-24
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/ha/AdhocExecutorServiceStarter.java
+  d3a7d1180373ba5b 16,18-19,21,28,36
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/ha/ExecutorStatusReporter.java
+  d3a7d1180373ba5b 1-71
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/ha/AdhocServerServiceStarter.java
+  d3a7d1180373ba5b 28,36-37,46,60,75
+adhoc-server/src/test/resources/application.yml
+  d3a7d1180373ba5b 31-32
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "bf212ae5e5f3551cde71efd796e60fef06ac2ff4",
+  "prompts": {
+    "d3a7d1180373ba5b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "aae968bb-d6aa-4af3-8666-84bdc80e9e95",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 181,
+      "total_deletions": 3,
+      "accepted_lines": 1179,
+      "overriden_lines": 0
+    }
+  }
+}
