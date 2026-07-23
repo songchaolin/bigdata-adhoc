@@ -1,0 +1,23 @@
+adhoc-dependencies/pom.xml
+  d3a7d1180373ba5b 50-52
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "b18620592b8784082e3adc58ef90967ce9e6e074",
+  "prompts": {
+    "d3a7d1180373ba5b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "aae968bb-d6aa-4af3-8666-84bdc80e9e95",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 0,
+      "accepted_lines": 1230,
+      "overriden_lines": 0
+    }
+  }
+}
