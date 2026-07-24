@@ -1,0 +1,23 @@
+adhoc-sql-parser/src/main/java/com/yl/bigdata/adhoc/sqlparser/preprocess/SqlCommentRemover.java
+  d3a7d1180373ba5b 4,6-8,16,19-91,93
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "58d3566a103fcef8db8456ea57986ff217c60a70",
+  "prompts": {
+    "d3a7d1180373ba5b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "aae968bb-d6aa-4af3-8666-84bdc80e9e95",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 658,
+      "total_deletions": 1126,
+      "accepted_lines": 1833,
+      "overriden_lines": 0
+    }
+  }
+}
