@@ -1,0 +1,268 @@
+adhoc-executor/src/test/java/com/yl/bigdata/adhoc/executor/runner/JobExecutionRunnerScenarioTest.java
+  a994eceb300c9eb2 86,120
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/grpc/JobManagerServiceImpl.java
+  a994eceb300c9eb2 1-46
+adhoc-server/src/test/resources/application.yml
+  6bae87d9313f8a61 25
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/dto/request/ResultRequest.java
+  b874a1f7a4bbccc7 1-16
+adhoc-dao/src/main/java/com/yl/bigdata/adhoc/dao/mapper/AdhocQueryJobMapper.java
+  6bae87d9313f8a61 14,19-20
+  a994eceb300c9eb2 34-36
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/sqlparse/SqlParseTest.java
+  d3a7d1180373ba5b 3-11,13-894
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/ha/ServerCrashCompensation.java
+  a994eceb300c9eb2 3-5,12,18-21,28-29,35-36,38-39,55-81,90
+adhoc-protocol/src/main/proto/internal/data_fetcher.proto
+  a994eceb300c9eb2 43,53-61,65
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/engine/StarRocksEngineExecutor.java
+  a994eceb300c9eb2 6-7,14,20-23,28-29,39-41,56-59,80-95
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/service/JobServiceLimitTest.java
+  b874a1f7a4bbccc7 7
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/web/LogController.java
+  6bae87d9313f8a61 8-9,15,18,22,33,35-36,39,41-42,44
+  dab945f3a659dfc8 4,10-11,19-20,27,29-30,34,40
+  b874a1f7a4bbccc7 5-7
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/ha/AdhocServerServiceStarter.java
+  a994eceb300c9eb2 52
+superpowers/plans/2026-07-22-runner-refactor-serverlog.md
+  d3a7d1180373ba5b 1-627
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/ha/ExecutorCrashCompensationTest.java
+  a994eceb300c9eb2 63-64
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/ha/JobReconcileTask.java
+  a994eceb300c9eb2 23,68-69,112-113,138-141,143,148-152,189-190,192-204,222-223,231-243,258
+adhoc-protocol/src/main/proto/internal/server_reconcile.proto
+  a994eceb300c9eb2 19-31,34
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/dto/JobSubmitResponse.java
+  b874a1f7a4bbccc7 1-10
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/dto/request/JobLogRequest.java
+  b874a1f7a4bbccc7 1-11
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/grpc/ServerReconcileServiceImpl.java
+  a994eceb300c9eb2 5-6,8-9,14-17,22,24,26,35-54
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/web/JobController.java
+  b874a1f7a4bbccc7 7-13
+  dab945f3a659dfc8 56,62,68
+  6bae87d9313f8a61 3,14-22,25-26,28,41,43,49-55,57-58,61,63-64,67,69-70
+superpowers/plans/2026-07-21-executor-self-heartbeat.md
+  dab945f3a659dfc8 1-601
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/web/EchoControllerTest.java
+  dab945f3a659dfc8 12,40-42
+  6bae87d9313f8a61 4,21-24,44-46
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/dto/request/JobIdRequest.java
+  b874a1f7a4bbccc7 1-12
+adhoc-executor/src/main/resources/logback-spring.xml
+  6bae87d9313f8a61 35-39
+adhoc-server/pom.xml
+  6bae87d9313f8a61 29-32
+superpowers/plans/2026-07-22-job-task-timing-log.md
+  dab945f3a659dfc8 1-662
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/dto/TaskSummary.java
+  b874a1f7a4bbccc7 1-13
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/dto/ResultResponse.java
+  b874a1f7a4bbccc7 1,8,14-15
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/service/JobQueryServiceTest.java
+  b874a1f7a4bbccc7 4-7
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/util/LogConstants.java
+  a994eceb300c9eb2 1-19
+superpowers/plans/2026-07-21-job-log-server-owned.md
+  dab945f3a659dfc8 1-308
+adhoc-common/pom.xml
+  b874a1f7a4bbccc7 15,23-26
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/dto/request/JobPageQueryRequest.java
+  b874a1f7a4bbccc7 1-23
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/grpc/JobExecutorServiceImpl.java
+  a994eceb300c9eb2 13,25-27,37-38,57-63,66,76
+adhoc-dao/src/main/resources/mapper/AdhocQueryJobMapper.xml
+  a994eceb300c9eb2 49,61-64,93-99
+  6bae87d9313f8a61 50
+adhoc-executor/src/test/java/com/yl/bigdata/adhoc/executor/runner/LogBufferRegistryTest.java
+  a994eceb300c9eb2 1-174
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/ha/ExecutorCrashCompensation.java
+  a994eceb300c9eb2 10,12-13,21-23,31-32,56-57,59-67,72,83
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/service/ResultQueryService.java
+  b874a1f7a4bbccc7 8-9,35
+  6bae87d9313f8a61 1-7,10-34,36-64
+superpowers/plans/2026-07-23-rate-limit-config.md
+  d3a7d1180373ba5b 1-358
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/dto/request/JobSubmitRequest.java
+  b874a1f7a4bbccc7 1,5-6,10,12
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/dto/LogResponse.java
+  b874a1f7a4bbccc7 1-16
+adhoc-server/src/main/resources/META-INF/app.properties
+  d3a7d1180373ba5b 1
+adhoc-dao/src/main/resources/mapper/AdhocQueryTaskMapper.xml
+  6bae87d9313f8a61 55-68
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/JobExecutionRunner.java
+  a994eceb300c9eb2 39-40,66,111-112,146,293-295,305-310,319,321-323,388
+  6bae87d9313f8a61 27,44-47,83-106,135-136,149-179,181-255,260-261,263,266,272-273,276,278,280,320,324-387
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/enums/JobStatus.java
+  dab945f3a659dfc8 5,36,39
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/TaskStateWriter.java
+  a994eceb300c9eb2 17,31,40,49,61,79,86-95,109
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/web/EchoController.java
+  dab945f3a659dfc8 10,35
+  b874a1f7a4bbccc7 6
+  6bae87d9313f8a61 7-8,14,19,21,32,34,36-39
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/service/LogQueryService.java
+  a994eceb300c9eb2 9,11,13,16,19-20,32-35,40-41,47-48,52-53,59-60,74,77-80,82,92,95-116,120,127-135,139-141,144-151,153,159
+  b874a1f7a4bbccc7 17
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/web/ResultController.java
+  6bae87d9313f8a61 4,7-12,14,17-18,20,25,27-28,31,33-34
+  b874a1f7a4bbccc7 5-6
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/grpc/ServerReconcileClient.java
+  a994eceb300c9eb2 1-111
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/grpc/ExecutorClient.java
+  a994eceb300c9eb2 7-9,19,26,32,34
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/ha/JobLog.java
+  d3a7d1180373ba5b 8,12-13,22-24
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/schedule/QueueWorkerLimitTest.java
+  a994eceb300c9eb2 75,89,107
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/dto/JobDetailResponse.java
+  b874a1f7a4bbccc7 1-18
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/LogBufferRegistry.java
+  dab945f3a659dfc8 1-2,4-5,11-12,14-15,34-37,50-54,59,62,64,68-70,73,92-97,104-105,107-108,262-263
+  a994eceb300c9eb2 3,6-10,13,16-33,38-49,55-58,60-61,63,65-67,71-72,74,76,78-91,98-103,106,109-261
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/schedule/QueueWorker.java
+  6bae87d9313f8a61 23,27,50-55,57-59,82,84-114,117,127-128,204-206,209-210,212,214-215,220-221,229-230
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/dto/common/PageRequest.java
+  b874a1f7a4bbccc7 1-23
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/dto/request/EchoRequest.java
+  b874a1f7a4bbccc7 1-11
+adhoc-dao/src/main/resources/db/schema.sql
+  6bae87d9313f8a61 40,90
+  a994eceb300c9eb2 37,42
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/JobStateWriter.java
+  a994eceb300c9eb2 13,24,29,36,41,45-46,51,55,59
+superpowers/plans/2026-07-28-dto-extract-to-common.md
+  b874a1f7a4bbccc7 1-66
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/util/DangerousSqlChecker.java
+  d3a7d1180373ba5b 67,75-77,79
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/service/LogQueryServiceTest.java
+  b874a1f7a4bbccc7 13
+  a994eceb300c9eb2 1-12,14-152
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/grpc/ExecutorChannelPool.java
+  a994eceb300c9eb2 7-8,17,52-53,150-203,257,260-261
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/ha/AdhocExecutorServiceStarter.java
+  a994eceb300c9eb2 3,11,18,21-22,25,33,42,45
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/aspect/AdhocResponseAdvice.java
+  b874a1f7a4bbccc7 76-86
+adhoc-dao/src/main/java/com/yl/bigdata/adhoc/dao/mapper/AdhocQueryTaskMapper.java
+  6bae87d9313f8a61 13-15
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/service/JobQueryService.java
+  b874a1f7a4bbccc7 12-16,45,47-62
+  6bae87d9313f8a61 4-5,18,23,35-44,46
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/dto/JobVO.java
+  b874a1f7a4bbccc7 1-34
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/TaskResultWriter.java
+  a994eceb300c9eb2 3,22-24,48,53-56,59-69,75
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/engine/EngineExecutor.java
+  6bae87d9313f8a61 17-23
+  a994eceb300c9eb2 7-9,13-16
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/config/MybatisPlusConfig.java
+  6bae87d9313f8a61 1-24
+superpowers/plans/2026-07-27-log-finalizer-compensation.md
+  a994eceb300c9eb2 1-294
+adhoc-executor/src/test/java/com/yl/bigdata/adhoc/executor/grpc/DataFetcherServiceImplTest.java
+  a994eceb300c9eb2 3,6,20,23-26,29,31,57,74-97
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/ha/JobLogCollector.java
+  a994eceb300c9eb2 5,70,80,87,89-94,102,106-114,117-118
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/dto/request/TaskLogRequest.java
+  b874a1f7a4bbccc7 1-11
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/dto/JobStatusResponse.java
+  b874a1f7a4bbccc7 1-11
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/LogBuffer.java
+  d3a7d1180373ba5b 21-22,36,40
+  a994eceb300c9eb2 10-16,26-27,29,37-39,46,51-53,61-62,65,71-72,75,79-83,85-87,90
+superpowers/plans/2026-07-23-apollo-eureka.md
+  d3a7d1180373ba5b 1-227
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/service/JobService.java
+  6bae87d9313f8a61 15,53,56,61,109
+  b874a1f7a4bbccc7 16-17,21
+  a994eceb300c9eb2 13,52,55,60,87-103,181-184,186,190-212
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/schedule/QueueWorkerTest.java
+  a994eceb300c9eb2 66,84,111,134
+  b874a1f7a4bbccc7 11-12
+adhoc-server/src/main/resources/logback-spring.xml
+  6bae87d9313f8a61 35-39
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/service/JobServiceTest.java
+  dab945f3a659dfc8 40,47-48
+  b874a1f7a4bbccc7 7-8
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/engine/KyuubiEngineExecutor.java
+  6bae87d9313f8a61 7-9,13,22,30-37,42-43,49-51,57,68,71,109-179,181
+adhoc-executor/src/test/resources/application.yml
+  a994eceb300c9eb2 29-31
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/grpc/DataFetcherServiceImpl.java
+  a994eceb300c9eb2 5-6,15,52-58,64-71
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "5d97297b37338140006a296dbbeeb1af8394a151",
+  "prompts": {
+    "6bae87d9313f8a61": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8b28eb44-d222-4632-bc72-de139de7adcf",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 1566,
+      "total_deletions": 588,
+      "accepted_lines": 890,
+      "overriden_lines": 54
+    },
+    "a994eceb300c9eb2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "ee87bf22-8860-410b-a481-1f48dd28f9f1",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 1872,
+      "total_deletions": 348,
+      "accepted_lines": 1647,
+      "overriden_lines": 2
+    },
+    "b874a1f7a4bbccc7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "49c4d5b3-eb7b-4b8a-bb12-62ba31a5b75b",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 1122,
+      "total_deletions": 46,
+      "accepted_lines": 382,
+      "overriden_lines": 0
+    },
+    "d3a7d1180373ba5b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "aae968bb-d6aa-4af3-8666-84bdc80e9e95",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 39,
+      "total_deletions": 3,
+      "accepted_lines": 2123,
+      "overriden_lines": 0
+    },
+    "dab945f3a659dfc8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f99c7bc2-fd28-4443-a76f-c142a2d99c32",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 0,
+      "accepted_lines": 1644,
+      "overriden_lines": 1
+    }
+  }
+}
