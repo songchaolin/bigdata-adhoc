@@ -1,0 +1,111 @@
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/service/JobService.java
+  7ed6542841f326e5 185-189,203
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/dto/request/JobResultRequest.java
+  7ed6542841f326e5 3-4,6,8-11,13-19
+superpowers/plans/2026-07-29-unified-config.md
+  7ed6542841f326e5 1-78
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/engine/KyuubiEngineExecutor.java
+  7ed6542841f326e5 60,62-67,105,108
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/web/LogController.java
+  7ed6542841f326e5 12,36-38,43-45
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/dto/JobResultResponse.java
+  7ed6542841f326e5 1-15
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/exception/AdhocErrorCode.java
+  7ed6542841f326e5 22-23
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/service/JobQueryService.java
+  7ed6542841f326e5 10,13,22,24,33,35-36,39,43,46,72,74,79,81-88,93-109,111,114-119
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/config/AdhocProperties.java
+  7ed6542841f326e5 1-200
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/AdhocExecutorApplication.java
+  7ed6542841f326e5 8,15
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/config/Knife4jConfiguration.java
+  b874a1f7a4bbccc7 1-34
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/engine/QueryResult.java
+  7ed6542841f326e5 10-13,20-21
+adhoc-dependencies/pom.xml
+  b874a1f7a4bbccc7 62-65,140-148
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/JobExecutionRunner.java
+  7ed6542841f326e5 233,277,280-282,286-291,349
+adhoc-server/pom.xml
+  b874a1f7a4bbccc7 29-34
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/AdhocServerApplication.java
+  7ed6542841f326e5 15
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/web/ConfigController.java
+  7ed6542841f326e5 1-76
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/service/ResultQueryService.java
+  7ed6542841f326e5 3,7-8,10-11,13-14,29-31,37-38,41-42,44-45,49-56,61-110,125,127-141
+superpowers/plans/2026-07-28-frontend-interaction-hardening.md
+  7ed6542841f326e5 1-65
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/service/LogQueryService.java
+  7ed6542841f326e5 5-6,65,68-72,84,90,92-93
+adhoc-protocol/pom.xml
+  07040b415b504010 26-36,38-39,48-74
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/service/LogQueryServiceTest.java
+  7ed6542841f326e5 47,69,86,103,119,134,147
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/web/ResultController.java
+  7ed6542841f326e5 5-6,13,20-22,37-46
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/dto/ConfigItem.java
+  7ed6542841f326e5 1-16
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/dto/TaskResultItem.java
+  7ed6542841f326e5 1-33
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/dto/TaskSummary.java
+  7ed6542841f326e5 4,6-11,13,19-26
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/service/JobQueryServiceTest.java
+  7ed6542841f326e5 3-4,15,37,43,48-61
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/service/JobServiceTest.java
+  7ed6542841f326e5 133,142-155
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/web/JobController.java
+  7ed6542841f326e5 51-53,58-60,65-67,72-74
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/service/ResultQueryServiceTest.java
+  7ed6542841f326e5 1-74
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/TaskStateWriter.java
+  7ed6542841f326e5 37,42-43,110-116
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/engine/StarRocksEngineExecutor.java
+  7ed6542841f326e5 50,52-57,82,85
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "00ef902845dbc633f76185550cb5e3b6d9cd53bf",
+  "prompts": {
+    "07040b415b504010": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "13bae9b1-89fb-4c99-a88d-78cdf4959638",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 21706,
+      "total_deletions": 35,
+      "accepted_lines": 21699,
+      "overriden_lines": 0
+    },
+    "7ed6542841f326e5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "bead77c9-e10b-4283-b1a6-37fe3ba30e2b",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 884,
+      "total_deletions": 85,
+      "accepted_lines": 874,
+      "overriden_lines": 1
+    },
+    "b874a1f7a4bbccc7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "49c4d5b3-eb7b-4b8a-bb12-62ba31a5b75b",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 26,
+      "total_deletions": 10,
+      "accepted_lines": 271,
+      "overriden_lines": 0
+    }
+  }
+}
