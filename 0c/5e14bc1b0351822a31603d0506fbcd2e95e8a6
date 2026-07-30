@@ -1,0 +1,23 @@
+superpowers/specs/2026-07-30-hadoop-style-config-design.md
+  ce73f3f40af36d73 1-154
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "0c5e14bc1b0351822a31603d0506fbcd2e95e8a6",
+  "prompts": {
+    "ce73f3f40af36d73": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c2b58fe0-3846-4896-9bf4-eec53e495a46",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 1087,
+      "total_deletions": 243,
+      "accepted_lines": 1067,
+      "overriden_lines": 0
+    }
+  }
+}
