@@ -1,0 +1,115 @@
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/engine/KyuubiEngineExecutor.java
+  ce73f3f40af36d73 3-4,45-46,51-54
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/ha/ExecutorCrashCompensation.java
+  ce73f3f40af36d73 3,6,34,38-39,42,46
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/config/AdhocCommonConfig.java
+  ce73f3f40af36d73 1-50
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/ha/ExecutorInstanceRegistration.java
+  ce73f3f40af36d73 4-5,19-21,23-24,27-29,42
+adhoc-executor/src/test/java/com/yl/bigdata/adhoc/executor/config/AdhocExecutorConfigTest.java
+  ce73f3f40af36d73 1-49
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/schedule/QueueWorker.java
+  ce73f3f40af36d73 13-14,46,62,69-72,124-126,222,224,231,233,243
+adhoc-executor/src/test/java/com/yl/bigdata/adhoc/executor/ha/ExecutorHeartbeatTaskTest.java
+  ce73f3f40af36d73 6-7,27-33
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/ha/ServerStatusReporter.java
+  ce73f3f40af36d73 9-11,32,38,42-43,76,78
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/web/ConfigController.java
+  ce73f3f40af36d73 3-7,18-20,27-28,30,32-33,36-39
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/ha/JobReconcileTask.java
+  ce73f3f40af36d73 21-22,65,72,80,84-85,98-99
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/ha/ServerHeartbeatTask.java
+  ce73f3f40af36d73 3,5,25,29-30,33,37
+adhoc-executor/src/test/java/com/yl/bigdata/adhoc/executor/config/ConfigHolderTest.java
+  ce73f3f40af36d73 1-50
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/SqlLimitEnforcer.java
+  ce73f3f40af36d73 25
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/config/StorageConfig.java
+  ce73f3f40af36d73 3-4,10,15,17-22,30
+superpowers/specs/2026-07-08-adhoc-redesign/13-config-catalog.md
+  ce73f3f40af36d73 4-5
+superpowers/plans/2026-07-30-unified-config-desc-migration.md
+  ce73f3f40af36d73 1-91
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/config/AdhocExecutorConfig.java
+  ce73f3f40af36d73 1-76
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/AdhocExecutorApplication.java
+  ce73f3f40af36d73 10,17
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/JobExecutionRunner.java
+  ce73f3f40af36d73 15-16,70,79
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/ha/InstanceCleanup.java
+  ce73f3f40af36d73 3,6,24,28-29,32,36
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/config/ConfigItem.java
+  ce73f3f40af36d73 1-45
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/dto/ConfigItemView.java
+  ce73f3f40af36d73 7-10,14,19-20
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/ha/JobLogCollector.java
+  ce73f3f40af36d73 4,10,43,49,53,57
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/ha/ExecutorStatusReporter.java
+  ce73f3f40af36d73 4-5,28,33-34,38
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/config/AdhocServerConfig.java
+  ce73f3f40af36d73 1-106
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/config/ConfigCatalog.java
+  ce73f3f40af36d73 3-10,13-16,18,20,22-23,26-27,30-50,53-61,64-67,70-71,74-87
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/config/StartupConfigLogger.java
+  ce73f3f40af36d73 1-39
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/service/JobService.java
+  ce73f3f40af36d73 12-13,52,56,60,135-136,138,164,166,169,173,175,178
+adhoc-executor/src/test/java/com/yl/bigdata/adhoc/executor/grpc/JobExecutorServiceImplTest.java
+  ce73f3f40af36d73 3,23-27,33,62
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/config/ConfigHolder.java
+  ce73f3f40af36d73 1-52
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/ha/ExecutorHeartbeatTask.java
+  ce73f3f40af36d73 8-9,47,54-55,60,151
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/AdhocServerApplication.java
+  ce73f3f40af36d73 10,17
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/LogBufferRegistry.java
+  ce73f3f40af36d73 10-11,75-76,79,82-83
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/config/StartupConfigLogger.java
+  ce73f3f40af36d73 3-13,16-18,20-39
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/grpc/JobExecutorServiceImpl.java
+  ce73f3f40af36d73 3-4,47,49
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/ha/ServerCrashCompensation.java
+  ce73f3f40af36d73 4,8,31,36,40,44,92
+adhoc-executor/src/test/java/com/yl/bigdata/adhoc/executor/grpc/DataFetcherServiceImplTest.java
+  ce73f3f40af36d73 4,25
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/ha/GracefulShutdown.java
+  ce73f3f40af36d73 3,5,23-24,28,30,36
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/ha/ServerInstanceInfo.java
+  ce73f3f40af36d73 3-4,15,20,29-32,54
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/ha/HealthCheckTask.java
+  ce73f3f40af36d73 5-6,25,29-30,33,37,65
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/config/StorageConfig.java
+  ce73f3f40af36d73 3-4,10,15,17-22,30
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/ha/ServerInstanceRegistration.java
+  ce73f3f40af36d73 3,5,19,21-22,25,31
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/config/AdhocServerConfigTest.java
+  ce73f3f40af36d73 1-49
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/engine/StarRocksEngineExecutor.java
+  ce73f3f40af36d73 3-4,31-34,39-45,48
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/EngineSelector.java
+  ce73f3f40af36d73 4-5,27-29,31,34-36
+adhoc-executor/src/test/java/com/yl/bigdata/adhoc/executor/runner/LogBufferRegistryTest.java
+  ce73f3f40af36d73 7,34
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/ha/ExecutorInstanceInfo.java
+  ce73f3f40af36d73 3-4,16,21,28-31,53
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "e6ecd853fc78e59599620989c76bde4409b4ec13",
+  "prompts": {
+    "ce73f3f40af36d73": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c2b58fe0-3846-4896-9bf4-eec53e495a46",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 1628,
+      "total_deletions": 651,
+      "accepted_lines": 1017,
+      "overriden_lines": 0
+    }
+  }
+}
