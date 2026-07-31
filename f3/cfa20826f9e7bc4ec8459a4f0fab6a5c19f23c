@@ -1,0 +1,47 @@
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/grpc/ExecutorChannelPool.java
+  292cccababa02d48 16-17,34,57,208-239
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/grpc/HeartbeatServiceImpl.java
+  292cccababa02d48 4-6,8,10,15-16,22-23,27-29,32-40,48-53,55-57,59-67,72-81,102-157
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/ha/JobReconcileTask.java
+  292cccababa02d48 23,64,74,82,124-126,128,130,225-239
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/JobExecutionRunner.java
+  292cccababa02d48 21,62,73,81,126,149,168-169
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/grpc/HeartbeatServiceImplTest.java
+  292cccababa02d48 7,12-13,37-44,66
+adhoc-executor/src/test/java/com/yl/bigdata/adhoc/executor/runner/JobExecutionRunnerTest.java
+  292cccababa02d48 61
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/config/ConfigHolder.java
+  292cccababa02d48 3,6,40-54
+adhoc-protocol/src/main/proto/internal/job_dispatch.proto
+  292cccababa02d48 39-47,50-51
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/ha/RunningJobRegistry.java
+  292cccababa02d48 1-32
+adhoc-executor/src/test/java/com/yl/bigdata/adhoc/executor/runner/JobExecutionRunnerScenarioTest.java
+  292cccababa02d48 44,99
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/config/ConfigCatalog.java
+  292cccababa02d48 61,74,81-82
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/grpc/JobManagerServiceImpl.java
+  292cccababa02d48 4,7-8,17,31,33,35,52-59
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/dto/ConfigItemView.java
+  292cccababa02d48 21-22
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "f3cfa20826f9e7bc4ec8459a4f0fab6a5c19f23c",
+  "prompts": {
+    "292cccababa02d48": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "fdf3f22b-681e-4040-9004-c583f335197a",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 1368,
+      "total_deletions": 24,
+      "accepted_lines": 1368,
+      "overriden_lines": 0
+    }
+  }
+}
