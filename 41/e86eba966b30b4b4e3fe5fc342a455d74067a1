@@ -1,0 +1,25 @@
+adhoc-common/pom.xml
+  292cccababa02d48 27-28
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/config/ApolloConfigChangeLogger.java
+  292cccababa02d48 1-77
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "41e86eba966b30b4b4e3fe5fc342a455d74067a1",
+  "prompts": {
+    "292cccababa02d48": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "fdf3f22b-681e-4040-9004-c583f335197a",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 79,
+      "total_deletions": 0,
+      "accepted_lines": 1176,
+      "overriden_lines": 0
+    }
+  }
+}
