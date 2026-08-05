@@ -1,0 +1,23 @@
+superpowers/specs/2026-08-05-sdk-implementation-design.md
+  27b6549aed517ef8 1-933
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "a03dfa4e8da7685569bacda902819c7012d8a9e8",
+  "prompts": {
+    "27b6549aed517ef8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d46936f7-7644-4351-bf3b-1bd9b95eaf64",
+        "model": "astron-code-latest"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 933,
+      "total_deletions": 0,
+      "accepted_lines": 933,
+      "overriden_lines": 0
+    }
+  }
+}
