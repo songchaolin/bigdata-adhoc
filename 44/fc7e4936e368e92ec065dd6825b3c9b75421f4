@@ -1,0 +1,125 @@
+adhoc-protocol/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/v1/TaskResultOrBuilder.java
+  27b6549aed517ef8 1-88
+adhoc-protocol/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/v1/GetTaskResultResponse.java
+  27b6549aed517ef8 1-1517
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/grpc/GrpcMetadataUtil.java
+  27b6549aed517ef8 1-75
+adhoc-api-sdk/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/GrpcAdhocClient.java
+  27b6549aed517ef8 1-243,245-247,249-271,273-309
+adhoc-protocol/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/v1/GetJobLogResponse.java
+  27b6549aed517ef8 1-885
+adhoc-protocol/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/v1/ColumnSchemaOrBuilder.java
+  27b6549aed517ef8 1-39
+adhoc-protocol/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/v1/SubmitJobResponse.java
+  27b6549aed517ef8 1-774
+adhoc-protocol/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/v1/GetTaskResultRequestOrBuilder.java
+  27b6549aed517ef8 1-41
+adhoc-protocol/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/v1/GetJobStatusRequestOrBuilder.java
+  27b6549aed517ef8 1-21
+adhoc-protocol/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/v1/GetJobRequestOrBuilder.java
+  27b6549aed517ef8 1-21
+adhoc-protocol/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/v1/GetJobResponse.java
+  27b6549aed517ef8 1-1635
+adhoc-protocol/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/v1/GetJobResultRequestOrBuilder.java
+  27b6549aed517ef8 1-31
+adhoc-protocol/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/v1/ErrorResponseOrBuilder.java
+  27b6549aed517ef8 1-33
+adhoc-protocol/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/v1/GetTaskResultResponseOrBuilder.java
+  27b6549aed517ef8 1-133
+adhoc-protocol/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/v1/SubmitJobResponseOrBuilder.java
+  27b6549aed517ef8 1-56
+adhoc-protocol/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/v1/TaskResult.java
+  27b6549aed517ef8 1-1260
+adhoc-protocol/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/v1/GetJobRequest.java
+  27b6549aed517ef8 1-517
+adhoc-protocol/src/main/proto/sdk/adhoc_service.proto
+  27b6549aed517ef8 1-206
+adhoc-api-sdk/src/main/java/com/yl/bigdata/adhoc/sdk/http/HttpAdhocClient.java
+  27b6549aed517ef8 1-247
+adhoc-protocol/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/v1/AdhocServiceGrpc.java
+  27b6549aed517ef8 1-863
+adhoc-protocol/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/v1/SubmitJobRequestOrBuilder.java
+  27b6549aed517ef8 1-89
+adhoc-protocol/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/v1/GetJobLogRequestOrBuilder.java
+  27b6549aed517ef8 1-41
+adhoc-protocol/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/v1/TaskSummaryOrBuilder.java
+  27b6549aed517ef8 1-75
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/dto/request/JobSubmitRequest.java
+  27b6549aed517ef8 16-19
+adhoc-protocol/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/v1/CancelJobRequest.java
+  27b6549aed517ef8 1-517
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/grpc/AdhocGrpcService.java
+  27b6549aed517ef8 1-278
+adhoc-protocol/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/v1/AdhocServiceOuterClass.java
+  27b6549aed517ef8 1-283
+adhoc-protocol/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/v1/ErrorResponse.java
+  27b6549aed517ef8 1-655
+adhoc-protocol/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/v1/TaskSummary.java
+  27b6549aed517ef8 1-1125
+adhoc-protocol/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/v1/CancelJobRequestOrBuilder.java
+  27b6549aed517ef8 1-21
+adhoc-protocol/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/v1/GetJobResultResponseOrBuilder.java
+  27b6549aed517ef8 1-48
+adhoc-protocol/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/v1/GetJobStatusRequest.java
+  27b6549aed517ef8 1-517
+adhoc-api-sdk/src/main/java/com/yl/bigdata/adhoc/sdk/Protocol.java
+  27b6549aed517ef8 1-11
+adhoc-protocol/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/v1/CancelJobResponseOrBuilder.java
+  27b6549aed517ef8 1-30
+adhoc-protocol/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/v1/SubmitJobRequest.java
+  27b6549aed517ef8 1-1037
+adhoc-protocol/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/v1/GetTaskResultRequest.java
+  27b6549aed517ef8 1-683
+adhoc-api-sdk/pom.xml
+  27b6549aed517ef8 15,18-24,29-51,56-69,71
+adhoc-protocol/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/v1/CancelJobResponse.java
+  27b6549aed517ef8 1-629
+adhoc-protocol/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/v1/GetJobResponseOrBuilder.java
+  27b6549aed517ef8 1-126
+adhoc-protocol/src/main/proto/sdk/common.proto
+  27b6549aed517ef8 1-15
+adhoc-protocol/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/v1/GetJobResultResponse.java
+  27b6549aed517ef8 1-916
+adhoc-api-sdk/src/main/java/com/yl/bigdata/adhoc/sdk/AdhocClient.java
+  27b6549aed517ef8 1-103
+adhoc-protocol/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/v1/ColumnSchema.java
+  27b6549aed517ef8 1-719
+adhoc-protocol/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/v1/GetJobLogRequest.java
+  27b6549aed517ef8 1-682
+adhoc-api-sdk/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/GrpcMetadataInterceptor.java
+  27b6549aed517ef8 1-44
+adhoc-protocol/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/v1/GetJobStatusResponseOrBuilder.java
+  27b6549aed517ef8 1-48
+adhoc-protocol/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/v1/GetJobResultRequest.java
+  27b6549aed517ef8 1-600
+adhoc-api-sdk/src/main/java/com/yl/bigdata/adhoc/sdk/AdhocClientBuilder.java
+  27b6549aed517ef8 1-162
+adhoc-protocol/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/v1/Common.java
+  27b6549aed517ef8 1-49
+adhoc-protocol/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/v1/GetJobStatusResponse.java
+  27b6549aed517ef8 1-834
+adhoc-api-sdk/src/main/java/com/yl/bigdata/adhoc/sdk/AdhocClientException.java
+  27b6549aed517ef8 1-30
+adhoc-protocol/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/v1/GetJobLogResponseOrBuilder.java
+  27b6549aed517ef8 1-61
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "44fc7e4936e368e92ec065dd6825b3c9b75421f4",
+  "prompts": {
+    "27b6549aed517ef8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d46936f7-7644-4351-bf3b-1bd9b95eaf64",
+        "model": "astron-code-latest"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 37942,
+      "total_deletions": 119,
+      "accepted_lines": 36930,
+      "overriden_lines": 56
+    }
+  }
+}
