@@ -1,0 +1,83 @@
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/web/FileNodeController.java
+  8b829d8cec04f224 84-89
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/service/TaskQueryService.java
+  8b829d8cec04f224 1-124
+.claude/analysis/p1-interfaces-completion-report.md
+  8b829d8cec04f224 1-353
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/JobExecutionRunner.java
+  af8f5c8842fb35c5 85,87,288-303
+  8b829d8cec04f224 86,157-190,209,216,222,228-238
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/dto/TaskDetailResponse.java
+  8b829d8cec04f224 1-103
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/TaskExecutionPipeline.java
+  af8f5c8842fb35c5 9,76-77,80,122,181-182
+  8b829d8cec04f224 8,27-29,70,73-75,79,81-82,84,97,99,109,180,190-203
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/util/SqlHashUtil.java
+  af8f5c8842fb35c5 3-5,10-11,13-17,28,36-43,57-66
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/TaskReuseHandler.java
+  af8f5c8842fb35c5 3-5,9-10,14-15,20-22,27-30,41-49,51-55
+  8b829d8cec04f224 36-37,40,50,63,66-67
+adhoc-dao/src/main/java/com/yl/bigdata/adhoc/dao/mapper/AdhocQueryTaskMapper.java
+  af8f5c8842fb35c5 39-46
+adhoc-dao/src/main/resources/mapper/AdhocQueryTaskMapper.xml
+  af8f5c8842fb35c5 108-114
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/JobAggregator.java
+  af8f5c8842fb35c5 44-45
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/dto/request/TaskIdRequest.java
+  8b829d8cec04f224 1-19
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/dto/request/UpdateNodeRequest.java
+  8b829d8cec04f224 1-30
+.claude/analysis/product-comparison-report.md
+  8b829d8cec04f224 1-458
+.claude/analysis/frontend-backend-interaction-analysis.md
+  8b829d8cec04f224 1-300
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/result/ResultReuseChecker.java
+  8b829d8cec04f224 41-42,45,75,78
+adhoc-executor/src/main/resources/application.yml
+  8b829d8cec04f224 1-5
+adhoc-server/src/main/resources/application.yml
+  8b829d8cec04f224 1-5
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/TaskCreator.java
+  af8f5c8842fb35c5 8,75
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/web/JobController.java
+  8b829d8cec04f224 7,9,16,38,40,43,81-87
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/util/SqlTypeUtils.java
+  af8f5c8842fb35c5 1-26
+.claude/analysis/multi-server-ha-verification.md
+  8b829d8cec04f224 1-387
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/service/FileNodeService.java
+  8b829d8cec04f224 305-367
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "e00eee20eb50c904dd05cb212656298475a1580b",
+  "prompts": {
+    "8b829d8cec04f224": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "29adaea1-b805-4420-9862-23c5150b1d03",
+        "model": "astron-code-latest"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 2338,
+      "total_deletions": 38,
+      "accepted_lines": 2331,
+      "overriden_lines": 0
+    },
+    "af8f5c8842fb35c5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "cfeec181-137d-4b1b-9cc6-4c7836e0db96",
+        "model": "astron-code-latest"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 130,
+      "total_deletions": 26,
+      "accepted_lines": 23128,
+      "overriden_lines": 2
+    }
+  }
+}
