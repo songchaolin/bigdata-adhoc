@@ -1,0 +1,87 @@
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/util/SqlTypeUtils.java
+  b58eed1b73d594db 6,15-19,22-23,26-42,46-83
+adhoc-sql-parser/src/main/java/com/yl/bigdata/adhoc/sqlparser/preprocess/SqlCommentRemover.java
+  b58eed1b73d594db 75,83-91
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/service/JobService.java
+  b58eed1b73d594db 66-79,85,113,127,138,142,158,162-164,166-177,179,181
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/grpc/GrpcMetadataUtil.java
+  ab1d5685c49e655f 3,26,39,43-45,48-50
+adhoc-sql-parser/src/main/java/com/yl/bigdata/adhoc/sqlparser/preprocess/SqlScriptSplitter.java
+  b58eed1b73d594db 7-12,27-29,32-59,62-68,70,77-83,85,114-136
+adhoc-sql-parser/src/test/java/com/yl/bigdata/adhoc/sqlparser/engine/SmartFallbackParserEngineTest.java
+  b58eed1b73d594db 1-134
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/grpc/AdhocGrpcService.java
+  ab1d5685c49e655f 225
+adhoc-api-sdk/src/test/java/com/yl/bigdata/adhoc/sdk/AdhocClientDemo.java
+  ab1d5685c49e655f 14-21,23-33,35,38-39,41,44-45,49-60,62-63,85-86,92,98,104,114,119,127,139,143-147,149-150,154,161-162,169,173,178,183-185,191,195,206,210-217,219-220,236,243,247,251,261,264-265,271,274,280,301
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/service/FileNodeServiceTest.java
+  b58eed1b73d594db 39,55,68,201,264,377,430,456
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/JobExecutionRunner.java
+  8b829d8cec04f224 116,120-121,123
+  b58eed1b73d594db 170-172,224-225,227-234
+adhoc-protocol/src/main/proto/sdk/adhoc_service.proto
+  ab1d5685c49e655f 95
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/TaskCreator.java
+  b58eed1b73d594db 14-15,31-32,79-85,88,92-95
+adhoc-api-sdk/src/main/java/com/yl/bigdata/adhoc/sdk/http/HttpAdhocClient.java
+  8b829d8cec04f224 53,57,66,75,84,93,102,111,122,133,142,153,162,174,201-202
+adhoc-sql-parser/src/main/java/com/yl/bigdata/adhoc/sqlparser/preprocess/SqlScriptProcessor.java
+  b58eed1b73d594db 5,15,26-27,41,47-48,54
+adhoc-api-sdk/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/GrpcAdhocClient.java
+  8b829d8cec04f224 8-9,19,34-36,39,67,103,118,135,169,211,235
+  ab1d5685c49e655f 10,12-14,18,20-22,26-27,29-31,38,42-43,50-55,57-58,60-61,63,72-95,97-99,108-109,111-112,114,123-124,126-127,129,142-161,163-165,175-199,201,203,205-207,218-219,221-222,224-230,238-240,242,251,253-260,263,267,269-285,288-293
+adhoc-sql-parser/src/main/java/com/yl/bigdata/adhoc/sqlparser/engine/SmartFallbackParserEngine.java
+  b58eed1b73d594db 1-60,62-219
+adhoc-sql-parser/src/test/java/com/yl/bigdata/adhoc/sqlparser/preprocess/SqlScriptSplitterEnhancedTest.java
+  b58eed1b73d594db 1-53
+adhoc-api-sdk/src/main/java/com/yl/bigdata/adhoc/sdk/AdhocClient.java
+  8b829d8cec04f224 22-24,43-44,48,53-54,58,63-64,68,78,82,87-89,93,101,105
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/config/GrpcConfig.java
+  ab1d5685c49e655f 1-20
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "ced8f1a40c6638c198b910b2b3b31c2e3d95b61e",
+  "prompts": {
+    "8b829d8cec04f224": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "29adaea1-b805-4420-9862-23c5150b1d03",
+        "model": "astron-code-latest"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 105,
+      "total_deletions": 300,
+      "accepted_lines": 427,
+      "overriden_lines": 2
+    },
+    "ab1d5685c49e655f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4062fb5e-97a4-4f5a-a80d-9f9149863dff",
+        "model": "astron-code-latest"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 1076,
+      "total_deletions": 130,
+      "accepted_lines": 753,
+      "overriden_lines": 1
+    },
+    "b58eed1b73d594db": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "83f5ba82-0f4a-45a1-a1e3-c7fa1eb19fea",
+        "model": "astron-code-latest"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 643,
+      "total_deletions": 49,
+      "accepted_lines": 846,
+      "overriden_lines": 1
+    }
+  }
+}
