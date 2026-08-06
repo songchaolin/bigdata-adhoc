@@ -1,0 +1,37 @@
+adhoc-api-sdk/src/main/java/com/yl/bigdata/adhoc/sdk/Test.java
+  8b829d8cec04f224 1-311
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/dto/JobDetailResponse.java
+  8b829d8cec04f224 5,11
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/dto/JobStatusResponse.java
+  8b829d8cec04f224 5,8
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/dto/JobResultResponse.java
+  8b829d8cec04f224 5,11
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/dto/LogResponse.java
+  8b829d8cec04f224 5,11
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/dto/JobSubmitResponse.java
+  8b829d8cec04f224 5,8
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/dto/ResultResponse.java
+  8b829d8cec04f224 5,11,22
+adhoc-api-sdk/src/main/java/com/yl/bigdata/adhoc/sdk/http/HttpAdhocClient.java
+  8b829d8cec04f224 195-196
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "47222b53163bc5689219def4275402dd6d6629bd",
+  "prompts": {
+    "8b829d8cec04f224": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "29adaea1-b805-4420-9862-23c5150b1d03",
+        "model": "astron-code-latest"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 323,
+      "total_deletions": 27,
+      "accepted_lines": 697,
+      "overriden_lines": 0
+    }
+  }
+}
