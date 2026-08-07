@@ -1,0 +1,44 @@
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/schedule/QueueWorker.java
+  a2cbd0b47de734d7 4-5,24,26,37-38,62-63,80-82,132-133,152-153,191-192,195-202,207,209,216-217
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/config/AdhocServerConfig.java
+  a2cbd0b47de734d7 65-68
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/TaskStateWriter.java
+  a2cbd0b47de734d7 57-58,63,65-69
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/TaskStateTransition.java
+  a2cbd0b47de734d7 32,37-41
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/TaskResultWriter.java
+  a2cbd0b47de734d7 20-22,33,68
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "7b337f053739edadf5432a5ae91ff7bcd69ef1a4",
+  "prompts": {
+    "a2cbd0b47de734d7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "356ad83f-af55-4a9c-9181-f29533d84578",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 64,
+      "total_deletions": 44,
+      "accepted_lines": 59,
+      "overriden_lines": 0
+    },
+    "d86f0d41b20fc629": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "63dd6aa2-28b1-458a-b9ae-83d72581f949",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 252,
+      "total_deletions": 100,
+      "accepted_lines": 644,
+      "overriden_lines": 1
+    }
+  }
+}
