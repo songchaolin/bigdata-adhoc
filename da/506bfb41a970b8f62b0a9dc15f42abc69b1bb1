@@ -1,0 +1,41 @@
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/EngineSelector.java
+  d86f0d41b20fc629 11,73
+adhoc-sql-parser/src/main/java/com/yl/bigdata/adhoc/sqlparser/engine/SmartFallbackParserEngine.java
+  d86f0d41b20fc629 13-16,19-20,32,41
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/service/JobService.java
+  d86f0d41b20fc629 19,145
+adhoc-executor/src/main/resources/application.yml
+  d86f0d41b20fc629 11-20
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/exception/AdhocErrorCode.java
+  d86f0d41b20fc629 17
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/config/AdhocExecutorConfig.java
+  d86f0d41b20fc629 43-46
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/enums/FailReasonCategory.java
+  d86f0d41b20fc629 6
+adhoc-sql-parser/src/test/java/com/yl/bigdata/adhoc/sqlparser/engine/SmartFallbackParserEngineTest.java
+  d86f0d41b20fc629 104-107
+adhoc-executor/src/test/java/com/yl/bigdata/adhoc/executor/engine/StarRocksEngineExecutorLiveTest.java
+  d86f0d41b20fc629 1-134
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/engine/StarRocksEngineExecutor.java
+  d86f0d41b20fc629 19,21,23-27,35,42,66-68,93-98,107,111-116
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "da506bfb41a970b8f62b0a9dc15f42abc69b1bb1",
+  "prompts": {
+    "d86f0d41b20fc629": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "63dd6aa2-28b1-458a-b9ae-83d72581f949",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 0,
+      "accepted_lines": 639,
+      "overriden_lines": 6
+    }
+  }
+}
