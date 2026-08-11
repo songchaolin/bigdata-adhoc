@@ -1,0 +1,29 @@
+adhoc-executor/src/main/resources/application.yml
+  af3fcc1f2c8bdfc1 10-12
+adhoc-server/src/main/resources/logback-spring.xml
+  af3fcc1f2c8bdfc1 3-5
+adhoc-executor/src/main/resources/logback-spring.xml
+  af3fcc1f2c8bdfc1 3-5
+adhoc-server/src/main/resources/application.yml
+  af3fcc1f2c8bdfc1 10-12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "1f8113ec31bcb0267bbe4c5328850c30600aadac",
+  "prompts": {
+    "af3fcc1f2c8bdfc1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "71098c18-df60-4566-af15-902fde177e42",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 12,
+      "total_deletions": 4,
+      "accepted_lines": 12,
+      "overriden_lines": 0
+    }
+  }
+}
