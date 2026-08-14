@@ -1,0 +1,29 @@
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/service/ResultQueryService.java
+  db378bc7513a2c63 50-51,53-54,70,72-73
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/grpc/AdhocGrpcService.java
+  db378bc7513a2c63 149,174
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/service/ResultQueryServiceTest.java
+  db378bc7513a2c63 34-35,37,39,61
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/web/ResultController.java
+  db378bc7513a2c63 37,43
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "60fd923fc9d6489d543238c7180b561e4c680cfd",
+  "prompts": {
+    "db378bc7513a2c63": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "95a163d6-d061-47f5-92dc-cf13f679c213",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 16,
+      "total_deletions": 25,
+      "accepted_lines": 16,
+      "overriden_lines": 0
+    }
+  }
+}
