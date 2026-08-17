@@ -1,0 +1,25 @@
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/service/FileNodeServiceTest.java
+  ff7a6f536f8044b7 111,118,122,124-126,129
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/service/FileNodeService.java
+  ff7a6f536f8044b7 17,458-469,521-548
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "7d72475bfec7f145e96bdfd3b4dc6a239b713222",
+  "prompts": {
+    "ff7a6f536f8044b7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e21c5821-4ba2-41c9-8935-2f602ecb094b",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 48,
+      "total_deletions": 20,
+      "accepted_lines": 48,
+      "overriden_lines": 0
+    }
+  }
+}
