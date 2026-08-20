@@ -1,0 +1,29 @@
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/exception/AdhocErrorCode.java
+  9580b95573bd21f5 3-7,9-29,32-40
+.claude/CLAUDE.md
+  9580b95573bd21f5 634-635,638-645
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/service/ResultQueryService.java
+  9580b95573bd21f5 58
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/service/JobService.java
+  9580b95573bd21f5 136
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "4135e959ba241848e24464a31231ef7896e49917",
+  "prompts": {
+    "9580b95573bd21f5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f5b25f0c-aedb-430f-826e-b504cd0a0c94",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 47,
+      "total_deletions": 40,
+      "accepted_lines": 2455,
+      "overriden_lines": 0
+    }
+  }
+}
