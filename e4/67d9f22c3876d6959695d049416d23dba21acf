@@ -1,0 +1,43 @@
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/grpc/ServerReconcileServiceImpl.java
+  9580b95573bd21f5 3,54-55
+adhoc-protocol/src/main/proto/sdk/adhoc_service.proto
+  9580b95573bd21f5 207
+adhoc-protocol/src/main/proto/internal/server_reconcile.proto
+  9580b95573bd21f5 30
+adhoc-api-sdk/src/main/java/com/yl/bigdata/adhoc/sdk/grpc/GrpcAdhocClient.java
+  9580b95573bd21f5 229
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/service/LogQueryServiceTest.java
+  9580b95573bd21f5 3,5,15,18,23,32,46-47,50-55,67-72,92,109,111,175-262
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/util/LogConstants.java
+  9580b95573bd21f5 3-4,21-37
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/grpc/AdhocGrpcService.java
+  9580b95573bd21f5 199-200
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/service/LogQueryService.java
+  9580b95573bd21f5 3,8,16,22,34,43,47-54,70-71,76-77,85-86,102-104,111,113,135-137,147-149,157-158,160,168-169,171-172,175-226,231,236
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/config/AdhocServerConfig.java
+  9580b95573bd21f5 107-110
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/dto/LogResponse.java
+  9580b95573bd21f5 9-18,27
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/ha/TerminalLogCache.java
+  9580b95573bd21f5 1-49
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "e467d9f22c3876d6959695d049416d23dba21acf",
+  "prompts": {
+    "9580b95573bd21f5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f5b25f0c-aedb-430f-826e-b504cd0a0c94",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 4456,
+      "total_deletions": 89,
+      "accepted_lines": 2443,
+      "overriden_lines": 20
+    }
+  }
+}
