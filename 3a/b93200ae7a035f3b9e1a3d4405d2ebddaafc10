@@ -1,0 +1,31 @@
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/SqlLimitEnforcer.java
+  6aebe0ff5bd518fa 3,5-7,17-20,22,38-40
+adhoc-executor/src/test/java/com/yl/bigdata/adhoc/common/util/SqlHashUtilTest.java
+  6aebe0ff5bd518fa 1-88
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/TaskExecutionPipeline.java
+  6aebe0ff5bd518fa 37,43,77,79-81
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/util/SqlHashUtil.java
+  6aebe0ff5bd518fa 8,10-17,21-23,29-30,36-37,39-62,65,73-75,93
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/TaskCreator.java
+  6aebe0ff5bd518fa 35,37-38,41,80-84
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "3ab93200ae7a035f3b9e1a3d4405d2ebddaafc10",
+  "prompts": {
+    "6aebe0ff5bd518fa": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2b7f058e-6578-4337-a641-91f9d10c0680",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 170,
+      "total_deletions": 36,
+      "accepted_lines": 162,
+      "overriden_lines": 0
+    }
+  }
+}
