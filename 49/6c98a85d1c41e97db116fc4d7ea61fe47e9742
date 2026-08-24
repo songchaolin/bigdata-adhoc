@@ -1,0 +1,27 @@
+adhoc-server/src/main/resources/static/dashboard/index.html
+  42d0e0bd7daf91a5 9,19-22,179
+adhoc-server/src/main/resources/static/dashboard/style.css
+  42d0e0bd7daf91a5 84-98
+adhoc-server/src/main/resources/static/dashboard/app.js
+  42d0e0bd7daf91a5 457-461,463-464,466-471,668-672
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "496c98a85d1c41e97db116fc4d7ea61fe47e9742",
+  "prompts": {
+    "42d0e0bd7daf91a5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "777737d2-9523-4bb1-a4a5-81e52367c8d4",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 1138,
+      "total_deletions": 5,
+      "accepted_lines": 40,
+      "overriden_lines": 0
+    }
+  }
+}
