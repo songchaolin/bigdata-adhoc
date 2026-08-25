@@ -1,0 +1,39 @@
+sql/create.sql
+  42d0e0bd7daf91a5 68
+adhoc-dao/src/main/resources/mapper/AdhocQueryTaskMapper.xml
+  42d0e0bd7daf91a5 84,87
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/service/JobProgressAssembler.java
+  42d0e0bd7daf91a5 239,244
+.claude/CLAUDE.md
+  42d0e0bd7daf91a5 452
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/enums/FailStage.java
+  42d0e0bd7daf91a5 4-5
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/ha/ServerHeartbeatTask.java
+  42d0e0bd7daf91a5 59,61-75
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/grpc/HeartbeatServiceImpl.java
+  42d0e0bd7daf91a5 6,152
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/ha/ExecutorHeartbeatTask.java
+  42d0e0bd7daf91a5 98-103,105
+adhoc-dao/src/main/resources/db/schema.sql
+  42d0e0bd7daf91a5 65
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "adc30434bddf45353a0366faf9862d9fa09e62ce",
+  "prompts": {
+    "42d0e0bd7daf91a5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "777737d2-9523-4bb1-a4a5-81e52367c8d4",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 36,
+      "total_deletions": 18,
+      "accepted_lines": 34,
+      "overriden_lines": 0
+    }
+  }
+}
