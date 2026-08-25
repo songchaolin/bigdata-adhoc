@@ -1,0 +1,35 @@
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/service/MetricsService.java
+  42d0e0bd7daf91a5 109,115-116,118-130
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/dto/MetricsTrendPoint.java
+  42d0e0bd7daf91a5 8-11,19,21
+adhoc-dao/src/main/resources/mapper/AdhocQueryTaskMapper.xml
+  42d0e0bd7daf91a5 170-214
+adhoc-server/src/main/resources/static/dashboard/app.js
+  42d0e0bd7daf91a5 222-228,796-797,801
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/web/MetricsController.java
+  42d0e0bd7daf91a5 76-81
+adhoc-server/src/main/resources/static/dashboard/index.html
+  42d0e0bd7daf91a5 9,60,62-65,238
+adhoc-dao/src/main/java/com/yl/bigdata/adhoc/dao/mapper/AdhocQueryTaskMapper.java
+  42d0e0bd7daf91a5 69-76
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "c646eac0e7cec722ef26bd403a343ec4787fd865",
+  "prompts": {
+    "42d0e0bd7daf91a5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "777737d2-9523-4bb1-a4a5-81e52367c8d4",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 100,
+      "total_deletions": 14,
+      "accepted_lines": 100,
+      "overriden_lines": 0
+    }
+  }
+}
