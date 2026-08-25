@@ -1,0 +1,59 @@
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/web/MetricsController.java
+  42d0e0bd7daf91a5 7,30,113-122
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/config/AdhocServerConfig.java
+  42d0e0bd7daf91a5 112-113,115-121
+adhoc-dao/src/main/java/com/yl/bigdata/adhoc/dao/entity/AdhocJvmMetricSample.java
+  42d0e0bd7daf91a5 1-151
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/dto/JvmSamplePoint.java
+  42d0e0bd7daf91a5 1-41
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/service/MetricsService.java
+  42d0e0bd7daf91a5 3,7,15,17,32-33,45,50-51,56,248-290
+adhoc-server/src/main/resources/static/dashboard/index.html
+  42d0e0bd7daf91a5 9,81,89-97,101-102,104-107,109-133,237
+adhoc-server/src/main/resources/static/dashboard/app.js
+  42d0e0bd7daf91a5 324-327,329,334,337-338,342-343,346-347,373,398-400,402-411,413,416-428,430-445,447,449-457,463,465,471-495,855,858,862,866,870-879
+.claude/plans/2026-08-24-jvm-timeseries.md
+  42d0e0bd7daf91a5 1-75
+sql/create.sql
+  42d0e0bd7daf91a5 241-301
+sql/migrate-jvm-history.sql
+  42d0e0bd7daf91a5 1-57
+adhoc-dao/src/main/java/com/yl/bigdata/adhoc/dao/mapper/AdhocJvmMetricSampleMapper.java
+  42d0e0bd7daf91a5 1-14
+adhoc-server/src/main/resources/static/dashboard/style.css
+  42d0e0bd7daf91a5 64,66-77
+adhoc-executor/src/test/java/com/yl/bigdata/adhoc/executor/ha/JvmMetricsTest.java
+  42d0e0bd7daf91a5 34-64
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/ha/ServerHeartbeatTask.java
+  42d0e0bd7daf91a5 5-6,28,34-36,39,62-63
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/ha/ExecutorHeartbeatTask.java
+  42d0e0bd7daf91a5 5,8,45,57,63,101-107
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/ha/JvmMetricSampleCleanupTask.java
+  42d0e0bd7daf91a5 1-64
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/ha/AdhocServerServiceStarter.java
+  42d0e0bd7daf91a5 13,26,36,46,62,78
+adhoc-executor/src/test/java/com/yl/bigdata/adhoc/executor/ha/ExecutorHeartbeatTaskTest.java
+  42d0e0bd7daf91a5 5,27,34
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/model/JvmMetrics.java
+  42d0e0bd7daf91a5 4,7,12,14,20-23,25-32,34,37,39,46-47,53,59-92,102-103,105-106,110-116,118,123,125,130-153,155-168,172-182,185-196,198-199,201-207,211-238,246-252,256
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "4c88ba072f1359f64e357b79905dea892f7c01b9",
+  "prompts": {
+    "42d0e0bd7daf91a5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "777737d2-9523-4bb1-a4a5-81e52367c8d4",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 953,
+      "total_deletions": 174,
+      "accepted_lines": 933,
+      "overriden_lines": 1
+    }
+  }
+}
