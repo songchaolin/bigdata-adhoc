@@ -1,0 +1,48 @@
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/service/LogQueryServiceTest.java
+  ccb54d8b57a7bd29 5,8,298-328
+docs/apollo-prod-config.md
+  42d0e0bd7daf91a5 1-283
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/TaskExecutionPipeline.java
+  ccb54d8b57a7bd29 102,117-119,161,192
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/JobExecutionRunner.java
+  ccb54d8b57a7bd29 241,254,263,277,285
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/TaskLogger.java
+  ccb54d8b57a7bd29 8-9,24,26-27,31,33,35-36,49-51
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/service/LogQueryService.java
+  ccb54d8b57a7bd29 40-41,107,110,112,227-272
+adhoc-executor/src/test/java/com/yl/bigdata/adhoc/executor/runner/JobExecutionRunnerScenarioTest.java
+  ccb54d8b57a7bd29 72,76-77
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "dd0b786ffe4c3893a48e0d14f000153d502975b4",
+  "prompts": {
+    "42d0e0bd7daf91a5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "777737d2-9523-4bb1-a4a5-81e52367c8d4",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 283,
+      "total_deletions": 0,
+      "accepted_lines": 283,
+      "overriden_lines": 0
+    },
+    "ccb54d8b57a7bd29": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "21993135-cb47-4a06-826a-86a0ad61a6e5",
+        "model": "glm-5.2"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 110,
+      "total_deletions": 26,
+      "accepted_lines": 574,
+      "overriden_lines": 0
+    }
+  }
+}
