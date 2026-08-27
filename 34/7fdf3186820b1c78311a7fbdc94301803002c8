@@ -1,0 +1,27 @@
+adhoc-server/src/main/resources/static/dashboard/index.html
+  405fde04ca19ab4b 9,91-92,239
+adhoc-server/src/main/resources/static/dashboard/style.css
+  405fde04ca19ab4b 74
+adhoc-server/src/main/resources/static/dashboard/app.js
+  405fde04ca19ab4b 333-336,425-428,432-439,447-484,919-921,959,965,993-994
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "347fdf3186820b1c78311a7fbdc94301803002c8",
+  "prompts": {
+    "405fde04ca19ab4b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "eb5b6f50-8b6a-4a15-b112-edba1360142d",
+        "model": "astron-code-latest"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 73,
+      "total_deletions": 15,
+      "accepted_lines": 66,
+      "overriden_lines": 0
+    }
+  }
+}
