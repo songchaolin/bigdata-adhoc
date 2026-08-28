@@ -1,0 +1,45 @@
+docs/apollo-prod-config.md
+  1e364dd1717b76ea 133,137,281-282
+  169b0a75cf521b03 135-136,138-143,156,160,169,182,265,267
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/service/JobServiceTest.java
+  1e364dd1717b76ea 144,150-153,156
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/service/JobService.java
+  1e364dd1717b76ea 13,57,60-61,67,103,224,231
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/service/LogQueryServiceTest.java
+  169b0a75cf521b03 51,54,92,110,129,145,160,173,189,206,222,235,242-243,257,264,274,285,296,323
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/auth/OwnershipChecker.java
+  1e364dd1717b76ea 18-19,31
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "e044399d991d98fbde19d2b74382651ec1a440a8",
+  "prompts": {
+    "169b0a75cf521b03": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6371c164-2288-467b-8463-9b70079e5aaf",
+        "model": "astron-code-latest"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 36,
+      "total_deletions": 26,
+      "accepted_lines": 34,
+      "overriden_lines": 0
+    },
+    "1e364dd1717b76ea": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f9001131-3f51-4538-8f9c-dc829a1cf504",
+        "model": "glm-5.3"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 352,
+      "total_deletions": 22,
+      "accepted_lines": 350,
+      "overriden_lines": 2
+    }
+  }
+}
