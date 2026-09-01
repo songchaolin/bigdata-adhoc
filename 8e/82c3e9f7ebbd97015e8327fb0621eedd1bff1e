@@ -1,0 +1,47 @@
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/endpoint/EngineInstanceConfigResolver.java
+  db097ab5f211ce00 5,28-33,57,79-83,85-101,122-125
+.claude/plans/2026-08-31-engine-auth-mode-switch.md
+  51d913350bd1ff5a 58
+  db097ab5f211ce00 1-57,59-87
+docs/apollo-prod-config.md
+  51d913350bd1ff5a 50,232,234-254,279,286
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/EngineSelector.java
+  db097ab5f211ce00 42-43,47
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/config/AdhocExecutorConfig.java
+  db097ab5f211ce00 6,60-63,76-79
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/enums/EngineAuthMode.java
+  db097ab5f211ce00 1-18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "8e82c3e9f7ebbd97015e8327fb0621eedd1bff1e",
+  "prompts": {
+    "51d913350bd1ff5a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "cf47d94e-8642-4bb9-833a-ceaa5d166838",
+        "model": "astron-code-latest"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 26,
+      "total_deletions": 5,
+      "accepted_lines": 324,
+      "overriden_lines": 0
+    },
+    "db097ab5f211ce00": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e9c355bf-0c46-4f91-a178-d1e6680e06f8",
+        "model": "glm-5.3"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 151,
+      "total_deletions": 9,
+      "accepted_lines": 441,
+      "overriden_lines": 0
+    }
+  }
+}
