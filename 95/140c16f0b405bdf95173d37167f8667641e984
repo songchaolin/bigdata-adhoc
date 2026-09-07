@@ -1,0 +1,33 @@
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/AdhocExecutorApplication.java
+  eeb840a04d6afb1f 17
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/ha/ExecutorHeartbeatTask.java
+  eeb840a04d6afb1f 148
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/AdhocServerApplication.java
+  eeb840a04d6afb1f 17
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/grpc/ServerReconcileClient.java
+  eeb840a04d6afb1f 92
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/grpc/ExecutorChannelPool.java
+  eeb840a04d6afb1f 277
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/ha/JobReconcileTask.java
+  eeb840a04d6afb1f 197
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "95140c16f0b405bdf95173d37167f8667641e984",
+  "prompts": {
+    "eeb840a04d6afb1f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "12197acd-9bb3-4a98-8487-b98c336dec1e",
+        "model": "glm-5.3"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 16,
+      "total_deletions": 87,
+      "accepted_lines": 1322,
+      "overriden_lines": 0
+    }
+  }
+}
