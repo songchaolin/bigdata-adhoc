@@ -1,0 +1,27 @@
+adhoc-server/pom.xml
+  eeb840a04d6afb1f 29-30
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/config/Knife4jConfiguration.java
+  eeb840a04d6afb1f 19
+adhoc-common/pom.xml
+  eeb840a04d6afb1f 25-26
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "6d0cf47ea4bf101f26dc016a955cfb717117e60c",
+  "prompts": {
+    "eeb840a04d6afb1f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "12197acd-9bb3-4a98-8487-b98c336dec1e",
+        "model": "glm-5.3"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 5,
+      "total_deletions": 14,
+      "accepted_lines": 274,
+      "overriden_lines": 0
+    }
+  }
+}
