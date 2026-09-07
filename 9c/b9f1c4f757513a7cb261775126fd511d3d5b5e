@@ -1,0 +1,23 @@
+superpowers/specs/2026-09-07-open-source-prep-design.md
+  eeb840a04d6afb1f 52,134
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "9cb9f1c4f757513a7cb261775126fd511d3d5b5e",
+  "prompts": {
+    "eeb840a04d6afb1f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "12197acd-9bb3-4a98-8487-b98c336dec1e",
+        "model": "glm-5.3"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 84,
+      "total_deletions": 2,
+      "accepted_lines": 84,
+      "overriden_lines": 0
+    }
+  }
+}
