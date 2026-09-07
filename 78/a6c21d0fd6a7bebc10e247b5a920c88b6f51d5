@@ -1,0 +1,23 @@
+adhoc-server/pom.xml
+  eeb840a04d6afb1f 29-40
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "78a6c21d0fd6a7bebc10e247b5a920c88b6f51d5",
+  "prompts": {
+    "eeb840a04d6afb1f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "12197acd-9bb3-4a98-8487-b98c336dec1e",
+        "model": "glm-5.3"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 12,
+      "total_deletions": 2,
+      "accepted_lines": 209,
+      "overriden_lines": 0
+    }
+  }
+}
