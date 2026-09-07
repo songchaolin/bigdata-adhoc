@@ -1,0 +1,35 @@
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/aspect/AdhocResponseAdvice.java
+  eeb840a04d6afb1f 3-4,25
+adhoc-dependencies/pom.xml
+  eeb840a04d6afb1f 63,156
+adhoc-common/src/test/java/com/yl/bigdata/adhoc/common/web/ResultTest.java
+  eeb840a04d6afb1f 1-45
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/web/ResultCodeEnum.java
+  eeb840a04d6afb1f 1-28
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/sqlparse/SqlParseTest.java
+  eeb840a04d6afb1f 6
+adhoc-common/pom.xml
+  eeb840a04d6afb1f 29-30
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/web/Result.java
+  eeb840a04d6afb1f 1-64
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "46e1f756ccc23d27bf016a526989de2c5f75655a",
+  "prompts": {
+    "eeb840a04d6afb1f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "12197acd-9bb3-4a98-8487-b98c336dec1e",
+        "model": "glm-5.3"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 147,
+      "total_deletions": 12,
+      "accepted_lines": 1366,
+      "overriden_lines": 0
+    }
+  }
+}
