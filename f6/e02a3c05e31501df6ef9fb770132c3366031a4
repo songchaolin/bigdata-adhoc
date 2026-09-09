@@ -1,0 +1,31 @@
+sql/migrate-jvm-history.sql
+  aae0091f3312dc3a 5
+sql/datetime3-migration.sql
+  aae0091f3312dc3a 6-7
+sql/migrate-jvm-metrics.sql
+  aae0091f3312dc3a 6
+sql/troubleshooting-queries.sql
+  aae0091f3312dc3a 2-3
+sql/create.sql
+  aae0091f3312dc3a 2,5-6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "f6e02a3c05e31501df6ef9fb770132c3366031a4",
+  "prompts": {
+    "aae0091f3312dc3a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "193d178a-0b16-4cb9-bc28-c35286f36c21",
+        "model": "glm-5.3"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 9,
+      "total_deletions": 9,
+      "accepted_lines": 6872,
+      "overriden_lines": 0
+    }
+  }
+}
