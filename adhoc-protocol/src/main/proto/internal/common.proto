@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package adhoc.internal.v1;
+
+option java_package = "io.gitee.songchaolin.adhoc.internal.grpc.v1";
+option java_multiple_files = true;
+
+// 统一错误返回。error_code 用 ADHOC_* 前缀（见 development-plan.md §6 错误码体系）。
+message ErrorResponse {
+  string error_code = 1;
+  string error_message = 2;
+}

@@ -1,0 +1,209 @@
+syntax = "proto3";
+
+package adhoc.sdk.v1;
+
+import "sdk/common.proto";
+
+option java_package = "io.gitee.songchaolin.adhoc.sdk.grpc.v1";
+option java_multiple_files = true;
+
+/**
+ * SDK -> server gRPC 服务。
+ *
+ * 用户身份通过 gRPC Metadata 传递：
+ * - x-adhoc-user-id: 用户 ID（必填）
+ * - x-adhoc-user-name: 用户名（选填）
+ */
+service AdhocService {
+  // === Job 提交与查询 ===
+
+  /** 提交查询 Job */
+  rpc submitJob(SubmitJobRequest) returns (SubmitJobResponse);
+
+  /** 查询 Job 详情（含 Task 列表） */
+  rpc getJob(GetJobRequest) returns (GetJobResponse);
+
+  /** 查询 Job 状态 */
+  rpc getJobStatus(GetJobStatusRequest) returns (GetJobStatusResponse);
+
+  /** 取消 Job */
+  rpc cancelJob(CancelJobRequest) returns (CancelJobResponse);
+
+  // === 结果与日志 ===
+
+  /** 获取 Task 结果分页 */
+  rpc getTaskResult(GetTaskResultRequest) returns (GetTaskResultResponse);
+
+  /** 获取 Job 结果聚合（所有 Task 第一页） */
+  rpc getJobResult(GetJobResultRequest) returns (GetJobResultResponse);
+
+  /** 获取 Job 日志分页 */
+  rpc getJobLog(GetJobLogRequest) returns (GetJobLogResponse);
+}
+
+// === Job 提交与查询 ===
+
+/**
+ * 提交 Job 请求
+ */
+message SubmitJobRequest {
+  string sql_content = 1;         // SQL 原文
+  string engine_type = 2;          // KYUUBI / STARROCKS
+  string client_request_id = 3;    // 幂等键
+  string file_id = 4;              // 来源文件节点
+  string engine_instance = 5;      // 引擎实例名（如 kyuubi-02），空则用默认实例
+}
+
+/**
+ * 提交 Job 响应
+ */
+message SubmitJobResponse {
+  string job_id = 1;               // Job ID
+  ErrorResponse error = 2;         // 错误信息
+}
+
+/**
+ * 查询 Job 详情请求
+ */
+message GetJobRequest {
+  string job_id = 1;
+}
+
+/**
+ * 查询 Job 详情响应
+ */
+message GetJobResponse {
+  string job_id = 1;
+  string status = 2;
+  string sql_content = 3;
+  string engine_type = 4;
+  int64 submit_time = 5;           // epoch millis
+  repeated TaskSummary tasks = 6;  // Task 列表
+  ErrorResponse error = 7;
+}
+
+/**
+ * Task 摘要信息
+ */
+message TaskSummary {
+  string task_id = 1;
+  int32 segment_index = 2;
+  string sql_content = 3;
+  string sql_type = 4;
+  string status = 5;
+  int64 result_rows = 6;
+  int64 result_bytes = 7;
+  bool has_result_set = 8;  // 是否有结果集
+}
+
+/**
+ * 查询 Job 状态请求
+ */
+message GetJobStatusRequest {
+  string job_id = 1;
+}
+
+/**
+ * 查询 Job 状态响应
+ */
+message GetJobStatusResponse {
+  string job_id = 1;
+  string status = 2;
+  ErrorResponse error = 3;
+}
+
+/**
+ * 取消 Job 请求
+ */
+message CancelJobRequest {
+  string job_id = 1;
+}
+
+/**
+ * 取消 Job 响应
+ */
+message CancelJobResponse {
+  bool canceled = 1;
+  ErrorResponse error = 2;
+}
+
+// === 结果与日志 ===
+
+/**
+ * 获取 Task 结果请求
+ */
+message GetTaskResultRequest {
+  string task_id = 1;
+  int64 current = 2;               // 当前页码（1-based）
+  int64 size = 3;                  // 每页行数
+}
+
+/**
+ * 获取 Task 结果响应
+ */
+message GetTaskResultResponse {
+  repeated ColumnSchema schema = 1; // 列定义
+  repeated string rows = 2;         // JSON 编码的行
+  int64 current = 3;
+  int64 size = 4;
+  int64 total_rows = 5;
+  bool has_more = 6;
+  ErrorResponse error = 7;
+}
+
+/**
+ * 列定义
+ */
+message ColumnSchema {
+  int32 col_index = 1;
+  string col_name = 2;
+  string col_type = 3;
+}
+
+/**
+ * 获取 Job 结果聚合请求
+ */
+message GetJobResultRequest {
+  string job_id = 1;
+  int64 size = 2;                  // 每个 Task 的行数
+}
+
+/**
+ * 获取 Job 结果聚合响应
+ */
+message GetJobResultResponse {
+  repeated TaskResult task_results = 1;
+  ErrorResponse error = 2;
+}
+
+/**
+ * Task 结果
+ */
+message TaskResult {
+  string task_id = 1;
+  int32 segment_index = 2;
+  repeated ColumnSchema schema = 3;
+  repeated string rows = 4;
+  int64 total_rows = 5;
+  bool has_more = 6;
+}
+
+/**
+ * 获取 Job 日志请求
+ */
+message GetJobLogRequest {
+  string job_id = 1;
+  int64 offset = 2;                // 行偏移
+  int32 limit = 3;                 // 行数
+}
+
+/**
+ * 获取 Job 日志响应
+ */
+message GetJobLogResponse {
+  repeated string lines = 1;
+  int64 next_offset = 2;
+  bool has_more = 3;
+  ErrorResponse error = 4;
+  bool complete = 5;  // 日志是否已完整（终态）：含 server 终态轮追加的 COMPLETE 标识。false 时客户端须继续轮询
+}

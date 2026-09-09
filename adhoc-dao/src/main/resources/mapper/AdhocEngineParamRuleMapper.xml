@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.gitee.songchaolin.adhoc.dao.mapper.AdhocEngineParamRuleMapper">
+
+    <resultMap id="BaseResultMap" type="io.gitee.songchaolin.adhoc.dao.entity.AdhocEngineParamRule">
+        <id column="id" property="id"/>
+        <result column="engine_type" property="engineType"/>
+        <result column="param_key" property="paramKey"/>
+        <result column="param_value_type" property="paramValueType"/>
+        <result column="min_value" property="minValue"/>
+        <result column="max_value" property="maxValue"/>
+        <result column="allowed_values" property="allowedValues"/>
+        <result column="default_value" property="defaultValue"/>
+        <result column="description" property="description"/>
+        <result column="enabled" property="enabled"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, engine_type, param_key, param_value_type, min_value, max_value, allowed_values, default_value, description, enabled, create_time, update_time
+    </sql>
+
+</mapper>

@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package adhoc.internal.v1;
+
+import "internal/common.proto";
+
+option java_package = "io.gitee.songchaolin.adhoc.internal.grpc.v1";
+option java_multiple_files = true;
+
+// executor -> server：L3 转发代写 DB（executor 直写 DB 失败时走此路）。
+message ReportTaskStatusRequest {
+  string task_id = 1;
+  string status = 2;             // PENDING/RUNNING/SUCCESS/FAILED/CANCELED
+  string stage = 3;              // EXECUTING/FETCHING/WRITING
+  string fail_stage = 4;
+  string fail_reason_category = 5;
+  string error_code = 6;
+  string error_message = 7;
+}
+
+message ReportTaskStatusResponse {
+  bool applied = 1;
+  ErrorResponse error = 2;
+}
+
+service TaskStatusService {
+  rpc reportTaskStatus(ReportTaskStatusRequest) returns (ReportTaskStatusResponse);
+}
+
+message ReportJobStatusRequest {
+  string job_id = 1;
+  string status = 2;
+  string error_code = 3;
+  string error_message = 4;
+}
+
+message ReportJobStatusResponse {
+  bool applied = 1;
+  ErrorResponse error = 2;
+}
+
+service JobStatusService {
+  rpc reportJobStatus(ReportJobStatusRequest) returns (ReportJobStatusResponse);
+}

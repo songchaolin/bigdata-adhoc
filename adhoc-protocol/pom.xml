@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>io.gitee.songchaolin</groupId>
+        <artifactId>bigdata-adhoc</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>adhoc-protocol</artifactId>
+    <name>adhoc-protocol</name>
+    <description>gRPC protobuf：internal（server&lt;-&gt;executor 6 service）+ sdk（对外契约，多语言 SDK 源头）</description>
+
+    <dependencies>
+        <dependency><groupId>io.gitee.songchaolin</groupId><artifactId>adhoc-common</artifactId></dependency>
+        <dependency><groupId>io.grpc</groupId><artifactId>grpc-protobuf</artifactId></dependency>
+        <dependency><groupId>io.grpc</groupId><artifactId>grpc-stub</artifactId></dependency>
+        <dependency><groupId>com.google.protobuf</groupId><artifactId>protobuf-java</artifactId></dependency>
+        <!-- generated stub 上的 @javax.annotation.Generated -->
+        <dependency><groupId>javax.annotation</groupId><artifactId>javax.annotation-api</artifactId></dependency>
+    </dependencies>
+
+    <!--
+        gRPC/protobuf 桩代码策略：CI 镜像为 Alpine(musl libc)，gRPC 官方只发 glibc 版 protoc-gen-grpc-java
+        原生插件，Alpine 上 execve 失败（报 "program not found or is not executable"，protoc 本身静态链接能跑，
+        挂的是 grpc 插件）。故默认构建改为编译"已提交"的桩（见 src/main/java/com/yl/bigdata/adhoc/internal/grpc/v1/），
+        不再在构建期调用 protoc——CI 零原生二进制依赖。
+        改了 .proto 后本地重新生成并提交：
+            mvn -Pcodegen -pl adhoc-protocol clean generate-sources
+            然后覆盖提交 src/main/java/com/yl/bigdata/adhoc/internal/grpc/v1/（先清空该目录再从
+            target/generated-sources/protobuf/{java,grpc-java}/com/yl/bigdata/adhoc/internal/grpc/v1/ 拷入）
+        注意：带 -Pcodegen 跑 package 会与已提交桩产生重复类，重生成只用 generate-sources 再拷贝。
+    -->
+    <build>
+        <!-- os-maven-plugin 留在主 build：纯 Java 扩展，仅设置 os.detected.classifier 属性，
+             不下载/执行任何原生二进制，CI(Alpine) 无害；默认构建无 protobuf 插件引用它，呈惰性。 -->
+        <extensions>
+            <extension>
+                <groupId>kr.motd.maven</groupId>
+                <artifactId>os-maven-plugin</artifactId>
+                <version>1.7.1</version>
+            </extension>
+        </extensions>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>codegen</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.xolstice.maven.plugins</groupId>
+                        <artifactId>protobuf-maven-plugin</artifactId>
+                        <configuration>
+                            <protocArtifact>com.google.protobuf:protoc:${protobuf.version}:exe:${os.detected.classifier}</protocArtifact>
+                            <pluginId>grpc-java</pluginId>
+                            <pluginArtifact>io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:${os.detected.classifier}</pluginArtifact>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>compile</goal>
+                                    <goal>compile-custom</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

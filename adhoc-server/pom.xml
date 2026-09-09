@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>io.gitee.songchaolin</groupId>
+        <artifactId>bigdata-adhoc</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>adhoc-server</artifactId>
+    <name>adhoc-server</name>
+    <description>REST API + 前置校验 + Job 调度（dispatchJob）+ 读路径 + HA 补偿；不接触数据/不写日志结果/不拆分/不做鉴权</description>
+
+    <dependencies>
+        <dependency><groupId>io.gitee.songchaolin</groupId><artifactId>adhoc-common</artifactId></dependency>
+        <dependency><groupId>io.gitee.songchaolin</groupId><artifactId>adhoc-protocol</artifactId></dependency>
+        <dependency><groupId>io.gitee.songchaolin</groupId><artifactId>adhoc-dao</artifactId></dependency>
+        <!-- storage：server 仅用其 HDFS 兜底读（storage_type=PERSISTENT_ONLY 时直读 HDFS） -->
+        <dependency><groupId>io.gitee.songchaolin</groupId><artifactId>adhoc-storage</artifactId></dependency>
+        <dependency><groupId>io.gitee.songchaolin</groupId><artifactId>adhoc-sql-parser</artifactId></dependency>
+        <!-- 元数据自动补全：库/表/列查询（直连 Hive metastore + StarRocks information_schema），能力层在 adhoc-metadata，由 @ComponentScan 装配 -->
+        <dependency><groupId>io.gitee.songchaolin</groupId><artifactId>adhoc-metadata</artifactId></dependency>
+        <dependency><groupId>io.gitee.songchaolin</groupId><artifactId>adhoc-observability</artifactId></dependency>
+        <!-- guava：ExecutorChannelPool 用 Cache 管理 gRPC channel（版本由 adhoc-dependencies BOM 管理） -->
+        <dependency><groupId>com.google.guava</groupId><artifactId>guava</artifactId></dependency>
+        <!-- swagger API 文档（knife4j 开源版 + springfox，版本由 adhoc-dependencies BOM 锁定）；
+             排除 springfox-bean-validators：knife4j 2.0.6 传递 2.10.5，会与显式 springfox 3.0.0 混版 -->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-spring-boot-starter</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.springfox</groupId>
+                    <artifactId>springfox-bean-validators</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- 显式 springfox/swagger（Knife4jConfiguration 用）；版本由 adhoc-dependencies BOM 锁定 3.0.0/1.6.9，
+             避免 knife4j 传递的 springfox 2.x 与 parent 托管的 swagger2 3.0.0 混版（OnServletBasedWebApplication 缺失） -->
+        <dependency><groupId>io.springfox</groupId><artifactId>springfox-swagger2</artifactId></dependency>
+        <dependency><groupId>io.springfox</groupId><artifactId>springfox-swagger-ui</artifactId></dependency>
+        <dependency><groupId>io.swagger</groupId><artifactId>swagger-annotations</artifactId></dependency>
+        <dependency><groupId>io.swagger</groupId><artifactId>swagger-models</artifactId></dependency>
+        <!-- Bean Validation（@Valid/@NotBlank/@Range，Boot 2.3 起 web starter 不再带） -->
+        <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-validation</artifactId></dependency>
+
+        <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-web</artifactId></dependency>
+        <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-actuator</artifactId></dependency>
+        <dependency><groupId>com.baomidou</groupId><artifactId>mybatis-plus-boot-starter</artifactId></dependency>
+        <dependency><groupId>mysql</groupId><artifactId>mysql-connector-java</artifactId><scope>runtime</scope></dependency>
+        <dependency><groupId>com.alibaba</groupId><artifactId>druid-spring-boot-starter</artifactId></dependency>
+        <!-- server 既作 gRPC server（收 reportTaskStatus/heartbeat），又作 gRPC client（dispatchJob/fetchResult 给 executor） -->
+        <dependency><groupId>net.devh</groupId><artifactId>grpc-server-spring-boot-starter</artifactId></dependency>
+        <dependency><groupId>net.devh</groupId><artifactId>grpc-client-spring-boot-starter</artifactId></dependency>
+        <dependency><groupId>io.grpc</groupId><artifactId>grpc-netty-shaded</artifactId></dependency>
+        <!-- Apollo 配置中心（版本由公司 parent 托管）；排除 slf4j-log4j12/log4j 避免与 logback 冲突 -->
+        <dependency>
+            <groupId>com.ctrip.framework.apollo</groupId>
+            <artifactId>apollo-client</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency><groupId>org.projectlombok</groupId><artifactId>lombok</artifactId><scope>provided</scope></dependency>
+        <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-test</artifactId><scope>test</scope></dependency>
+
+        <!-- 铁律：adhoc-server 不依赖 adhoc-executor（仅 gRPC 通信） -->
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <!-- 将可执行 fat jar 拷贝到根目录 target/。
+                 必须声明在 spring-boot-maven-plugin 之后：Maven 同一 phase 内按“生命周期默认 -> 显式 execution（声明顺序）”执行，
+                 故 repackage 先于本 antrun 执行，拷贝的是 repackage 产出的 fat jar 而非原始 jar。
+                 路径用 ${project.*} 绝对属性，避免依赖 Ant basedir。 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-jar-to-root-target</id>
+                        <phase>package</phase>
+                        <goals><goal>run</goal></goals>
+                        <configuration>
+                            <target>
+                                <mkdir dir="${project.basedir}/../target"/>
+                                <copy file="${project.build.directory}/${project.build.finalName}.jar"
+                                      todir="${project.basedir}/../target"
+                                      failonerror="false"/>
+                                <echo message="Copied ${project.build.finalName}.jar -> ${project.basedir}/../target/"/>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

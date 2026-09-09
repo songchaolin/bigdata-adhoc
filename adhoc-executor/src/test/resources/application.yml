@@ -1,0 +1,30 @@
+# 测试关闭 Apollo bootstrap + 排除 ApolloAutoConfiguration（不连真 configserver，用本地 test yml）
+apollo:
+  bootstrap:
+    enabled: false
+spring:
+  autoconfigure:
+    exclude:
+      - com.ctrip.framework.apollo.spring.boot.ApolloAutoConfiguration
+  datasource:
+    url: 'jdbc:mysql://${ADHOC_MYSQL_HOST:localhost}:${ADHOC_MYSQL_PORT:3306}/${ADHOC_MYSQL_DB:adhoc}?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai'
+    username: ${ADHOC_MYSQL_USER:root}
+    password: ${ADHOC_MYSQL_PASSWORD:change-me}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+grpc:
+  server:
+    port: 0
+adhoc:
+  heartbeat:
+    interval-ms: 999999999
+  executor:
+    local-base-dir: /tmp/adhoc-executor-test-run
+    instance-id: executor-test
+    server-log-interval-ms: 999999999
+  status:
+    interval-ms: 999999999
+  log:
+    reconcile-scan-interval-ms: 999999999   # 测试期间不触发兜底定时器（避免连真 OSS 写入 + jobLog 异步清理致断言 flaky）
+    finalize-delay-ms: 999999999
+mybatis-plus:
+  mapper-locations: classpath*:mapper/**/*.xml

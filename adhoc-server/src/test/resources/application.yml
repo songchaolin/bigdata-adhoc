@@ -1,0 +1,59 @@
+# 测试关闭 Apollo bootstrap + 排除 ApolloAutoConfiguration（不连真 configserver，用本地 test yml）
+apollo:
+  bootstrap:
+    enabled: false
+spring:
+  autoconfigure:
+    exclude:
+      - com.ctrip.framework.apollo.spring.boot.ApolloAutoConfiguration
+  datasource:
+    url: 'jdbc:mysql://${ADHOC_MYSQL_HOST:localhost}:${ADHOC_MYSQL_PORT:3306}/${ADHOC_MYSQL_DB:adhoc}?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai'
+    username: ${ADHOC_MYSQL_USER:root}
+    password: ${ADHOC_MYSQL_PASSWORD:change-me}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+grpc:
+  server:
+    port: 0
+  client:
+    adhoc-executor:
+      address: 'static://127.0.0.1:9091'
+      negotiation-type: plaintext
+adhoc:
+  schedule:
+    interval-ms: 999999999
+    event-trigger-enabled: false   # 测试走纯显式 dispatcher()，避免 submit 异步触发与断言竞态
+  healthcheck:
+    interval-ms: 999999999
+  compensation:
+    interval-ms: 999999999
+  cleanup:
+    interval-ms: 999999999
+  server:
+    heartbeat-interval-ms: 999999999
+  reconcile:
+    interval-ms: 999999999
+  status:
+    interval-ms: 999999999
+  metadata:
+    # 与主 application.yml 同步：连接源已收敛到每实例（adhoc.metadata.{kind}.{instance}.*，无引擎级回退）
+    hive-metastore:
+      default_instance: kyuubi-01
+      pool-size: 4
+      kyuubi-01:
+        # Hive metastore（环境变量提供地址；URL 带 /hive）
+        url: jdbc:mysql://${ADHOC_HMS_HOST:localhost}:${ADHOC_HMS_PORT:3306}/hive?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+        user: ${ADHOC_HMS_USER:hive}
+        password: ${ADHOC_HMS_PASSWORD:change-me}
+    starrocks:
+      default_instance: starrocks-01
+      pool-size: 4
+      starrocks-01:
+        url: jdbc:mysql://${ADHOC_SR_META_HOST:localhost}:${ADHOC_SR_META_PORT:9030}?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+        user: ${ADHOC_SR_META_USER:root}
+        password: ${ADHOC_SR_META_PASSWORD:change-me}
+    cache:
+      db-ttl-min: 30
+      table-ttl-min: 10
+      column-ttl-min: 30
+mybatis-plus:
+  mapper-locations: classpath*:mapper/**/*.xml

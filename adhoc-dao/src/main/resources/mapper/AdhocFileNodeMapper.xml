@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.gitee.songchaolin.adhoc.dao.mapper.AdhocFileNodeMapper">
+
+    <resultMap id="BaseResultMap" type="io.gitee.songchaolin.adhoc.dao.entity.AdhocFileNode">
+        <id column="node_id" property="nodeId"/>
+        <result column="user_id" property="userId"/>
+        <result column="user_name" property="userName"/>
+        <result column="parent_node_id" property="parentNodeId"/>
+        <result column="node_type" property="nodeType"/>
+        <result column="node_name" property="nodeName"/>
+        <result column="sql_content" property="sqlContent"/>
+        <result column="description" property="description"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        node_id, user_id, user_name, parent_node_id, node_type, node_name, sql_content, description, is_deleted, create_time, update_time
+    </sql>
+
+</mapper>

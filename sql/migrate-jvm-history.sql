@@ -1,0 +1,57 @@
+-- ======================================================================
+-- 迁移：JVM/OS 指标采样历史表（时间曲线用）
+-- 适用：存量库（无此表）
+-- 特性：CREATE TABLE IF NOT EXISTS 幂等，可重复执行；全新库走 sql/create.sql
+-- 执行：mysql -u<user> -p adhoc < sql/migrate-jvm-history.sql
+-- ======================================================================
+
+CREATE TABLE IF NOT EXISTS adhoc_jvm_metric_sample (
+  id                          BIGINT        NOT NULL AUTO_INCREMENT COMMENT '自增',
+  instance_id                 VARCHAR(128)  NOT NULL COMMENT 'server 或 executor instance_id',
+  role                        VARCHAR(8)    NOT NULL COMMENT 'SERVER/EXECUTOR',
+  sample_time                 DATETIME(3)   NOT NULL COMMENT '采样时间',
+  running_tasks               INT           NOT NULL DEFAULT 0 COMMENT 'executor 在跑任务数；server=0',
+  cpu_usage_pct               DOUBLE        DEFAULT NULL COMMENT 'JVM 进程 CPU%',
+  system_cpu_usage_pct        DOUBLE        DEFAULT NULL COMMENT '系统整体 CPU%',
+  system_load_avg             DOUBLE        DEFAULT NULL COMMENT '系统 1min 负载（Linux；Windows=NULL）',
+  process_cpu_time_ms         BIGINT        DEFAULT NULL COMMENT '进程累计 CPU 时间 ms',
+  phys_mem_total_mb           DOUBLE        DEFAULT NULL COMMENT '物理内存总量 MB',
+  phys_mem_used_mb            DOUBLE        DEFAULT NULL COMMENT '物理内存已用 MB',
+  phys_mem_used_pct           DOUBLE        DEFAULT NULL COMMENT '物理内存使用率%',
+  heap_used_mb                DOUBLE        DEFAULT NULL COMMENT 'JVM 堆已用 MB',
+  heap_committed_mb           DOUBLE        DEFAULT NULL COMMENT 'JVM 堆已提交 MB',
+  heap_max_mb                 DOUBLE        DEFAULT NULL COMMENT 'JVM 堆最大 MB',
+  heap_used_pct               DOUBLE        DEFAULT NULL COMMENT 'JVM 堆使用率%',
+  eden_used_mb                DOUBLE        DEFAULT NULL COMMENT 'Eden 区已用 MB',
+  survivor_used_mb            DOUBLE        DEFAULT NULL COMMENT 'Survivor 区已用 MB',
+  old_used_mb                 DOUBLE        DEFAULT NULL COMMENT 'Old 区已用 MB',
+  old_max_mb                  DOUBLE        DEFAULT NULL COMMENT 'Old 区最大 MB',
+  metaspace_used_mb           DOUBLE        DEFAULT NULL COMMENT 'Metaspace 已用 MB',
+  metaspace_committed_mb      DOUBLE        DEFAULT NULL COMMENT 'Metaspace 已提交 MB',
+  code_cache_used_mb          DOUBLE        DEFAULT NULL COMMENT 'Code Cache 已用 MB',
+  non_heap_used_mb            DOUBLE        DEFAULT NULL COMMENT 'JVM 非堆已用 MB',
+  non_heap_committed_mb       DOUBLE        DEFAULT NULL COMMENT 'JVM 非堆已提交 MB',
+  direct_buffer_count          BIGINT        DEFAULT NULL COMMENT '直接内存 buffer 数',
+  direct_buffer_used_mb        DOUBLE        DEFAULT NULL COMMENT '直接内存已用 MB',
+  young_gc_count              BIGINT        DEFAULT NULL COMMENT 'Young GC 累计次数',
+  young_gc_time_ms           BIGINT        DEFAULT NULL COMMENT 'Young GC 累计耗时 ms',
+  full_gc_count               BIGINT        DEFAULT NULL COMMENT 'Full GC 累计次数',
+  full_gc_time_ms             BIGINT        DEFAULT NULL COMMENT 'Full GC 累计耗时 ms',
+  gc_count                    BIGINT        DEFAULT NULL COMMENT '所有 GC 累计次数',
+  gc_time_ms                  BIGINT        DEFAULT NULL COMMENT '所有 GC 累计耗时 ms',
+  gc_time_ratio_pct           DOUBLE        DEFAULT NULL COMMENT 'GC 时间占比%(gcTime/uptime)',
+  thread_count                INT           DEFAULT NULL COMMENT '线程数',
+  daemon_thread_count         INT           DEFAULT NULL COMMENT 'daemon 线程数',
+  peak_thread_count           INT           DEFAULT NULL COMMENT '峰值线程数',
+  total_started_thread_count  BIGINT        DEFAULT NULL COMMENT '累计启动线程数',
+  deadlock_count              INT           DEFAULT NULL COMMENT '死锁线程数',
+  loaded_class_count          INT           DEFAULT NULL COMMENT '已加载类数',
+  total_loaded_class_count    BIGINT        DEFAULT NULL COMMENT '累计加载类数',
+  unloaded_class_count        BIGINT        DEFAULT NULL COMMENT '累计卸载类数',
+  uptime_ms                   BIGINT        DEFAULT NULL COMMENT 'JVM 运行时长 ms',
+  start_time_ms               BIGINT        DEFAULT NULL COMMENT 'JVM 启动时间戳 ms',
+  create_time                 DATETIME(3)   NOT NULL DEFAULT CURRENT_TIMESTAMP(3) COMMENT '创建时间',
+  PRIMARY KEY (id),
+  KEY idx_inst_time (instance_id, sample_time),
+  KEY idx_time (sample_time)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='实例 JVM/OS 指标采样历史';

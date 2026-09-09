@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>io.gitee.songchaolin</groupId>
+        <artifactId>bigdata-adhoc</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>adhoc-sql-parser</artifactId>
+    <name>adhoc-sql-parser</name>
+    <description>ANTLR4 两套 g4（Kyuubi=Spark SQL / StarRocks）+ SqlType 提取 + 表级血缘 + 风险标记；外部可独立依赖</description>
+
+    <dependencies>
+        <dependency><groupId>io.gitee.songchaolin</groupId><artifactId>adhoc-common</artifactId></dependency>
+        <dependency><groupId>org.antlr</groupId><artifactId>antlr4-runtime</artifactId></dependency>
+        <dependency><groupId>org.projectlombok</groupId><artifactId>lombok</artifactId><scope>provided</scope></dependency>
+        <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-test</artifactId><scope>test</scope></dependency>
+    </dependencies>
+
+    <!-- ANTLR4 g4 编译配置（Spark + StarRocks 两套 g4，各自 libDirectory 解析 import/tokenVocab；
+         sourceDirectory 保持默认 src/main/antlr4 以保留生成类包名） -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.antlr</groupId>
+                <artifactId>antlr4-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>spark-g4</id>
+                        <configuration>
+                            <sourceDirectory>${basedir}/src/main/antlr4</sourceDirectory>
+                            <libDirectory>${basedir}/src/main/antlr4/org/apache/spark/sql/catalyst/parser</libDirectory>
+                            <includes>
+                                <include>org/apache/spark/sql/catalyst/parser/*.g4</include>
+                            </includes>
+                            <visitor>true</visitor>
+                            <listener>true</listener>
+                        </configuration>
+                        <goals><goal>antlr4</goal></goals>
+                    </execution>
+                    <execution>
+                        <id>starrocks-g4</id>
+                        <configuration>
+                            <sourceDirectory>${basedir}/src/main/antlr4</sourceDirectory>
+                            <libDirectory>${basedir}/src/main/antlr4/com/starrocks/sql/parser</libDirectory>
+                            <includes>
+                                <include>com/starrocks/sql/parser/*.g4</include>
+                            </includes>
+                            <visitor>true</visitor>
+                            <listener>true</listener>
+                        </configuration>
+                        <goals><goal>antlr4</goal></goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

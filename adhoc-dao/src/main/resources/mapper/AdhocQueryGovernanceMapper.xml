@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.gitee.songchaolin.adhoc.dao.mapper.AdhocQueryGovernanceMapper">
+
+    <resultMap id="BaseResultMap" type="io.gitee.songchaolin.adhoc.dao.entity.AdhocQueryGovernance">
+        <id column="query_id" property="queryId"/>
+        <result column="sql_type" property="sqlType"/>
+        <result column="risk_items_json" property="riskItemsJson"/>
+        <result column="executed_sql_content" property="executedSqlContent"/>
+        <result column="governance_result" property="governanceResult"/>
+        <result column="deny_reason" property="denyReason"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        query_id, sql_type, risk_items_json, executed_sql_content, governance_result, deny_reason, create_time, update_time
+    </sql>
+
+</mapper>

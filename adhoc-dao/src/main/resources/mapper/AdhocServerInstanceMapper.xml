@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.gitee.songchaolin.adhoc.dao.mapper.AdhocServerInstanceMapper">
+
+    <resultMap id="BaseResultMap" type="io.gitee.songchaolin.adhoc.dao.entity.AdhocServerInstance">
+        <id column="id" property="id"/>
+        <result column="instance_id" property="instanceId"/>
+        <result column="host" property="host"/>
+        <result column="http_port" property="httpPort"/>
+        <result column="grpc_port" property="grpcPort"/>
+        <result column="status" property="status"/>
+        <result column="accepting" property="accepting"/>
+        <result column="start_time" property="startTime"/>
+        <result column="version" property="version"/>
+        <result column="heartbeat_time" property="heartbeatTime"/>
+        <result column="active_jobs" property="activeJobs"/>
+        <result column="cpu_usage_pct" property="cpuUsagePct"/>
+        <result column="system_cpu_usage_pct" property="systemCpuUsagePct"/>
+        <result column="memory_usage_pct" property="memoryUsagePct"/>
+        <result column="memory_used_mb" property="memoryUsedMb"/>
+        <result column="memory_max_mb" property="memoryMaxMb"/>
+        <result column="heap_committed_mb" property="heapCommittedMb"/>
+        <result column="non_heap_used_mb" property="nonHeapUsedMb"/>
+        <result column="non_heap_committed_mb" property="nonHeapCommittedMb"/>
+        <result column="thread_count" property="threadCount"/>
+        <result column="daemon_thread_count" property="daemonThreadCount"/>
+        <result column="gc_count" property="gcCount"/>
+        <result column="gc_time_ms" property="gcTimeMs"/>
+        <result column="gc_time_ratio_pct" property="gcTimeRatioPct"/>
+        <result column="loaded_class_count" property="loadedClassCount"/>
+        <result column="uptime_ms" property="uptimeMs"/>
+        <result column="load_score" property="loadScore"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, instance_id, host, http_port, grpc_port, status, accepting, start_time, version, heartbeat_time, active_jobs,
+        cpu_usage_pct, system_cpu_usage_pct, memory_usage_pct, memory_used_mb, memory_max_mb, heap_committed_mb,
+        non_heap_used_mb, non_heap_committed_mb, thread_count, daemon_thread_count, gc_count, gc_time_ms,
+        gc_time_ratio_pct, loaded_class_count, uptime_ms, load_score, create_time, update_time
+    </sql>
+
+    <!-- 自注册：插入或重置为 UP（ON DUPLICATE KEY UPDATE by uk_instance_id） -->
+    <insert id="upsertOnRegister">
+        INSERT INTO adhoc_server_instance (instance_id, host, http_port, grpc_port, status, accepting, start_time, version, heartbeat_time)
+        VALUES (#{instanceId},#{host},#{httpPort},#{grpcPort},'UP',1,NOW(),#{version},NOW())
+        ON DUPLICATE KEY UPDATE status='UP', accepting=1, start_time=NOW(), heartbeat_time=NOW(), version=VALUES(version), grpc_port=VALUES(grpc_port)
+    </insert>
+
+    <!-- server 自写：刷新 heartbeat_time + 复位 status=UP + 写 JVM 指标（accepting 不动，由优雅停机控制） -->
+    <update id="updateSelfWithMetrics">
+        UPDATE adhoc_server_instance SET
+            heartbeat_time=NOW(), status='UP',
+            cpu_usage_pct=#{metrics.cpuUsagePct}, system_cpu_usage_pct=#{metrics.systemCpuUsagePct},
+            memory_usage_pct=#{metrics.memoryUsagePct}, memory_used_mb=#{metrics.memoryUsedMb},
+            memory_max_mb=#{metrics.memoryMaxMb}, heap_committed_mb=#{metrics.heapCommittedMb},
+            non_heap_used_mb=#{metrics.nonHeapUsedMb}, non_heap_committed_mb=#{metrics.nonHeapCommittedMb},
+            thread_count=#{metrics.threadCount}, daemon_thread_count=#{metrics.daemonThreadCount},
+            gc_count=#{metrics.gcCount}, gc_time_ms=#{metrics.gcTimeMs}, gc_time_ratio_pct=#{metrics.gcTimeRatioPct},
+            loaded_class_count=#{metrics.loadedClassCount}, uptime_ms=#{metrics.uptimeMs},
+            load_score=#{metrics.loadScore}
+        WHERE instance_id=#{instanceId}
+    </update>
+
+    <!-- 查所有 UP server（executor 心跳按此列表逐个尝试，失败转移下一个） -->
+    <select id="selectUpInstances" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM adhoc_server_instance
+        WHERE status='UP'
+        ORDER BY heartbeat_time DESC
+    </select>
+
+    <!-- 健康检查：心跳超时的 UP 实例标 DOWN（server 15s） -->
+    <update id="markDownTimedOut">
+        UPDATE adhoc_server_instance SET status='DOWN'
+        WHERE status='UP' AND heartbeat_time &lt; NOW() - INTERVAL #{seconds} SECOND
+    </update>
+
+    <!-- 优雅停机：标记 accepting=0（不再承接新 Job） -->
+    <update id="markAcceptingZero">
+        UPDATE adhoc_server_instance SET accepting=0 WHERE instance_id=#{instanceId}
+    </update>
+
+    <!-- 实例清理：删除 DOWN 超过 N 小时的实例 -->
+    <delete id="cleanupOldDownInstances">
+        DELETE FROM adhoc_server_instance WHERE status='DOWN' AND update_time &lt; NOW() - INTERVAL #{hours} HOUR
+    </delete>
+
+    <!-- 大盘 server 视图：active_jobs（当前处理 Job 数）+ 心跳新鲜度 + 启动时间 + 全套 JVM 指标。
+         server 与 executor 共用 JvmMetrics 采集，每 5s 自写。全表小，按 status 排序。 -->
+    <select id="selectMetricsView" resultType="java.util.LinkedHashMap">
+        SELECT
+            instance_id AS instanceId,
+            host AS host,
+            http_port AS httpPort,
+            grpc_port AS grpcPort,
+            status AS status,
+            accepting AS accepting,
+            IFNULL(active_jobs, 0) AS activeJobs,
+            IFNULL(TIMESTAMPDIFF(SECOND, heartbeat_time, NOW()), 0) AS heartbeatAgeSec,
+            UNIX_TIMESTAMP(start_time) AS startTimeSec,
+            version AS version,
+            IFNULL(cpu_usage_pct, 0) AS cpuUsagePct,
+            IFNULL(system_cpu_usage_pct, 0) AS systemCpuUsagePct,
+            IFNULL(memory_usage_pct, 0) AS memoryUsagePct,
+            IFNULL(memory_used_mb, 0) AS memoryUsedMb,
+            IFNULL(memory_max_mb, 0) AS memoryMaxMb,
+            IFNULL(heap_committed_mb, 0) AS heapCommittedMb,
+            IFNULL(non_heap_used_mb, 0) AS nonHeapUsedMb,
+            IFNULL(non_heap_committed_mb, 0) AS nonHeapCommittedMb,
+            IFNULL(thread_count, 0) AS threadCount,
+            IFNULL(daemon_thread_count, 0) AS daemonThreadCount,
+            IFNULL(gc_count, 0) AS gcCount,
+            IFNULL(gc_time_ms, 0) AS gcTimeMs,
+            IFNULL(gc_time_ratio_pct, 0) AS gcTimeRatioPct,
+            IFNULL(loaded_class_count, 0) AS loadedClassCount,
+            IFNULL(uptime_ms, 0) AS uptimeMs,
+            IFNULL(load_score, 0) AS loadScore
+        FROM adhoc_server_instance
+        ORDER BY status ASC, heartbeat_time DESC
+    </select>
+
+</mapper>

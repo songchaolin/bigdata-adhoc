@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package adhoc.internal.v1;
+
+import "internal/common.proto";
+
+option java_package = "io.gitee.songchaolin.adhoc.internal.grpc.v1";
+option java_multiple_files = true;
+
+// executor -> server：5s 心跳，携带在跑 Task 列表 + 负载。server 据此做对账 + 宕机判定。
+message HeartbeatRequest {
+  string instance_id = 1;
+  string instance_type = 2;      // SERVER / EXECUTOR
+  string host = 3;
+  int32 grpc_port = 4;
+  int32 http_port = 5;
+  repeated string running_task_ids = 6;
+  double load_score = 7;
+}
+
+message HeartbeatResponse {
+  bool accepted = 1;
+  string action = 2;             // NONE / DRAIN
+  ErrorResponse error = 3;
+}
+
+service HeartbeatService {
+  rpc heartbeat(HeartbeatRequest) returns (HeartbeatResponse);
+}

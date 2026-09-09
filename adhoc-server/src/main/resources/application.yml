@@ -1,0 +1,62 @@
+spring:
+  application:
+    name: bigdata-adhoc-server
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher  # springfox 3.0 + Boot 2.5 兼容
+  datasource:
+    url: 'jdbc:mysql://${ADHOC_MYSQL_HOST:localhost}:${ADHOC_MYSQL_PORT:3306}/${ADHOC_MYSQL_DB:adhoc}?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai'
+    username: ${ADHOC_MYSQL_USER:root}
+    password: ${ADHOC_MYSQL_PASSWORD:change-me}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+server:
+  port: 8080
+grpc:
+  server:
+    port: 9090
+  client:
+    adhoc-executor:
+      address: 'static://127.0.0.1:9091'
+      negotiation-type: plaintext
+mybatis-plus:
+  mapper-locations: classpath*:mapper/**/*.xml
+
+adhoc:
+  storage:
+    type: local                       # local | aliyun（第三方实现可直接注册 StorageClient Bean）
+    local:
+      base-dir: ./data/storage
+  metadata:
+    # Hive metastore（对应 KYUUBI 集群；多实例时每实例独立 url/账号密码，实例名与 adhoc.engine.KYUUBI 对齐）
+    hive-metastore:
+      # 默认实例名（元数据查询未传 instance 时用此）
+      default_instance: kyuubi-01
+      pool-size: 4
+      # 默认实例连接源（每实例配 adhoc.metadata.hive-metastore.{instance}.{url,user,password}）
+      kyuubi-01:
+        url: jdbc:mysql://${ADHOC_HMS_HOST:localhost}:${ADHOC_HMS_PORT:3306}/hive?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+        user: ${ADHOC_HMS_USER:hive}
+        password: ${ADHOC_HMS_PASSWORD:change-me}
+      # 第二个集群的 metastore（不同地址+账号），取消注释启用；查询时 instance=kyuubi-02 即用此实例
+      #kyuubi-02:
+      #  url: jdbc:mysql://localhost:3306/hive?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+      #  user: hive2
+      #  password: 'change-me'
+      #  pool-size: 4
+    starrocks:
+      default_instance: starrocks-01
+      pool-size: 4
+      # 默认实例连接源（与 executor 同实例；补全走 information_schema，固定账号，与查询权限一致）
+      starrocks-01:
+        url: jdbc:mysql://${ADHOC_SR_META_HOST:localhost}:${ADHOC_SR_META_PORT:9030}?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+        user: ${ADHOC_SR_META_USER:root}
+        password: ${ADHOC_SR_META_PASSWORD:change-me}
+      #starrocks-02:
+      #  url: jdbc:mysql://localhost:9030?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+      #  user: other
+      #  password: 'change-me'
+      #  pool-size: 4
+    cache:
+      db-ttl-min: 30
+      table-ttl-min: 10
+      column-ttl-min: 30

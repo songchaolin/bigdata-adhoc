@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>io.gitee.songchaolin</groupId>
+        <artifactId>bigdata-adhoc</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>adhoc-metadata</artifactId>
+    <name>adhoc-metadata</name>
+    <description>
+        元数据自动补全：直连 Hive metastore MySQL（查 DBS/TBLS/COLUMNS_V2/PARTITION_KEYS，Hive 3.x schema）
+        + StarRocks information_schema，提供 库/表/列 查询能力（MetadataFetcher）。
+        能力层模块，server import 后由 @ComponentScan(basePackages=io.gitee.songchaolin.adhoc) 自动装配，无需 spring.factories。
+        补全绕过 Ranger（超管直连），实际查询由 Kyuubi proxyUser + Ranger 兜底鉴权。
+    </description>
+
+    <dependencies>
+        <dependency><groupId>io.gitee.songchaolin</groupId><artifactId>adhoc-common</artifactId></dependency>
+        <!-- Caffeine 缓存（库表列列表 TTL 缓存，全量缓存 + 内存前缀过滤 keyword） -->
+        <dependency><groupId>com.github.ben-manes.caffeine</groupId><artifactId>caffeine</artifactId></dependency>
+        <!-- JdbcTemplate（只引 spring-jdbc，不引 starter-jdbc，避免触发 DataSourceAutoConfiguration 与 server Druid 主数据源冲突） -->
+        <dependency><groupId>org.springframework</groupId><artifactId>spring-jdbc</artifactId></dependency>
+        <!-- Druid 连接池（手动 new DruidDataSource 建独立元数据数据源；不配 spring.datasource.druid.* 不触发自动配置） -->
+        <dependency><groupId>com.alibaba</groupId><artifactId>druid-spring-boot-starter</artifactId></dependency>
+        <!-- MySQL 驱动（hive metastore + StarRocks 均走 MySQL 协议） -->
+        <dependency><groupId>mysql</groupId><artifactId>mysql-connector-java</artifactId><scope>runtime</scope></dependency>
+        <dependency><groupId>org.projectlombok</groupId><artifactId>lombok</artifactId><scope>provided</scope></dependency>
+        <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-test</artifactId><scope>test</scope></dependency>
+    </dependencies>
+</project>

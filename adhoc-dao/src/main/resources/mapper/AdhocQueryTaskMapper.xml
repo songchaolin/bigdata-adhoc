@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.gitee.songchaolin.adhoc.dao.mapper.AdhocQueryTaskMapper">
+
+    <resultMap id="BaseResultMap" type="io.gitee.songchaolin.adhoc.dao.entity.AdhocQueryTask">
+        <id column="query_id" property="queryId"/>
+        <result column="job_id" property="jobId"/>
+        <result column="segment_index" property="segmentIndex"/>
+        <result column="user_id" property="userId"/>
+        <result column="user_name" property="userName"/>
+        <result column="prefix_sql" property="prefixSql"/>
+        <result column="sql_content" property="sqlContent"/>
+        <result column="sql_hash" property="sqlHash"/>
+        <result column="sql_type" property="sqlType"/>
+        <result column="has_result_set" property="hasResultSet"/>
+        <result column="affected_rows" property="affectedRows"/>
+        <result column="engine_params" property="engineParams"/>
+        <result column="status" property="status"/>
+        <result column="stage" property="stage"/>
+        <result column="cancel_requested" property="cancelRequested"/>
+        <result column="cancel_requested_time" property="cancelRequestedTime"/>
+        <result column="fail_stage" property="failStage"/>
+        <result column="fail_reason_category" property="failReasonCategory"/>
+        <result column="error_code" property="errorCode"/>
+        <result column="error_message" property="errorMessage"/>
+        <result column="engine_type" property="engineType"/>
+        <result column="engine_instance" property="engineInstance"/>
+        <result column="executor_instance" property="executorInstance"/>
+        <result column="processing_server_instance" property="processingServerInstance"/>
+        <result column="reused_from_task_id" property="reusedFromTaskId"/>
+        <result column="scan_rows" property="scanRows"/>
+        <result column="scan_bytes" property="scanBytes"/>
+        <result column="persistent_log_path" property="persistentLogPath"/>
+        <result column="enqueue_time" property="enqueueTime"/>
+        <result column="start_time" property="startTime"/>
+        <result column="fetch_start_time" property="fetchStartTime"/>
+        <result column="write_start_time" property="writeStartTime"/>
+        <result column="local_write_finish_time" property="localWriteFinishTime"/>
+        <result column="oss_upload_time" property="ossUploadTime"/>
+        <result column="finish_time" property="finishTime"/>
+        <result column="duration_ms" property="durationMs"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        query_id, job_id, segment_index, user_id, user_name, prefix_sql, sql_content, sql_hash, sql_type, has_result_set,
+        affected_rows, engine_params, status, stage, cancel_requested, cancel_requested_time, fail_stage, fail_reason_category,
+        error_code, error_message, engine_type, engine_instance, executor_instance, processing_server_instance,
+        reused_from_task_id, scan_rows, scan_bytes, persistent_log_path, enqueue_time, start_time, fetch_start_time,
+        write_start_time, local_write_finish_time, oss_upload_time, finish_time, duration_ms, is_deleted, create_time, update_time
+    </sql>
+
+    <!-- 批量插入：一次 INSERT 多行（createTasks 构造的列；其余列走 DB 默认 is_deleted=0/create_time=NOW() 等） -->
+    <insert id="insertBatch">
+        INSERT INTO adhoc_query_task
+        (query_id, job_id, segment_index, user_id, user_name, prefix_sql, sql_content, sql_hash, sql_type,
+         has_result_set, status, fail_stage, fail_reason_category, error_code, error_message,
+         engine_type, engine_instance, executor_instance, processing_server_instance, enqueue_time, create_time, update_time)
+        VALUES
+        <foreach collection="list" item="t" separator=",">
+            (#{t.queryId}, #{t.jobId}, #{t.segmentIndex}, #{t.userId}, #{t.userName}, #{t.prefixSql}, #{t.sqlContent},
+             #{t.sqlHash}, #{t.sqlType}, #{t.hasResultSet}, #{t.status}, #{t.failStage}, #{t.failReasonCategory},
+             #{t.errorCode}, #{t.errorMessage}, #{t.engineType}, #{t.engineInstance}, #{t.executorInstance},
+             #{t.processingServerInstance}, #{t.enqueueTime}, NOW(), NOW())
+        </foreach>
+    </insert>
+
+    <!-- 找有 RUNNING/PENDING Task 的 DOWN executor（待补偿） -->
+    <select id="selectDownExecutorsWithActiveTasks" resultType="java.lang.String">
+        SELECT DISTINCT executor_instance FROM adhoc_query_task
+        WHERE status IN ('RUNNING','PENDING') AND is_deleted=0
+        AND executor_instance IN (SELECT instance_id FROM adhoc_executor_instance WHERE status='DOWN')
+    </select>
+
+    <!-- executor 宕机：RUNNING Task -> FAILED(EXECUTOR_CRASHED) -->
+    <update id="markRunningTasksFailedForExecutor">
+        UPDATE adhoc_query_task SET status='FAILED', fail_reason_category='EXECUTOR_CRASHED',
+        fail_stage='EXECUTING', error_code='ADHOC_EXECUTOR_CRASHED', finish_time=NOW()
+        WHERE executor_instance=#{exec} AND status='RUNNING'
+    </update>
+
+    <!-- executor 宕机：PENDING Task -> FAILED(SKIPPED_DUE_TO_SESSION_LOSS)；fail_stage=DISPATCH（task 未进入执行管线，因 executor 宕机丢失 session） -->
+    <update id="markPendingTasksFailedForExecutor">
+        UPDATE adhoc_query_task SET status='FAILED', fail_reason_category='SKIPPED_DUE_TO_SESSION_LOSS',
+        fail_stage='DISPATCH', finish_time=NOW() WHERE executor_instance=#{exec} AND status='PENDING'
+    </update>
+
+    <!-- 心跳对账：DB=RUNNING 但 executor 心跳未上报的 Task -> FAILED(TASK_LOST) -->
+    <update id="markTaskLost">
+        UPDATE adhoc_query_task SET status='FAILED', fail_reason_category='TASK_LOST',
+        fail_stage='EXECUTING', finish_time=NOW() WHERE query_id=#{queryId} AND status='RUNNING'
+    </update>
+
+    <!-- 结果复用：查询最近成功的同 SQL Task -->
+    <select id="selectSuccessTaskBySqlHash" resultType="java.lang.String">
+        SELECT query_id FROM adhoc_query_task
+        WHERE user_id = #{userId}
+          AND sql_hash = #{sqlHash}
+          AND status = 'SUCCESS'
+          AND finish_time >= DATE_SUB(NOW(), INTERVAL #{ttlSeconds} SECOND)
+          AND is_deleted = 0
+        ORDER BY finish_time DESC
+        LIMIT 1
+    </select>
+
+    <!-- 聚合查询：按 Job ID 查询 Task 统计信息（只查 status 和 fail_reason_category） -->
+    <select id="selectStatisticsByJobId" resultType="io.gitee.songchaolin.adhoc.dao.entity.AdhocQueryTask">
+        SELECT status, fail_reason_category
+        FROM adhoc_query_task
+        WHERE job_id = #{jobId} AND is_deleted = 0
+    </select>
+
+    <!-- ==================== 指标大盘聚合查询（on-the-fly GROUP BY；绝对时间区间 [start,end]，按 enqueue_time；走 idx_status_enqueue） ====================
+         输出列一律显式 camelCase 别名，保证 Map key 不依赖 mapUnderscoreToCamelCase 配置。 -->
+
+    <!-- Task 按 status 分布（时间区间内，按 enqueue_time） -->
+    <select id="selectTaskStatusDistribution" resultType="java.util.LinkedHashMap">
+        SELECT status AS status, COUNT(*) AS cnt
+        FROM adhoc_query_task
+        WHERE enqueue_time &gt;= #{startTime} AND enqueue_time &lt;= #{endTime} AND is_deleted = 0
+        GROUP BY status
+    </select>
+
+    <!-- 失败 Task 按 fail_stage 分布（时间区间内） -->
+    <select id="selectFailStageDistribution" resultType="java.util.LinkedHashMap">
+        SELECT fail_stage AS failStage, COUNT(*) AS cnt
+        FROM adhoc_query_task
+        WHERE enqueue_time &gt;= #{startTime} AND enqueue_time &lt;= #{endTime} AND is_deleted = 0
+          AND status = 'FAILED'
+        GROUP BY fail_stage
+    </select>
+
+    <!-- 失败 Task 按 error_code 分布 TopN（时间区间内，cnt DESC） -->
+    <select id="selectErrorCodeDistribution" resultType="java.util.LinkedHashMap">
+        SELECT error_code AS errorCode, COUNT(*) AS cnt
+        FROM adhoc_query_task
+        WHERE enqueue_time &gt;= #{startTime} AND enqueue_time &lt;= #{endTime} AND is_deleted = 0
+          AND status = 'FAILED' AND error_code IS NOT NULL AND error_code &lt;&gt; ''
+        GROUP BY error_code
+        ORDER BY cnt DESC
+        LIMIT #{limit}
+    </select>
+
+    <!-- Task 按 sql_type 分布（时间区间内） -->
+    <select id="selectSqlTypeDistribution" resultType="java.util.LinkedHashMap">
+        SELECT sql_type AS sqlType, COUNT(*) AS cnt
+        FROM adhoc_query_task
+        WHERE enqueue_time &gt;= #{startTime} AND enqueue_time &lt;= #{endTime} AND is_deleted = 0
+        GROUP BY sql_type
+    </select>
+
+    <!-- 每实例 Task 数（时间区间内，按 processing_server_instance；NULL -> '(未分配)'） -->
+    <select id="selectTaskCountByServer" resultType="java.util.LinkedHashMap">
+        SELECT COALESCE(processing_server_instance, '(未分配)') AS instance, COUNT(*) AS cnt
+        FROM adhoc_query_task
+        WHERE enqueue_time &gt;= #{startTime} AND enqueue_time &lt;= #{endTime} AND is_deleted = 0
+        GROUP BY processing_server_instance
+    </select>
+
+    <!-- 每实例 Task 数（时间区间内，按 executor_instance；NULL -> '(未分配)'） -->
+    <select id="selectTaskCountByExecutor" resultType="java.util.LinkedHashMap">
+        SELECT COALESCE(executor_instance, '(未分配)') AS instance, COUNT(*) AS cnt
+        FROM adhoc_query_task
+        WHERE enqueue_time &gt;= #{startTime} AND enqueue_time &lt;= #{endTime} AND is_deleted = 0
+        GROUP BY executor_instance
+    </select>
+
+    <!-- ==================== Task 提交/完成趋势（与 Job 趋势同口径，便于 job/task 对照） ====================
+         submitted 按 enqueue_time 分桶（task 入队=提交），finished 按 finish_time 分桶 + 终态过滤。
+         终态 = SUCCESS/FAILED/CANCELED（对齐 TaskStatus.isTerminal；SKIPPED 未真正执行，不计完成）。
+         finished 分支按 finish_time 范围扫描（无独立索引，与 Job 趋势同访问模式）。 -->
+
+    <!-- Task 提交/完成趋势（按小时，label='yyyy-MM-dd HH:00'，窄区间用）。
+         同 Job 趋势，注入起止桶 0,0 锚点（DATE_FORMAT #{startTime}/#{endTime}）铺满区间，
+         Service 侧 fillTrendPoints 按 min..max 补空桶即可把横轴拉到区间右端（近 N 小时预设下=当前时间）。 -->
+    <select id="selectHourlyTrend" resultType="java.util.LinkedHashMap">
+        SELECT hour AS hour,
+               SUM(isSubmitted) AS submitted,
+               SUM(isFinished) AS finished
+        FROM (
+            SELECT DATE_FORMAT(enqueue_time, '%Y-%m-%d %H:00') AS hour, 1 AS isSubmitted, 0 AS isFinished
+            FROM adhoc_query_task
+            WHERE enqueue_time &gt;= #{startTime} AND enqueue_time &lt;= #{endTime} AND is_deleted = 0
+            UNION ALL
+            SELECT DATE_FORMAT(finish_time, '%Y-%m-%d %H:00'), 0, 1
+            FROM adhoc_query_task
+            WHERE finish_time &gt;= #{startTime} AND finish_time &lt;= #{endTime} AND is_deleted = 0
+              AND status IN ('SUCCESS','FAILED','CANCELED')
+            UNION ALL
+            SELECT DATE_FORMAT(#{startTime}, '%Y-%m-%d %H:00'), 0, 0
+            UNION ALL
+            SELECT DATE_FORMAT(#{endTime}, '%Y-%m-%d %H:00'), 0, 0
+        ) t
+        WHERE hour IS NOT NULL
+        GROUP BY hour
+        ORDER BY hour
+    </select>
+
+    <!-- Task 提交/完成趋势（按天，label='yyyy-MM-dd'，宽区间用，粒度更可读）。注入起止桶 0,0 锚点铺满区间。 -->
+    <select id="selectDailyTrend" resultType="java.util.LinkedHashMap">
+        SELECT hour AS hour,
+               SUM(isSubmitted) AS submitted,
+               SUM(isFinished) AS finished
+        FROM (
+            SELECT DATE_FORMAT(enqueue_time, '%Y-%m-%d') AS hour, 1 AS isSubmitted, 0 AS isFinished
+            FROM adhoc_query_task
+            WHERE enqueue_time &gt;= #{startTime} AND enqueue_time &lt;= #{endTime} AND is_deleted = 0
+            UNION ALL
+            SELECT DATE_FORMAT(finish_time, '%Y-%m-%d'), 0, 1
+            FROM adhoc_query_task
+            WHERE finish_time &gt;= #{startTime} AND finish_time &lt;= #{endTime} AND is_deleted = 0
+              AND status IN ('SUCCESS','FAILED','CANCELED')
+            UNION ALL
+            SELECT DATE_FORMAT(#{startTime}, '%Y-%m-%d'), 0, 0
+            UNION ALL
+            SELECT DATE_FORMAT(#{endTime}, '%Y-%m-%d'), 0, 0
+        ) t
+        WHERE hour IS NOT NULL
+        GROUP BY hour
+        ORDER BY hour
+    </select>
+
+</mapper>

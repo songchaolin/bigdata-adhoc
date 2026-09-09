@@ -1,0 +1,7 @@
+superpowers/
+.claude/
+docs/apollo-prod-config.md
+docs/技术方案设计/
+docs/README.md
+.opensource-exclude
+.sr-ref/

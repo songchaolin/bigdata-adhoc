@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.gitee.songchaolin.adhoc.dao.mapper.AdhocExecutorInstanceMapper">
+
+    <resultMap id="BaseResultMap" type="io.gitee.songchaolin.adhoc.dao.entity.AdhocExecutorInstance">
+        <id column="id" property="id"/>
+        <result column="instance_id" property="instanceId"/>
+        <result column="host" property="host"/>
+        <result column="grpc_port" property="grpcPort"/>
+        <result column="status" property="status"/>
+        <result column="accepting" property="accepting"/>
+        <result column="start_time" property="startTime"/>
+        <result column="version" property="version"/>
+        <result column="heartbeat_time" property="heartbeatTime"/>
+        <result column="last_down_time" property="lastDownTime"/>
+        <result column="max_concurrent_tasks" property="maxConcurrentTasks"/>
+        <result column="engine_types" property="engineTypes"/>
+        <result column="cpu_usage" property="cpuUsage"/>
+        <result column="mem_usage" property="memUsage"/>
+        <result column="disk_usage" property="diskUsage"/>
+        <result column="running_tasks" property="runningTasks"/>
+        <result column="cpu_usage_pct" property="cpuUsagePct"/>
+        <result column="system_cpu_usage_pct" property="systemCpuUsagePct"/>
+        <result column="memory_usage_pct" property="memoryUsagePct"/>
+        <result column="memory_used_mb" property="memoryUsedMb"/>
+        <result column="memory_max_mb" property="memoryMaxMb"/>
+        <result column="thread_count" property="threadCount"/>
+        <result column="last_gc_pause_ms" property="lastGcPauseMs"/>
+        <result column="heap_committed_mb" property="heapCommittedMb"/>
+        <result column="non_heap_used_mb" property="nonHeapUsedMb"/>
+        <result column="non_heap_committed_mb" property="nonHeapCommittedMb"/>
+        <result column="daemon_thread_count" property="daemonThreadCount"/>
+        <result column="gc_count" property="gcCount"/>
+        <result column="gc_time_ms" property="gcTimeMs"/>
+        <result column="gc_time_ratio_pct" property="gcTimeRatioPct"/>
+        <result column="loaded_class_count" property="loadedClassCount"/>
+        <result column="uptime_ms" property="uptimeMs"/>
+        <result column="load_score" property="loadScore"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, instance_id, host, grpc_port, status, accepting, start_time, version, heartbeat_time, last_down_time,
+        max_concurrent_tasks, engine_types, cpu_usage, mem_usage, disk_usage, running_tasks, cpu_usage_pct,
+        system_cpu_usage_pct, memory_usage_pct, memory_used_mb, memory_max_mb, thread_count, last_gc_pause_ms,
+        heap_committed_mb, non_heap_used_mb, non_heap_committed_mb, daemon_thread_count, gc_count, gc_time_ms,
+        gc_time_ratio_pct, loaded_class_count, uptime_ms, load_score, create_time, update_time
+    </sql>
+
+    <!-- 选首个 UP + accepting 的 executor（按 load_score ASC；MVP 单 executor 也走此路） -->
+    <select id="selectFirstUpAccepting" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM adhoc_executor_instance
+        WHERE status='UP' AND accepting=1
+        ORDER BY load_score ASC LIMIT 1
+    </select>
+
+    <!-- 选首个 UP + accepting 且支持指定 engine_type 的 executor（FIND_IN_SET engine_types，按 load_score ASC） -->
+    <select id="selectFirstUpAcceptingByEngineType" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM adhoc_executor_instance
+        WHERE status='UP' AND accepting=1 AND FIND_IN_SET(#{engineType}, engine_types)
+        ORDER BY load_score ASC LIMIT 1
+    </select>
+
+    <!-- 查所有 UP + accepting 且支持指定 engine_type 的 executor（FIND_IN_SET engine_types，按 load_score ASC）。QueueWorker 逐个探活+failover 用 -->
+    <select id="selectAllUpAcceptingByEngineType" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM adhoc_executor_instance
+        WHERE status='UP' AND accepting=1 AND FIND_IN_SET(#{engineType}, engine_types)
+        ORDER BY load_score ASC
+    </select>
+
+    <!-- 自注册：插入或重置为 UP（ON DUPLICATE KEY UPDATE by uk_instance_id） -->
+    <insert id="upsertOnRegister">
+        INSERT INTO adhoc_executor_instance (instance_id, host, grpc_port, status, accepting, start_time, version, heartbeat_time, engine_types, max_concurrent_tasks)
+        VALUES (#{instanceId},#{host},#{grpcPort},'UP',1,NOW(),#{version},NOW(),#{engineTypes},#{maxConcurrentTasks})
+        ON DUPLICATE KEY UPDATE status='UP', accepting=1, start_time=NOW(), heartbeat_time=NOW(), version=VALUES(version), engine_types=VALUES(engine_types)
+    </insert>
+
+    <!-- executor 自写：status=UP + 指标 + running_tasks + heartbeat_time -->
+    <update id="updateSelf">
+        UPDATE adhoc_executor_instance SET
+            heartbeat_time=NOW(), status='UP',
+            running_tasks=#{runningTasks},
+            cpu_usage=#{metrics.cpuUsage}, mem_usage=#{metrics.memUsage}, disk_usage=#{metrics.diskUsage},
+            cpu_usage_pct=#{metrics.cpuUsagePct}, system_cpu_usage_pct=#{metrics.systemCpuUsagePct},
+            memory_usage_pct=#{metrics.memoryUsagePct}, memory_used_mb=#{metrics.memoryUsedMb}, memory_max_mb=#{metrics.memoryMaxMb},
+            thread_count=#{metrics.threadCount}, last_gc_pause_ms=#{metrics.lastGcPauseMs},
+            heap_committed_mb=#{metrics.heapCommittedMb}, non_heap_used_mb=#{metrics.nonHeapUsedMb},
+            non_heap_committed_mb=#{metrics.nonHeapCommittedMb}, daemon_thread_count=#{metrics.daemonThreadCount},
+            gc_count=#{metrics.gcCount}, gc_time_ms=#{metrics.gcTimeMs}, gc_time_ratio_pct=#{metrics.gcTimeRatioPct},
+            loaded_class_count=#{metrics.loadedClassCount}, uptime_ms=#{metrics.uptimeMs},
+            load_score=#{metrics.loadScore}
+        WHERE instance_id=#{instanceId}
+    </update>
+
+    <!-- 健康检查：心跳超时的 UP 实例标 DOWN（executor 30s）。返回标 DOWN 数 -->
+    <update id="markDownTimedOut">
+        UPDATE adhoc_executor_instance SET status='DOWN', last_down_time=NOW()
+        WHERE status='UP' AND heartbeat_time &lt; NOW() - INTERVAL #{seconds} SECOND
+    </update>
+
+    <!-- 实例清理：删除 DOWN 超过 N 小时的实例 -->
+    <delete id="cleanupOldDownInstances">
+        DELETE FROM adhoc_executor_instance WHERE status='DOWN' AND last_down_time &lt; NOW() - INTERVAL #{hours} HOUR
+    </delete>
+
+    <!-- 大盘 executor 视图：running_tasks 用 JSON_LENGTH 直接出在跑数（避免 Java 解析 JSON），
+         heartbeatAgeSec = 心跳距今秒。全表小，按 status(load) 排序。 -->
+    <select id="selectMetricsView" resultType="java.util.LinkedHashMap">
+        SELECT
+            instance_id AS instanceId,
+            host AS host,
+            grpc_port AS grpcPort,
+            status AS status,
+            accepting AS accepting,
+            IFNULL(JSON_LENGTH(running_tasks), 0) AS runningTasks,
+            max_concurrent_tasks AS maxConcurrent,
+            IFNULL(TIMESTAMPDIFF(SECOND, heartbeat_time, NOW()), 0) AS heartbeatAgeSec,
+            IFNULL(cpu_usage_pct, 0) AS cpuUsagePct,
+            IFNULL(system_cpu_usage_pct, 0) AS systemCpuUsagePct,
+            IFNULL(memory_usage_pct, 0) AS memoryUsagePct,
+            IFNULL(memory_used_mb, 0) AS memoryUsedMb,
+            IFNULL(memory_max_mb, 0) AS memoryMaxMb,
+            IFNULL(heap_committed_mb, 0) AS heapCommittedMb,
+            IFNULL(non_heap_used_mb, 0) AS nonHeapUsedMb,
+            IFNULL(non_heap_committed_mb, 0) AS nonHeapCommittedMb,
+            IFNULL(thread_count, 0) AS threadCount,
+            IFNULL(daemon_thread_count, 0) AS daemonThreadCount,
+            IFNULL(gc_count, 0) AS gcCount,
+            IFNULL(gc_time_ms, 0) AS gcTimeMs,
+            IFNULL(gc_time_ratio_pct, 0) AS gcTimeRatioPct,
+            IFNULL(loaded_class_count, 0) AS loadedClassCount,
+            IFNULL(uptime_ms, 0) AS uptimeMs,
+            IFNULL(load_score, 0) AS loadScore
+        FROM adhoc_executor_instance
+        ORDER BY status ASC, load_score ASC
+    </select>
+
+</mapper>

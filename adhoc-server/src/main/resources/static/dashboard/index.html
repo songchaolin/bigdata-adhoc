@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <title>Adhoc 集群指标大盘</title>
+    <link rel="stylesheet" href="style.css?v=20260904"/>
+    <link rel="stylesheet" href="lib/flatpickr.min.css"/>
+    <script src="lib/echarts.min.js"></script>
+    <script src="lib/flatpickr.min.js"></script>
+    <script src="lib/flatpickr.l10n.zh.js"></script>
+</head>
+<body>
+<header class="topbar">
+    <div class="title">📊 Adhoc 即席查询 · 集群指标大盘</div>
+    <div class="controls">
+        <span class="job-search">
+            <input type="text" id="jobIdInput" class="job-search-input" placeholder="按 Job ID 定位详情/Task/日志" autocomplete="off" title="输入完整 Job ID 回车查看详情、Task、日志"/>
+            <button id="jobIdSearchBtn" type="button" class="job-search-btn" title="查看 Job 详情/日志/Task">查看</button>
+        </span>
+        <label>时间窗
+            <select id="windowSel">
+                <option value="min5">近 5 分钟</option>
+                <option value="min30">近 30 分钟</option>
+                <option value="1">近 1 小时</option>
+                <option value="24" selected>近 24 小时</option>
+                <option value="72">近 3 天</option>
+                <option value="168">近 7 天</option>
+                <option value="custom">自定义区间</option>
+            </select>
+        </label>
+        <span id="rangeWrap" class="range-wrap" style="display:none">
+            <input type="text" id="rangeStart" class="range-input" placeholder="开始时间" readonly title="开始时间（含时分）"/>
+            <span class="range-sep">~</span>
+            <input type="text" id="rangeEnd" class="range-input" placeholder="结束时间" readonly title="结束时间（含时分）"/>
+        </span>
+        <label class="switch">
+            <input type="checkbox" id="autoRefresh" checked/> 30s 自动刷新
+        </label>
+        <button id="refreshBtn" type="button" class="btn-refresh" title="立即刷新最新数据"><span class="ico">🔄</span> 刷新</button>
+        <span id="lastUpdate" class="last-update">-</span>
+        <span id="status" class="status-dot ok" title="数据正常">●</span>
+    </div>
+</header>
+
+<main>
+    <!-- 概览卡片 -->
+    <section class="cards" id="cards">
+        <div class="card"><div class="k">Job 总数</div><div class="v" id="kJobTotal">-</div></div>
+        <div class="card"><div class="k">成功率</div><div class="v" id="kSuccessRate">-</div></div>
+        <div class="card"><div class="k">平均时长</div><div class="v" id="kAvgDur">-</div></div>
+        <div class="card"><div class="k">PENDING 积压</div><div class="v" id="kPending">-</div></div>
+        <div class="card"><div class="k">RUNNING</div><div class="v" id="kRunning">-</div></div>
+        <div class="card"><div class="k">Executor UP</div><div class="v" id="kExecUp">-</div></div>
+        <div class="card"><div class="k">Server UP</div><div class="v" id="kServerUp">-</div></div>
+    </section>
+
+    <!-- 图表区 1：概览分布 + Job/Task 提交完成趋势对照（每图 wide=占 2 列；4 列网格：状态+引擎 一行，Job 趋势+Task 趋势 一行） -->
+    <section class="grid">
+        <div class="chart wide"><h3>Job 状态分布</h3><div id="jobStatusPie" class="echart"></div></div>
+        <div class="chart wide"><h3>引擎分布</h3><div id="enginePie" class="echart"></div></div>
+        <div class="chart wide"><h3>Job 提交/完成趋势</h3><div id="trendLine" class="echart"></div></div>
+        <div class="chart wide"><h3>Task 提交/完成趋势</h3><div id="taskTrendLine" class="echart"></div></div>
+    </section>
+
+    <!-- 图表区 2 -->
+    <section class="grid">
+        <div class="chart"><h3>Job 时长分桶</h3><div id="durBucketBar" class="echart"></div></div>
+        <div class="chart"><h3>Task 失败 Stage</h3><div id="failStageBar" class="echart"></div></div>
+        <div class="chart"><h3>错误码 TopN</h3><div id="errorCodeBar" class="echart"></div></div>
+        <div class="chart"><h3>SQL 类型分布</h3><div id="sqlTypePie" class="echart"></div></div>
+    </section>
+
+    <!-- 图表区 3：每实例负载（时间窗内 Job/Task 聚合） -->
+    <section class="grid">
+        <div class="chart wide"><h3>Server 提交负载（时间窗内 Job/Task 数）</h3><div id="serverLoadBar" class="echart"></div></div>
+        <div class="chart wide"><h3>Executor 执行负载（时间窗内 Job/Task 数）</h3><div id="executorLoadBar" class="echart"></div></div>
+    </section>
+
+    <!-- JVM 监控区：在线 server + executor 每实例 JVM/OS 指标时间曲线（5s 采样）。角色开关 + 实例勾选 + 时间窗联动 -->
+    <div class="jvm-wrap">
+        <div class="jvm-toolbar">
+            <div class="jvm-role">
+                <label class="jvm-chip jvm-role-chip role-s"><input type="checkbox" id="jvmRoleServer" checked><span class="jvm-chip-tag">S</span><span>Server</span></label>
+                <label class="jvm-chip jvm-role-chip role-e"><input type="checkbox" id="jvmRoleExecutor" checked><span class="jvm-chip-tag">E</span><span>Executor</span></label>
+                <button type="button" id="jvmSelectAll" class="jvm-btn" title="勾选当前可见全部实例">全选</button>
+                <button type="button" id="jvmSelectNone" class="jvm-btn" title="取消当前可见全部实例">全不选</button>
+                <span class="jvm-window">
+                    <span class="jvm-window-hint" title="默认跟随顶部时间窗（选7d则JVM也展示最近7天）；点下方按钮可对JVM区单独覆盖">JVM窗口：</span>
+                    <button type="button" class="jvm-window-btn" data-min="60">1小时</button>
+                    <button type="button" class="jvm-window-btn" data-min="120">2小时</button>
+                    <button type="button" class="jvm-window-btn" data-min="360">6小时</button>
+                    <button type="button" class="jvm-window-btn" data-min="720">12小时</button>
+                    <button type="button" class="jvm-window-btn" data-min="1440">24小时</button>
+                    <button type="button" class="jvm-window-btn" data-min="4320">3天</button>
+                    <button type="button" class="jvm-window-btn" data-min="10080">7天</button>
+                </span>
+            </div>
+            <div class="jvm-instances" id="jvmInstances"></div>
+        </div>
+        <div class="jvm-group"><h4>CPU / 系统</h4>
+        <p class="jvm-calc-desc"><b>进程CPU%</b> = <code>OperatingSystemMXBean.getProcessCpuLoad()</code>×100，即 JVM 进程占<b>整机 CPU 总算力</b>的比例（非单核，8 核机器单线程跑满约 12.5%）；<b>系统CPU%</b> = <code>getSystemCpuLoad()</code>×100，整机 CPU 使用率。两者均为最近采样间隔的均值（非瞬时值），来自 <code>com.sun.management</code>；JVM 启动初期或采样不足时返回 -1，不绘制。</p>
+        <section class="grid jvm-grid">
+            <div class="chart"><h3>JVM 进程 CPU <span class="tbl-hint">%</span></h3><div id="jvmCpu" class="echart"></div></div>
+            <div class="chart"><h3>系统 CPU <span class="tbl-hint">%</span></h3><div id="jvmSysCpu" class="echart"></div></div>
+            <div class="chart"><h3>系统负载 <span class="tbl-hint">1min</span></h3><div id="jvmLoad" class="echart"></div></div>
+            <div class="chart"><h3>物理内存使用率 <span class="tbl-hint">%</span></h3><div id="jvmPhysMem" class="echart"></div></div>
+        </section>
+        </div>
+        <div class="jvm-group"><h4>堆内存</h4>
+        <section class="grid jvm-grid">
+            <div class="chart"><h3>堆已用 <span class="tbl-hint">MB</span></h3><div id="jvmHeap" class="echart"></div></div>
+            <div class="chart"><h3>堆使用率 <span class="tbl-hint">%</span></h3><div id="jvmHeapPct" class="echart"></div></div>
+            <div class="chart"><h3>非堆/Metaspace <span class="tbl-hint">MB</span></h3><div id="jvmNonHeap" class="echart"></div></div>
+            <div class="chart"><h3>Eden 已用 <span class="tbl-hint">MB</span></h3><div id="jvmEden" class="echart"></div></div>
+            <div class="chart"><h3>Old 区已用 <span class="tbl-hint">MB</span></h3><div id="jvmOld" class="echart"></div></div>
+        </section>
+        </div>
+        <div class="jvm-group"><h4>GC</h4>
+        <section class="grid jvm-grid">
+            <div class="chart"><h3>Young GC 频率 <span class="tbl-hint">次/分</span></h3><div id="jvmYoungGc" class="echart"></div></div>
+            <div class="chart"><h3>Full GC 频率 <span class="tbl-hint">次/分</span></h3><div id="jvmFullGc" class="echart"></div></div>
+            <div class="chart"><h3>GC 时间占比 <span class="tbl-hint">%·近一间隔</span></h3><div id="jvmGc" class="echart"></div></div>
+        </section>
+        </div>
+        <div class="jvm-group"><h4>线程 / 其他</h4>
+        <section class="grid jvm-grid">
+            <div class="chart"><h3>线程数 <span class="tbl-hint">总数</span></h3><div id="jvmThread" class="echart"></div></div>
+            <div class="chart"><h3>daemon 线程数</h3><div id="jvmDaemon" class="echart"></div></div>
+            <div class="chart"><h3>直接内存 <span class="tbl-hint">MB</span></h3><div id="jvmDirect" class="echart"></div></div>
+            <div class="chart"><h3>加载类数</h3><div id="jvmClass" class="echart"></div></div>
+        </section>
+        </div>
+    </div>
+
+    <!-- 表格区 -->
+    <section class="grid tables">
+        <div class="chart table-wrap">
+            <h3>Server 列表 <span class="tbl-hint">（仅在线）</span></h3>
+            <div class="table-scroll"><table id="serverTable">
+                <thead><tr>
+                    <th>实例</th><th>状态</th><th>承接</th><th>active</th>
+                    <th>心跳(s)</th><th>版本</th>
+                </tr></thead>
+                <tbody></tbody>
+            </table></div>
+        </div>
+        <div class="chart table-wrap">
+            <h3>Executor 列表 <span class="tbl-hint">（仅在线）</span></h3>
+            <div class="table-scroll"><table id="execTable">
+                <thead><tr>
+                    <th>实例</th><th>状态</th><th>接收</th><th>并发</th><th>利用率</th>
+                    <th>心跳(s)</th><th>CPU%</th><th>内存%</th><th>负载</th>
+                </tr></thead>
+                <tbody></tbody>
+            </table></div>
+        </div>
+        <div class="chart table-wrap">
+            <h3>TopN 慢 Job</h3>
+            <div class="table-scroll"><table id="slowTable">
+                <thead><tr><th>Job</th><th>用户</th><th>引擎</th><th>状态</th><th>耗时</th></tr></thead>
+                <tbody></tbody>
+            </table></div>
+        </div>
+        <div class="chart table-wrap">
+            <h3>TopN 活跃用户</h3>
+            <div class="table-scroll"><table id="userTable">
+                <thead><tr><th>用户</th><th>工号</th><th>提交数</th></tr></thead>
+                <tbody></tbody>
+            </table></div>
+        </div>
+    </section>
+
+    <!-- 穿透明细面板（点击图表/慢Job行后出现，支持分页） -->
+    <section class="chart drill-panel" id="drillPanel" style="display:none">
+        <h3><span id="drillTitle">明细</span>
+            <button type="button" class="drill-close" id="drillClose" title="关闭明细">✕</button></h3>
+        <div class="tbl-hint" id="drillHint">点击上方图表查看明细</div>
+        <div class="table-scroll"><table id="drillTable">
+            <thead><tr>
+                <th>Job</th><th>用户</th><th>引擎</th><th>状态</th><th>提交时间</th><th>耗时</th><th>Executor</th>
+            </tr></thead>
+            <tbody></tbody>
+        </table></div>
+        <div class="pager">
+            <button id="drillPrev" type="button" class="pager-btn">‹ 上一页</button>
+            <span id="drillPageInfo" class="pager-info">-</span>
+            <button id="drillNext" type="button" class="pager-btn">下一页 ›</button>
+            <label class="pager-size">每页
+                <select id="drillSize"><option value="20">20</option><option value="50">50</option><option value="100">100</option></select>
+            </label>
+        </div>
+    </section>
+
+    <!-- SQL 查询控制台（本地元数据库 · 只读） -->
+    <section class="chart sql-console">
+        <h3>🔍 SQL 查询控制台 <span class="tbl-hint">（本地元数据库 · 只读 SELECT）</span></h3>
+        <div class="sql-hint">仅支持 SELECT / SHOW / DESCRIBE / EXPLAIN，自动 LIMIT 1000，超时 30s。Ctrl+Enter 执行。</div>
+        <textarea id="sqlInput" rows="4" spellcheck="false" placeholder="SELECT job_id, user_name, status, submit_time FROM adhoc_query_job ORDER BY submit_time DESC LIMIT 10"></textarea>
+        <div class="sql-toolbar">
+            <button id="sqlRunBtn" type="button" class="btn-run"><span class="ico">▶</span> 执行查询</button>
+            <span id="sqlMeta" class="sql-meta">-</span>
+        </div>
+        <div class="table-scroll sql-result"><table id="sqlResultTable">
+            <thead><tr><th>执行查询后在此显示结果</th></tr></thead>
+            <tbody></tbody>
+        </table></div>
+    </section>
+</main>
+
+<footer class="footer">Adhoc Metrics Dashboard · on-the-fly 聚合 · 数据来自 adhoc_query_job/task/executor_instance</footer>
+
+<!-- Job 详情抽屉（点击明细行/慢Job行后从右侧滑出） -->
+<div class="drawer-mask" id="drawerMask" style="display:none"></div>
+<aside class="drawer" id="jobDrawer" aria-hidden="true">
+    <header class="drawer-head">
+        <span id="drawerTitle" class="drawer-title">Job 详情</span>
+        <button id="drawerClose" type="button" class="drawer-close" title="关闭">✕</button>
+    </header>
+    <div class="drawer-body">
+        <section id="drawerJobMeta" class="drawer-meta"></section>
+        <h4 class="drawer-sub">Task 列表 <span class="tbl-hint" id="drawerTaskHint">（点击行展开 SQL/详情）</span></h4>
+        <div class="table-scroll"><table id="drawerTaskTable">
+            <thead><tr>
+                <th>#</th><th>状态</th><th>类型</th><th>耗时</th><th>Stage</th><th>行数</th><th>错误</th>
+            </tr></thead>
+            <tbody></tbody>
+        </table></div>
+        <h4 class="drawer-sub">执行日志 <span class="tbl-hint" id="logMeta"></span></h4>
+        <pre id="drawerLog" class="log-view"></pre>
+        <div class="log-toolbar">
+            <button id="logMore" type="button" class="pager-btn" disabled>加载更多</button>
+            <span id="logStatus" class="tbl-hint"></span>
+        </div>
+    </div>
+</aside>
+
+<!-- 访问令牌缺失/失效遮罩（后端启用鉴权且无 token 时由 app.js 显示） -->
+<div id="tokenGate" class="token-gate" style="display:none">
+    <div class="token-gate-box">
+        <div class="tg-ico">🔒</div>
+        <div class="tg-msg">请通过带 token 的链接访问</div>
+        <div class="tg-hint">在原链接后追加 <code>?token=你的令牌</code> 后回车</div>
+    </div>
+</div>
+<script src="app.js?v=20260906"></script>
+</body>
+</html>

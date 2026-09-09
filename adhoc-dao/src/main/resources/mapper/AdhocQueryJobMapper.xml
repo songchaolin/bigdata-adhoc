@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.gitee.songchaolin.adhoc.dao.mapper.AdhocQueryJobMapper">
+
+    <resultMap id="BaseResultMap" type="io.gitee.songchaolin.adhoc.dao.entity.AdhocQueryJob">
+        <id column="job_id" property="jobId"/>
+        <result column="user_id" property="userId"/>
+        <result column="user_name" property="userName"/>
+        <result column="sql_content" property="sqlContent"/>
+        <result column="engine_type" property="engineType"/>
+        <result column="engine_instance" property="engineInstance"/>
+        <result column="engine_params" property="engineParams"/>
+        <result column="executor_instance" property="executorInstance"/>
+        <result column="status" property="status"/>
+        <result column="cancel_requested" property="cancelRequested"/>
+        <result column="cancel_requested_time" property="cancelRequestedTime"/>
+        <result column="processing_server_instance" property="processingServerInstance"/>
+        <result column="client_ip" property="clientIp"/>
+        <result column="client_user_agent" property="clientUserAgent"/>
+        <result column="client_request_id" property="clientRequestId"/>
+        <result column="source_file_node_id" property="sourceFileNodeId"/>
+        <result column="submit_time" property="submitTime"/>
+        <result column="validate_finish_time" property="validateFinishTime"/>
+        <result column="dispatch_time" property="dispatchTime"/>
+        <result column="split_finish_time" property="splitFinishTime"/>
+        <result column="start_time" property="startTime"/>
+        <result column="finish_time" property="finishTime"/>
+        <result column="duration_ms" property="durationMs"/>
+        <result column="persistent_log_path" property="persistentLogPath"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        job_id, user_id, user_name, sql_content, engine_type, engine_instance, engine_params, executor_instance, status,
+        cancel_requested, cancel_requested_time, processing_server_instance, client_ip, client_user_agent, client_request_id,
+        source_file_node_id, submit_time, validate_finish_time, dispatch_time, split_finish_time, start_time, finish_time,
+        duration_ms, persistent_log_path, is_deleted, create_time, update_time
+    </sql>
+
+    <!-- 取一个可调度的 PENDING Job（按提交时间 ASC；带 running 限流子查询：global/per-user/per-server，
+         + EXISTS(有可用容量的 executor：UP+accepting+支持引擎+running_tasks<max_concurrent_tasks)。
+         任一限流满 或 无可用容量 executor -> 不选（返回 null），避免 claim->revert 抖动。
+         MVP 无 FOR UPDATE SKIP LOCKED，靠 CAS UPDATE 保证不重复抢占）
+         running_tasks 存任务 ID 的 JSON 数组，JSON_LENGTH 取其长度（≈ 在跑 job 数）。 -->
+    <select id="selectOnePendingJobId" resultType="java.lang.String">
+        SELECT job_id FROM adhoc_query_job j
+        WHERE j.status='PENDING' AND j.is_deleted=0 AND j.cancel_requested=0
+          AND j.submit_time > DATE_SUB(NOW(), INTERVAL #{recentWindowHours} HOUR)
+          AND (SELECT COUNT(*) FROM adhoc_query_job WHERE status IN ('DISPATCHING','RUNNING')) &lt; #{maxRunningGlobal}
+          AND (SELECT COUNT(*) FROM adhoc_query_job WHERE status IN ('DISPATCHING','RUNNING') AND user_id=j.user_id) &lt; #{maxRunningPerUser}
+          AND (SELECT COUNT(*) FROM adhoc_query_job WHERE processing_server_instance=#{serverInstance}
+               AND status IN ('DISPATCHING','RUNNING')) &lt; #{maxRunningPerServer}
+          AND EXISTS (
+            SELECT 1 FROM adhoc_executor_instance e
+            WHERE e.status='UP' AND e.accepting=1
+              AND FIND_IN_SET(j.engine_type, e.engine_types)
+              AND IFNULL(JSON_LENGTH(e.running_tasks), 0) &lt; e.max_concurrent_tasks
+          )
+          AND EXISTS (
+            SELECT 1 FROM adhoc_server_instance s
+            WHERE s.instance_id=#{serverInstance} AND s.accepting=1
+          )
+        ORDER BY j.submit_time ASC LIMIT 1
+    </select>
+
+    <!-- CAS 抢占：PENDING -> DISPATCHING，设 processing_server_instance + dispatch_time。executor createTasks 后才设 RUNNING -->
+    <update id="claimJob">
+        UPDATE adhoc_query_job SET status='DISPATCHING', processing_server_instance=#{serverInstanceId},
+        dispatch_time=#{dispatchTime} WHERE job_id=#{jobId} AND status='PENDING'
+    </update>
+
+    <!-- 回退 DISPATCHING -> PENDING（无可用 executor 或 dispatch 失败时） -->
+    <update id="revertToPending">
+        UPDATE adhoc_query_job SET status='PENDING', processing_server_instance=NULL, dispatch_time=NULL
+        WHERE job_id=#{jobId} AND status='DISPATCHING'
+    </update>
+
+    <!-- executor 宕机：该 executor 上 RUNNING 的 Job -> FAILED -->
+    <update id="markJobsFailedForExecutor">
+        UPDATE adhoc_query_job SET status='FAILED', finish_time=NOW()
+        WHERE executor_instance=#{exec} AND status='RUNNING'
+    </update>
+
+    <!-- server 宕机补偿：DOWN server 承接的 RUNNING Job -> processing_server_instance 置 NULL -->
+    <update id="clearProcessingServerForDownServers">
+        UPDATE adhoc_query_job SET processing_server_instance=NULL
+        WHERE status='RUNNING' AND processing_server_instance IN
+        (SELECT instance_id FROM adhoc_server_instance WHERE status='DOWN')
+    </update>
+
+    <!-- server 宕机补偿：DOWN server 承接的 DISPATCHING Job -> 回退 PENDING（claim 后 dispatch 前崩溃的重派） -->
+    <update id="revertDispatchingForDownServers">
+        UPDATE adhoc_query_job SET status='PENDING', processing_server_instance=NULL, dispatch_time=NULL
+        WHERE status='DISPATCHING' AND processing_server_instance IN
+        (SELECT instance_id FROM adhoc_server_instance WHERE status='DOWN')
+    </update>
+
+    <!-- 查询 Job 的 Task 统计摘要（一次查询返回多维度计数） -->
+    <select id="selectTaskStatsByJobId" resultType="io.gitee.songchaolin.adhoc.common.model.TaskStats">
+        SELECT
+        COUNT(*) AS total,
+        SUM(CASE WHEN status = 'SUCCESS' THEN 1 ELSE 0 END) AS success,
+        SUM(CASE WHEN status = 'FAILED' THEN 1 ELSE 0 END) AS failed,
+        SUM(CASE WHEN status = 'CANCELED' THEN 1 ELSE 0 END) AS canceled,
+        SUM(CASE WHEN status = 'FAILED' AND fail_reason_category = 'SKIPPED_DUE_TO_PRIOR_FAILURE' THEN 1 ELSE 0 END) AS skipped
+        FROM adhoc_query_task
+        WHERE job_id = #{jobId}
+    </select>
+
+    <!-- ==================== 指标大盘聚合查询（on-the-fly GROUP BY；时间窗 hours；走 idx_status_submit） ====================
+         输出列一律显式 camelCase 别名，保证 Map key 不依赖 mapUnderscoreToCamelCase 配置。 -->
+
+    <!-- Job 按 status 分布（时间区间 [start,end] 内，按 submit_time） -->
+    <select id="selectStatusDistribution" resultType="java.util.LinkedHashMap">
+        SELECT status AS status, COUNT(*) AS cnt
+        FROM adhoc_query_job
+        WHERE submit_time &gt;= #{startTime} AND submit_time &lt;= #{endTime} AND is_deleted = 0
+        GROUP BY status
+    </select>
+
+    <!-- Job 按 engine_type 分布（时间区间内） -->
+    <select id="selectEngineDistribution" resultType="java.util.LinkedHashMap">
+        SELECT engine_type AS engineType, COUNT(*) AS cnt
+        FROM adhoc_query_job
+        WHERE submit_time &gt;= #{startTime} AND submit_time &lt;= #{endTime} AND is_deleted = 0
+        GROUP BY engine_type
+    </select>
+
+    <!-- 提交/完成趋势（按小时，label='yyyy-MM-dd HH:00'，DB 侧 DATE_FORMAT 字符串，避免 JVM/DB 时区错配）。
+         用 DB 侧字符串 label 而非 epoch-hour，避免 UNIX_TIMESTAMP 与 JVM 时区不一致导致桶错位（曾出现 7d 全 0）。
+         UNION ALL 后条件聚合：submitted 来自 submit_time 分支，finished 来自 finish_time 终态分支；两分支均落在 [start,end] 内。
+         额外注入两行 0,0 锚点（DATE_FORMAT #{startTime}/#{endTime}）：保证结果集必含区间起止桶，Service 侧 fillTrendPoints
+         按 min..max 补空桶时能把横轴铺满整个区间（右端=now 时即拉到当前时间），即便近段时间无任务也不再断尾。 -->
+    <select id="selectHourlyTrend" resultType="java.util.LinkedHashMap">
+        SELECT hour AS hour,
+               SUM(isSubmitted) AS submitted,
+               SUM(isFinished) AS finished
+        FROM (
+            SELECT DATE_FORMAT(submit_time, '%Y-%m-%d %H:00') AS hour, 1 AS isSubmitted, 0 AS isFinished
+            FROM adhoc_query_job
+            WHERE submit_time &gt;= #{startTime} AND submit_time &lt;= #{endTime} AND is_deleted = 0
+            UNION ALL
+            SELECT DATE_FORMAT(finish_time, '%Y-%m-%d %H:00'), 0, 1
+            FROM adhoc_query_job
+            WHERE finish_time &gt;= #{startTime} AND finish_time &lt;= #{endTime} AND is_deleted = 0
+              AND status IN ('SUCCESS','FAILED','PARTIAL_FAILED','CANCELED')
+            UNION ALL
+            SELECT DATE_FORMAT(#{startTime}, '%Y-%m-%d %H:00'), 0, 0
+            UNION ALL
+            SELECT DATE_FORMAT(#{endTime}, '%Y-%m-%d %H:00'), 0, 0
+        ) t
+        WHERE hour IS NOT NULL
+        GROUP BY hour
+        ORDER BY hour
+    </select>
+
+    <!-- 提交/完成趋势（按天，label='yyyy-MM-dd'，宽区间用，粒度更可读）。两分支均落在 [start,end] 内。
+         同 selectHourlyTrend，注入起止桶 0,0 锚点铺满区间。 -->
+    <select id="selectDailyTrend" resultType="java.util.LinkedHashMap">
+        SELECT hour AS hour,
+               SUM(isSubmitted) AS submitted,
+               SUM(isFinished) AS finished
+        FROM (
+            SELECT DATE_FORMAT(submit_time, '%Y-%m-%d') AS hour, 1 AS isSubmitted, 0 AS isFinished
+            FROM adhoc_query_job
+            WHERE submit_time &gt;= #{startTime} AND submit_time &lt;= #{endTime} AND is_deleted = 0
+            UNION ALL
+            SELECT DATE_FORMAT(finish_time, '%Y-%m-%d'), 0, 1
+            FROM adhoc_query_job
+            WHERE finish_time &gt;= #{startTime} AND finish_time &lt;= #{endTime} AND is_deleted = 0
+              AND status IN ('SUCCESS','FAILED','PARTIAL_FAILED','CANCELED')
+            UNION ALL
+            SELECT DATE_FORMAT(#{startTime}, '%Y-%m-%d'), 0, 0
+            UNION ALL
+            SELECT DATE_FORMAT(#{endTime}, '%Y-%m-%d'), 0, 0
+        ) t
+        WHERE hour IS NOT NULL
+        GROUP BY hour
+        ORDER BY hour
+    </select>
+
+    <!-- Job 执行时长统计（时间区间内，终态）：avg/max/total + 4 档分桶（替代 P95）。
+         duration_ms 当前未在 Job 终态时落库，回退到 finish_time - submit_time（Job 总耗时，含排队等待）。 -->
+    <select id="selectDurationStats" resultType="java.util.LinkedHashMap">
+        SELECT
+            IFNULL(AVG(dur), 0) AS avgMs,
+            IFNULL(MAX(dur), 0) AS maxMs,
+            COUNT(*) AS total,
+            SUM(CASE WHEN dur &lt; 1000 THEN 1 ELSE 0 END) AS bucket0to1s,
+            SUM(CASE WHEN dur &gt;= 1000 AND dur &lt; 10000 THEN 1 ELSE 0 END) AS bucket1to10s,
+            SUM(CASE WHEN dur &gt;= 10000 AND dur &lt; 60000 THEN 1 ELSE 0 END) AS bucket10to60s,
+            SUM(CASE WHEN dur &gt;= 60000 THEN 1 ELSE 0 END) AS bucketGt60s
+        FROM (
+            SELECT COALESCE(duration_ms, TIMESTAMPDIFF(MICROSECOND, submit_time, finish_time) DIV 1000) AS dur
+            FROM adhoc_query_job
+            WHERE submit_time &gt;= #{startTime} AND submit_time &lt;= #{endTime}
+              AND is_deleted = 0
+              AND finish_time IS NOT NULL
+        ) t
+    </select>
+
+    <!-- TopN 慢 Job（时间区间内，终态，duration DESC；不取 sql_content 大字段）。
+         duration_ms 未落库时回退到 finish_time - submit_time。 -->
+    <select id="selectTopNSlow" resultType="java.util.LinkedHashMap">
+        SELECT job_id AS jobId, user_id AS userId, user_name AS userName,
+               engine_type AS engineType, status AS status,
+               COALESCE(duration_ms, TIMESTAMPDIFF(MICROSECOND, submit_time, finish_time) DIV 1000) AS durationMs,
+               submit_time AS submitTime
+        FROM adhoc_query_job
+        WHERE submit_time &gt;= #{startTime} AND submit_time &lt;= #{endTime} AND is_deleted = 0
+          AND finish_time IS NOT NULL
+        ORDER BY COALESCE(duration_ms, TIMESTAMPDIFF(MICROSECOND, submit_time, finish_time) DIV 1000) DESC
+        LIMIT #{limit}
+    </select>
+
+    <!-- TopN 活跃用户（时间区间内，按 user_id 计数 DESC） -->
+    <select id="selectTopNUsers" resultType="java.util.LinkedHashMap">
+        SELECT user_id AS userId, user_name AS userName, COUNT(*) AS cnt
+        FROM adhoc_query_job
+        WHERE submit_time &gt;= #{startTime} AND submit_time &lt;= #{endTime} AND is_deleted = 0
+        GROUP BY user_id, user_name
+        ORDER BY cnt DESC
+        LIMIT #{limit}
+    </select>
+
+    <!-- 实时 processing_server 分布（RUNNING Job 按 processing_server_instance 聚合，无时间窗） -->
+    <select id="selectProcessingServerDistribution" resultType="java.util.LinkedHashMap">
+        SELECT processing_server_instance AS serverInstance, COUNT(*) AS cnt
+        FROM adhoc_query_job
+        WHERE status = 'RUNNING' AND is_deleted = 0 AND processing_server_instance IS NOT NULL
+        GROUP BY processing_server_instance
+    </select>
+
+    <!-- 实时状态计数（PENDING/DISPATCHING/RUNNING，无时间窗） -->
+    <select id="selectRealtimeStatusCount" resultType="java.util.LinkedHashMap">
+        SELECT status AS status, COUNT(*) AS cnt
+        FROM adhoc_query_job
+        WHERE status IN ('PENDING','DISPATCHING','RUNNING') AND is_deleted = 0
+        GROUP BY status
+    </select>
+
+    <!-- 每实例 Job 提交数（时间区间内，按 processing_server_instance；NULL -> '(未分配)'） -->
+    <select id="selectJobCountByServer" resultType="java.util.LinkedHashMap">
+        SELECT COALESCE(processing_server_instance, '(未分配)') AS instance, COUNT(*) AS cnt
+        FROM adhoc_query_job
+        WHERE submit_time &gt;= #{startTime} AND submit_time &lt;= #{endTime} AND is_deleted = 0
+        GROUP BY processing_server_instance
+    </select>
+
+    <!-- 每实例 Job 执行数（时间区间内，按 executor_instance；NULL -> '(未分配)'） -->
+    <select id="selectJobCountByExecutor" resultType="java.util.LinkedHashMap">
+        SELECT COALESCE(executor_instance, '(未分配)') AS instance, COUNT(*) AS cnt
+        FROM adhoc_query_job
+        WHERE submit_time &gt;= #{startTime} AND submit_time &lt;= #{endTime} AND is_deleted = 0
+        GROUP BY executor_instance
+    </select>
+
+    <!-- ==================== 大盘穿透：Job 分页明细（跨用户，运维视图） ====================
+         耗时口径与 selectDurationStats/selectTopNSlow 一致：COALESCE(duration_ms, finish_time - submit_time)。
+         耗时过滤仅命中 finish_time 非空（NULL duration 的 >= / < 比较恒 false，与分桶查询同款，保证穿透行数 = 桶计数）。
+         排序用 <choose> 硬编码分支（白名单 service 侧校验，禁 ${} 防注入）。count 由 MP 分页插件自动生成。 -->
+    <select id="selectMetricsJobPage" resultType="io.gitee.songchaolin.adhoc.common.dto.JobVO">
+        SELECT job_id AS jobId, user_id AS userId, user_name AS userName,
+               engine_type AS engineType, status AS status,
+               submit_time AS submitTime, start_time AS startTime, finish_time AS finishTime,
+               COALESCE(duration_ms, TIMESTAMPDIFF(MICROSECOND, submit_time, finish_time) DIV 1000) AS durationMs,
+               executor_instance AS executorInstance
+        FROM adhoc_query_job
+        WHERE is_deleted = 0
+          AND submit_time &gt;= #{startTime} AND submit_time &lt;= #{endTime}
+          <if test="status != null and status != ''">AND status = #{status}</if>
+          <if test="engineType != null and engineType != ''">AND engine_type = #{engineType}</if>
+          <if test="minDurationMs != null">AND COALESCE(duration_ms, TIMESTAMPDIFF(MICROSECOND, submit_time, finish_time) DIV 1000) &gt;= #{minDurationMs}</if>
+          <if test="maxDurationMs != null">AND COALESCE(duration_ms, TIMESTAMPDIFF(MICROSECOND, submit_time, finish_time) DIV 1000) &lt;  #{maxDurationMs}</if>
+          <choose>
+              <when test="orderBy == 'duration_desc'">ORDER BY COALESCE(duration_ms, TIMESTAMPDIFF(MICROSECOND, submit_time, finish_time) DIV 1000) DESC, submit_time DESC</when>
+              <when test="orderBy == 'duration_asc'">ORDER BY COALESCE(duration_ms, TIMESTAMPDIFF(MICROSECOND, submit_time, finish_time) DIV 1000) ASC, submit_time DESC</when>
+              <when test="orderBy == 'submit_asc'">ORDER BY submit_time ASC</when>
+              <otherwise>ORDER BY submit_time DESC</otherwise>
+          </choose>
+    </select>
+</mapper>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- adhoc-dependencies = 依赖版本统一管理 BOM。Java8 + Spring Boot 2.5.6。 -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.5.6</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>io.gitee.songchaolin</groupId>
+    <artifactId>adhoc-dependencies</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>adhoc-dependencies</name>
+    <description>bigdata-adhoc 依赖版本统一管理 BOM</description>
+
+    <properties>
+        <spring-boot.version>2.5.6</spring-boot.version>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- 持久层 -->
+        <mybatis-plus.version>3.5.3</mybatis-plus.version>
+        <mysql-connector.version>8.0.18</mysql-connector.version>
+        <druid.version>1.2.14</druid.version>
+        <dynamic-datasource.version>3.5.2</dynamic-datasource.version>
+
+        <!-- 大数据客户端：Hadoop 3.1.2（匹配 HDP 3.1.4 / Hive 3.1.0 集群）；hive-jdbc 3.1.1（连 Kyuubi/HiveServer2） -->
+        <hadoop.version>3.1.2</hadoop.version>
+        <hive.version>3.1.1</hive.version>
+
+        <!-- gRPC -->
+        <grpc.version>1.54.0</grpc.version>
+        <protobuf.version>3.22.2</protobuf.version>
+        <grpc-spring-boot-starter.version>2.15.0.RELEASE</grpc-spring-boot-starter.version>
+
+        <!-- SQL 解析 -->
+        <antlr.version>4.9.3</antlr.version>
+
+        <!-- 工具 -->
+        <hutool.version>5.7.16</hutool.version>
+        <guava.version>30.0-jre</guava.version>
+        <caffeine.version>2.9.3</caffeine.version>
+
+        <!-- Swagger / Knife4j：springfox 3.0.0 + swagger 1.6.9 -->
+        <swagger.version>1.6.9</swagger.version>
+        <springfox-swagger2.version>3.0.0</springfox-swagger2.version>
+        <knife4j.version>2.0.6</knife4j.version>
+
+        <!-- Apollo 配置中心（原由内部 parent 托管，显式声明） -->
+        <apollo-client.version>1.7.0</apollo-client.version>
+
+        <!-- 阿里云 OSS 对象存储 -->
+        <aliyun-sdk-oss.version>3.17.4</aliyun-sdk-oss.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- gRPC BOM（统一 io.grpc:* 版本，避免 net.devh 传递版本 skew） -->
+            <dependency>
+                <groupId>io.grpc</groupId>
+                <artifactId>grpc-bom</artifactId>
+                <version>${grpc.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- 内部模块 -->
+            <dependency><groupId>io.gitee.songchaolin</groupId><artifactId>adhoc-common</artifactId><version>${project.version}</version></dependency>
+            <dependency><groupId>io.gitee.songchaolin</groupId><artifactId>adhoc-protocol</artifactId><version>${project.version}</version></dependency>
+            <dependency><groupId>io.gitee.songchaolin</groupId><artifactId>adhoc-dao</artifactId><version>${project.version}</version></dependency>
+            <dependency><groupId>io.gitee.songchaolin</groupId><artifactId>adhoc-storage</artifactId><version>${project.version}</version></dependency>
+            <dependency><groupId>io.gitee.songchaolin</groupId><artifactId>adhoc-sql-parser</artifactId><version>${project.version}</version></dependency>
+            <dependency><groupId>io.gitee.songchaolin</groupId><artifactId>adhoc-observability</artifactId><version>${project.version}</version></dependency>
+            <dependency><groupId>io.gitee.songchaolin</groupId><artifactId>adhoc-metadata</artifactId><version>${project.version}</version></dependency>
+            <dependency><groupId>io.gitee.songchaolin</groupId><artifactId>adhoc-api-sdk</artifactId><version>${project.version}</version></dependency>
+
+            <!-- MyBatis-Plus -->
+            <dependency><groupId>com.baomidou</groupId><artifactId>mybatis-plus-boot-starter</artifactId><version>${mybatis-plus.version}</version></dependency>
+            <dependency><groupId>mysql</groupId><artifactId>mysql-connector-java</artifactId><version>${mysql-connector.version}</version></dependency>
+            <dependency><groupId>com.alibaba</groupId><artifactId>druid-spring-boot-starter</artifactId><version>${druid.version}</version></dependency>
+            <dependency><groupId>com.baomidou</groupId><artifactId>dynamic-datasource-spring-boot-starter</artifactId><version>${dynamic-datasource.version}</version></dependency>
+
+            <!-- Hadoop（HDFS 客户端，adhoc-storage 用） -->
+            <dependency><groupId>org.apache.hadoop</groupId><artifactId>hadoop-common</artifactId><version>${hadoop.version}</version></dependency>
+            <dependency><groupId>org.apache.hadoop</groupId><artifactId>hadoop-hdfs</artifactId><version>${hadoop.version}</version></dependency>
+            <dependency><groupId>org.apache.hadoop</groupId><artifactId>hadoop-client</artifactId><version>${hadoop.version}</version></dependency>
+
+            <!-- Hive JDBC -->
+            <dependency>
+                <groupId>org.apache.hive</groupId>
+                <artifactId>hive-jdbc</artifactId>
+                <version>${hive.version}</version>
+            </dependency>
+
+            <!-- gRPC -->
+            <dependency><groupId>io.grpc</groupId><artifactId>grpc-netty-shaded</artifactId><version>${grpc.version}</version></dependency>
+            <dependency><groupId>io.grpc</groupId><artifactId>grpc-protobuf</artifactId><version>${grpc.version}</version></dependency>
+            <dependency><groupId>io.grpc</groupId><artifactId>grpc-stub</artifactId><version>${grpc.version}</version></dependency>
+            <dependency><groupId>com.google.protobuf</groupId><artifactId>protobuf-java</artifactId><version>${protobuf.version}</version></dependency>
+            <dependency><groupId>net.devh</groupId><artifactId>grpc-server-spring-boot-starter</artifactId><version>${grpc-spring-boot-starter.version}</version></dependency>
+            <dependency><groupId>net.devh</groupId><artifactId>grpc-client-spring-boot-starter</artifactId><version>${grpc-spring-boot-starter.version}</version></dependency>
+
+            <!-- ANTLR4 -->
+            <dependency><groupId>org.antlr</groupId><artifactId>antlr4-runtime</artifactId><version>${antlr.version}</version></dependency>
+
+            <!-- 工具 -->
+            <dependency><groupId>cn.hutool</groupId><artifactId>hutool-all</artifactId><version>${hutool.version}</version></dependency>
+            <dependency><groupId>com.google.guava</groupId><artifactId>guava</artifactId><version>${guava.version}</version></dependency>
+            <dependency><groupId>com.github.ben-manes.caffeine</groupId><artifactId>caffeine</artifactId><version>${caffeine.version}</version></dependency>
+
+            <!-- Apollo（排除 slf4j-log4j12/log4j 避免与 logback 冲突） -->
+            <dependency>
+                <groupId>com.ctrip.framework.apollo</groupId>
+                <artifactId>apollo-client</artifactId>
+                <version>${apollo-client.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-log4j12</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!-- 阿里云 OSS 对象存储 SDK -->
+            <dependency>
+                <groupId>com.aliyun.oss</groupId>
+                <artifactId>aliyun-sdk-oss</artifactId>
+                <version>${aliyun-sdk-oss.version}</version>
+            </dependency>
+
+            <!-- Swagger / Knife4j（开源版替换内部封装） -->
+            <dependency><groupId>com.github.xiaoymin</groupId><artifactId>knife4j-spring-boot-starter</artifactId><version>${knife4j.version}</version></dependency>
+            <dependency><groupId>io.swagger</groupId><artifactId>swagger-annotations</artifactId><version>${swagger.version}</version></dependency>
+            <dependency><groupId>io.swagger</groupId><artifactId>swagger-models</artifactId><version>${swagger.version}</version></dependency>
+            <dependency><groupId>io.springfox</groupId><artifactId>springfox-swagger2</artifactId><version>${springfox-swagger2.version}</version></dependency>
+            <dependency><groupId>io.springfox</groupId><artifactId>springfox-swagger-ui</artifactId><version>${springfox-swagger2.version}</version></dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

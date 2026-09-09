@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package adhoc.internal.v1;
+
+import "internal/common.proto";
+
+option java_package = "io.gitee.songchaolin.adhoc.internal.grpc.v1";
+option java_multiple_files = true;
+
+// server -> executor：下发整个 Job（含完整 sql_content），executor 负责拆分+顺序执行。
+message DispatchJobRequest {
+  string job_id = 1;
+  string user_id = 2;
+  string user_name = 3;
+  string engine_type = 4;        // KYUUBI / STARROCKS
+  string engine_instance = 5;
+  string sql_content = 6;
+  string client_request_id = 7;
+  string server_instance_id = 8;
+}
+
+message DispatchJobResponse {
+  bool accepted = 1;
+  ErrorResponse error = 2;
+}
+
+service JobExecutor {
+  rpc dispatchJob(DispatchJobRequest) returns (DispatchJobResponse);
+}
+
+message CancelJobRequest {
+  string job_id = 1;
+}
+
+message CancelJobResponse {
+  bool canceled = 1;
+  ErrorResponse error = 2;
+}
+
+// server 探查 executor 当前在跑的 job（探查 executor 上 job 是否失效用）。
+// executor 返回自己内存里 RunningJobRegistry 的 jobId 集合；server 据此判定 DB RUNNING 但 executor 已丢失的孤儿 job。
+message GetRunningJobsRequest {
+}
+
+message GetRunningJobsResponse {
+  repeated string job_ids = 1;
+}
+
+service JobManager {
+  rpc cancelJob(CancelJobRequest) returns (CancelJobResponse);
+  // 探查：返回本 executor 当前在跑的 jobId 集合（server 心跳到达时 + reconcile 兜底时调用，清理孤儿 job）
+  rpc getRunningJobs(GetRunningJobsRequest) returns (GetRunningJobsResponse);
+}

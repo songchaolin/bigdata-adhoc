@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>io.gitee.songchaolin</groupId>
+        <artifactId>bigdata-adhoc</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>adhoc-executor</artifactId>
+    <name>adhoc-executor</name>
+    <description>接收 Job、建 session、拆 Task、顺序执行、写本地结果、上传 HDFS、直写 DB、响应 FetchResult/FetchLog</description>
+
+    <dependencies>
+        <dependency><groupId>io.gitee.songchaolin</groupId><artifactId>adhoc-common</artifactId></dependency>
+        <dependency><groupId>io.gitee.songchaolin</groupId><artifactId>adhoc-protocol</artifactId></dependency>
+        <dependency><groupId>io.gitee.songchaolin</groupId><artifactId>adhoc-dao</artifactId></dependency>
+        <!-- storage：executor 用其本地写 + HDFS 上传 -->
+        <dependency><groupId>io.gitee.songchaolin</groupId><artifactId>adhoc-storage</artifactId></dependency>
+        <dependency><groupId>io.gitee.songchaolin</groupId><artifactId>adhoc-sql-parser</artifactId></dependency>
+        <dependency><groupId>io.gitee.songchaolin</groupId><artifactId>adhoc-observability</artifactId></dependency>
+        <!-- guava：LogBufferRegistry 用 Cache 做 LRU/TTL（版本由 adhoc-dependencies BOM 管理） -->
+        <dependency><groupId>com.google.guava</groupId><artifactId>guava</artifactId></dependency>
+
+        <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-web</artifactId></dependency>
+        <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-actuator</artifactId></dependency>
+        <dependency><groupId>com.baomidou</groupId><artifactId>mybatis-plus-boot-starter</artifactId></dependency>
+        <dependency><groupId>mysql</groupId><artifactId>mysql-connector-java</artifactId><scope>runtime</scope></dependency>
+        <dependency><groupId>com.alibaba</groupId><artifactId>druid-spring-boot-starter</artifactId></dependency>
+
+        <!-- Kyuubi 引擎（Hive 协议兼容）；TODO: P3 加排除解决 hive-jdbc 传递依赖冲突（jetty/log4j/servlet/netty 等） -->
+        <dependency>
+            <groupId>org.apache.hive</groupId>
+            <artifactId>hive-jdbc</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+                <!-- jetty-runner 内含旧版 org.apache.jasper.servlet.TldScanner，与嵌入式 Tomcat 9 冲突（AbstractMethodError），必须排除 -->
+                <exclusion>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-runner</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- executor 既作 gRPC server（收 dispatchJob），又作 gRPC client（reportTaskStatus 给 server） -->
+        <dependency><groupId>net.devh</groupId><artifactId>grpc-server-spring-boot-starter</artifactId></dependency>
+        <dependency><groupId>net.devh</groupId><artifactId>grpc-client-spring-boot-starter</artifactId></dependency>
+        <dependency><groupId>io.grpc</groupId><artifactId>grpc-netty-shaded</artifactId></dependency>
+        <dependency>
+            <groupId>com.ctrip.framework.apollo</groupId>
+            <artifactId>apollo-client</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency><groupId>org.projectlombok</groupId><artifactId>lombok</artifactId><scope>provided</scope></dependency>
+        <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-test</artifactId><scope>test</scope></dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <!-- 将可执行 fat jar 拷贝到根目录 target/。
+                 必须声明在 spring-boot-maven-plugin 之后：Maven 同一 phase 内按“生命周期默认 -> 显式 execution（声明顺序）”执行，
+                 故 repackage 先于本 antrun 执行，拷贝的是 repackage 产出的 fat jar 而非原始 jar。
+                 路径用 ${project.*} 绝对属性，避免依赖 Ant basedir。 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-jar-to-root-target</id>
+                        <phase>package</phase>
+                        <goals><goal>run</goal></goals>
+                        <configuration>
+                            <target>
+                                <mkdir dir="${project.basedir}/../target"/>
+                                <copy file="${project.build.directory}/${project.build.finalName}.jar"
+                                      todir="${project.basedir}/../target"
+                                      failonerror="false"/>
+                                <echo message="Copied ${project.build.finalName}.jar -> ${project.basedir}/../target/"/>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- 父链：本聚合工程 -> adhoc-dependencies(BOM) -> spring-boot-starter-parent。 -->
+    <parent>
+        <groupId>io.gitee.songchaolin</groupId>
+        <artifactId>adhoc-dependencies</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>adhoc-dependencies</relativePath>
+    </parent>
+
+    <artifactId>bigdata-adhoc</artifactId>
+    <packaging>pom</packaging>
+    <name>bigdata-adhoc</name>
+    <description>即席查询平台（adhoc query platform）：Kyuubi / StarRocks 双引擎；Java 8 + Spring Boot 2.5.6</description>
+
+    <modules>
+        <module>adhoc-dependencies</module>
+        <module>adhoc-common</module>
+        <module>adhoc-protocol</module>
+        <module>adhoc-dao</module>
+        <module>adhoc-storage</module>
+        <module>adhoc-sql-parser</module>
+        <module>adhoc-observability</module>
+        <module>adhoc-metadata</module>
+        <module>adhoc-api-sdk</module>
+        <module>adhoc-server</module>
+        <module>adhoc-executor</module>
+    </modules>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>${maven.compiler.source}</source>
+                        <target>${maven.compiler.target}</target>
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
+                </plugin>
+                <!-- gRPC/protobuf 代码生成（adhoc-protocol 启用，见 P1 task3） -->
+                <plugin>
+                    <groupId>org.xolstice.maven.plugins</groupId>
+                    <artifactId>protobuf-maven-plugin</artifactId>
+                    <version>0.6.1</version>
+                </plugin>
+                <!-- ANTLR4 g4 代码生成（adhoc-sql-parser 启用，见 P6） -->
+                <plugin>
+                    <groupId>org.antlr</groupId>
+                    <artifactId>antlr4-maven-plugin</artifactId>
+                    <version>${antlr.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>

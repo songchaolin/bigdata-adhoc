@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+package adhoc.internal.v1;
+
+import "internal/common.proto";
+
+option java_package = "io.gitee.songchaolin.adhoc.internal.grpc.v1";
+option java_multiple_files = true;
+
+// FetchResult 已删（server 直读 OSS）。ResultColumn/ResultSchema 保留供 status_report 用。
+message ResultColumn {
+  int32 col_index = 1;
+  string col_name = 2;
+  string col_type = 3;
+}
+
+message ResultSchema {
+  repeated ResultColumn columns = 1;
+}
+
+message FetchLogRequest {
+  string task_id = 1;
+  int64 offset = 2;
+  int32 limit = 3;
+}
+
+message FetchLogResponse {
+  repeated string lines = 1;
+  bool has_more = 2;
+  ErrorResponse error = 3;
+}
+
+message FetchJobLogRequest {
+  string job_id = 1;
+  int64 offset = 2;
+  int32 limit = 3;
+}
+
+message FetchJobLogResponse {
+  repeated string lines = 1;
+  bool has_more = 2;
+  ErrorResponse error = 3;
+  int64 next_offset = 4;  // 下次应读的全局 offset（eviction 后 server 据此调整 lastPulledOffset，防永久空拉）
+}
+
+message PingRequest {
+}
+
+message PingResponse {
+  bool ok = 1;
+}
+
+// server 终态轮通知 executor 清理本地 job 日志 buffer（正常路径，避免 jobBuffer 长期驻留）。
+// executor 异常兜底（server 挂/通知丢）由 LogBufferRegistry 定时器处理。
+message ClearJobLogRequest {
+  string job_id = 1;
+}
+
+message ClearJobLogResponse {
+}
+
+service DataFetcher {
+  rpc fetchLog(FetchLogRequest) returns (FetchLogResponse);
+  rpc fetchJobLog(FetchJobLogRequest) returns (FetchJobLogResponse);
+  rpc clearJobLog(ClearJobLogRequest) returns (ClearJobLogResponse);
+  rpc ping(PingRequest) returns (PingResponse);
+}

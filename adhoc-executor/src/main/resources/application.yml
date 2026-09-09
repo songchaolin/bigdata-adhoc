@@ -1,0 +1,46 @@
+spring:
+  application:
+    name: bigdata-adhoc-executor
+  datasource:
+    url: 'jdbc:mysql://${ADHOC_MYSQL_HOST:localhost}:${ADHOC_MYSQL_PORT:3306}/${ADHOC_MYSQL_DB:adhoc}?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai'
+    username: ${ADHOC_MYSQL_USER:root}
+    password: ${ADHOC_MYSQL_PASSWORD:change-me}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+server:
+  port: 8081
+grpc:
+  server:
+    port: 9091
+mybatis-plus:
+  mapper-locations: classpath*:mapper/**/*.xml
+
+adhoc:
+  storage:
+    type: local                       # local | aliyun（第三方实现可直接注册 StorageClient Bean）
+    local:
+      base-dir: ./data/storage
+  engine:
+    # ---- Kyuubi 多实例（每实例独立 endpoints + 账号密码）----
+    KYUUBI:
+      # 默认实例名（job 未指定 engine_instance 时用此）
+      default_instance: kyuubi-01
+      kyuubi-01:
+        # endpoints 列表（逗号分隔 host:port）；多 HA 共用下面这组账号，单条也走 EndpointManager 轮询
+        endpoints: ${ADHOC_KYUUBI_ENDPOINTS:localhost:10009}
+        user: ${ADHOC_KYUUBI_USER:change-me}
+        password: ${ADHOC_KYUUBI_PASSWORD:change-me}
+      # 第二个 Kyuubi 集群（不同地址+账号），取消注释启用；提交时 engine_instance=kyuubi-02 即用此实例
+      #kyuubi-02:
+      #  endpoints: localhost:10009
+      #  user: another
+      #  password: 'change-me'
+
+    # ---- StarRocks 多实例 ----
+    STARROCKS:
+      default_instance: starrocks-01
+      starrocks-01:
+        endpoints: ${ADHOC_SR_ENDPOINTS:localhost:9030}
+        user: ${ADHOC_SR_USER:root}
+        password: ${ADHOC_SR_PASSWORD:change-me}
+        # useSSL=false：StarRocks 默认未启 SSL，避免握手失败；serverTimezone=Asia/Shanghai：规避 8.x 驱动对 CST 时区识别失败
+        params: useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
