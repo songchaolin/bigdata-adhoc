@@ -1,0 +1,21 @@
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "df70522a1c5312bb9aa72793822d7591543735dd",
+  "prompts": {
+    "aae0091f3312dc3a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "193d178a-0b16-4cb9-bc28-c35286f36c21",
+        "model": "glm-5.3"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 41487,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    }
+  }
+}
