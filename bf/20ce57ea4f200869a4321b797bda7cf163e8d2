@@ -1,0 +1,37 @@
+adhoc-storage/pom.xml
+  aae0091f3312dc3a 16-17,23,25-26
+adhoc-server/src/main/resources/application.yml
+  aae0091f3312dc3a 26
+adhoc-storage/src/main/java/com/yl/bigdata/adhoc/storage/spi/StorageClient.java
+  aae0091f3312dc3a 6
+adhoc-dependencies/pom.xml
+  aae0091f3312dc3a 60-61,136,138-140
+adhoc-storage/src/main/java/com/yl/bigdata/adhoc/storage/spi/StorageAutoConfiguration.java
+  aae0091f3312dc3a 10,26,28-33
+adhoc-storage/src/main/java/com/yl/bigdata/adhoc/storage/spi/AliyunStorageClient.java
+  aae0091f3312dc3a 3-6,12-13,15,17,20-21,38,44,50
+README.md
+  aae0091f3312dc3a 17,33,42,146-151,167
+adhoc-executor/src/main/resources/application.yml
+  aae0091f3312dc3a 19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "bf20ce57ea4f200869a4321b797bda7cf163e8d2",
+  "prompts": {
+    "aae0091f3312dc3a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "193d178a-0b16-4cb9-bc28-c35286f36c21",
+        "model": "glm-5.3"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 84,
+      "total_deletions": 99,
+      "accepted_lines": 5716,
+      "overriden_lines": 0
+    }
+  }
+}
