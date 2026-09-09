@@ -1,0 +1,153 @@
+adhoc-executor/src/main/resources/application.yml
+  aae0091f3312dc3a 18-21
+  eeb840a04d6afb1f 1-15,17,22-36,38-46
+adhoc-executor/src/test/java/com/yl/bigdata/adhoc/executor/grpc/DataFetcherServiceImplTest.java
+  eeb840a04d6afb1f 11,25
+adhoc-dao/src/main/resources/db/schema.sql
+  aae0091f3312dc3a 2-3
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/service/ResultQueryServiceTest.java
+  eeb840a04d6afb1f 14,31,34
+adhoc-server/src/main/resources/application.properties
+  eeb840a04d6afb1f 1-5
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/AdhocServerApplicationTest.java
+  eeb840a04d6afb1f 4,8
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/dto/request/CreateNodeRequest.java
+  aae0091f3312dc3a 6
+adhoc-storage/src/main/java/com/yl/bigdata/adhoc/storage/spi/S3StorageClient.java
+  eeb840a04d6afb1f 1-63
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/service/JobQueryServiceTest.java
+  eeb840a04d6afb1f 13,21-22,25
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/dao/AdhocQueryJobMapperTest.java
+  eeb840a04d6afb1f 6,15-17,20
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/ha/JobLogCollector.java
+  eeb840a04d6afb1f 13,43,50,53,176
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/config/AdhocCommonConfig.java
+  aae0091f3312dc3a 4
+adhoc-executor/src/test/java/com/yl/bigdata/adhoc/executor/runner/LogBufferRegistryTest.java
+  aae0091f3312dc3a 8,33-34,53-54,64,68,79-80,85,98,103,120-121,134,146,156,161
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/schedule/QueueWorkerLimitTest.java
+  eeb840a04d6afb1f 11,24-25,30
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/service/LogQueryServiceTest.java
+  eeb840a04d6afb1f 20,44,53,126,142,157,170,203,219,234,239,247,255,265,320
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/dto/request/ListNodesRequest.java
+  aae0091f3312dc3a 6
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/schedule/QueueWorkerTest.java
+  eeb840a04d6afb1f 16,35-36,39,99
+adhoc-storage/src/main/java/com/yl/bigdata/adhoc/storage/spi/StorageAutoConfiguration.java
+  eeb840a04d6afb1f 1,3-5,9-12,14-15,18-22,26-35
+adhoc-executor/src/main/resources/META-INF/app.properties
+  eeb840a04d6afb1f 1-2
+adhoc-executor/src/test/resources/application.yml
+  eeb840a04d6afb1f 10-12
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/ha/ExecutorCrashCompensationTest.java
+  eeb840a04d6afb1f 12,23-24,27
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/service/SqlConsoleService.java
+  eeb840a04d6afb1f 22
+adhoc-server/src/test/resources/application.yml
+  eeb840a04d6afb1f 10-12,43-46,51-53
+adhoc-executor/src/main/resources/application.properties
+  eeb840a04d6afb1f 1-5
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/sqlparse/SqlParseTest.java
+  eeb840a04d6afb1f 7,13
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/metadata/StarRocksMetadataDebugTest.java
+  eeb840a04d6afb1f 9,22,25
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/metrics/DurationSqlVerifyTest.java
+  eeb840a04d6afb1f 4,13,16-17,20,24-26
+adhoc-executor/src/test/java/com/yl/bigdata/adhoc/executor/AdhocExecutorApplicationTest.java
+  eeb840a04d6afb1f 4,7,9
+adhoc-storage/pom.xml
+  eeb840a04d6afb1f 16-17,23,25-26,28,30-36
+adhoc-executor/src/test/java/com/yl/bigdata/adhoc/executor/runner/JobExecutionRunnerScenarioTest.java
+  eeb840a04d6afb1f 11,22,27
+adhoc-server/src/main/resources/application.yml
+  eeb840a04d6afb1f 1-22,24-62
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/service/ResultQueryService.java
+  eeb840a04d6afb1f 19,29,40,44,49,118
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/service/JobServiceTest.java
+  eeb840a04d6afb1f 10,18-19,22
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/ha/JobLogRegistry.java
+  eeb840a04d6afb1f 10,43,47-48,76
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/service/FileNodeServiceTest.java
+  eeb840a04d6afb1f 13,23-24,29
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/web/SqlConsoleController.java
+  eeb840a04d6afb1f 17,33
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/ha/ServerCrashCompensationTest.java
+  eeb840a04d6afb1f 10,20-21,24
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/metrics/MetricsDebugTest.java
+  eeb840a04d6afb1f 12,25-26,29
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/dto/request/SqlConsoleRequest.java
+  eeb840a04d6afb1f 10
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/metadata/MetadataVerifyTest.java
+  eeb840a04d6afb1f 17,58-59,61
+adhoc-storage/src/main/java/com/yl/bigdata/adhoc/storage/spi/LocalStorageClient.java
+  eeb840a04d6afb1f 1,3-6,8,11-12,14,16,18-19,22,24,27,29,32-43,46,48-52,55,57-66,68
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/TaskResultWriter.java
+  eeb840a04d6afb1f 13,19,30,33-34,58
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/service/JobServiceLimitTest.java
+  eeb840a04d6afb1f 9,21-22,26
+adhoc-server/src/main/resources/static/dashboard/app.js
+  aae0091f3312dc3a 147
+adhoc-server/src/main/resources/logback-spring.xml
+  eeb840a04d6afb1f 5
+adhoc-storage/src/main/java/com/yl/bigdata/adhoc/storage/format/AdhocResultSerializer.java
+  eeb840a04d6afb1f 42
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/metrics/RangeSqlVerifyTest.java
+  eeb840a04d6afb1f 4,14,18-19,22,26-28
+adhoc-executor/src/main/java/com/yl/bigdata/adhoc/executor/runner/LogBufferRegistry.java
+  eeb840a04d6afb1f 12,62,79,81,235,258
+adhoc-storage/src/test/java/com/yl/bigdata/adhoc/storage/spi/LocalStorageClientTest.java
+  eeb840a04d6afb1f 1,4,7,9-12,14-15,17-18,21-23,25-26,28,30-32,34-39,43-68,70,72
+adhoc-executor/src/test/java/com/yl/bigdata/adhoc/executor/engine/StarRocksEngineExecutorLiveTest.java
+  aae0091f3312dc3a 11,27-30,34-35,37,41-43,45,47,89
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/grpc/HeartbeatServiceImplTest.java
+  eeb840a04d6afb1f 19,29-30,33
+adhoc-server/src/test/java/com/yl/bigdata/adhoc/server/ha/HealthCheckTaskTest.java
+  eeb840a04d6afb1f 8,17-18,21
+adhoc-server/src/main/java/com/yl/bigdata/adhoc/server/service/LogQueryService.java
+  eeb840a04d6afb1f 25,67,77,83,283
+adhoc-server/src/main/resources/META-INF/app.properties
+  eeb840a04d6afb1f 1-2
+adhoc-common/src/main/java/com/yl/bigdata/adhoc/common/dto/request/SearchNodesRequest.java
+  aae0091f3312dc3a 6
+adhoc-storage/src/main/resources/META-INF/spring.factories
+  eeb840a04d6afb1f 1-2
+adhoc-executor/src/test/java/com/yl/bigdata/adhoc/executor/runner/JobExecutionRunnerTest.java
+  eeb840a04d6afb1f 12,23,25,28
+adhoc-storage/src/main/java/com/yl/bigdata/adhoc/storage/spi/StorageClient.java
+  eeb840a04d6afb1f 1-22
+adhoc-executor/src/main/resources/logback-spring.xml
+  eeb840a04d6afb1f 5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "9dfe75146888f906847b6606410933a32fd13138",
+  "prompts": {
+    "aae0091f3312dc3a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "193d178a-0b16-4cb9-bc28-c35286f36c21",
+        "model": "glm-5.3"
+      },
+      "human_author": null,
+      "messages": [],
+      "total_additions": 48,
+      "total_deletions": 83229,
+      "accepted_lines": 1358,
+      "overriden_lines": 0
+    },
+    "eeb840a04d6afb1f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "12197acd-9bb3-4a98-8487-b98c336dec1e",
+        "model": "glm-5.3"
+      },
+      "human_author": "songchaolin.song",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 0,
+      "accepted_lines": 4141,
+      "overriden_lines": 0
+    }
+  }
+}
